@@ -92,9 +92,12 @@ export function App() {
         Skip to content
       </a>
       <header className="site-header">
-        <a className="wordmark" href="#">
-          social-jev<span className="wordmark-dot">.</span>
-        </a>
+        <div className="brand-lockup">
+          <a className="wordmark" href="#">
+            social-jev<span className="wordmark-dot">.</span>
+          </a>
+          <span className="draft-label">Draft</span>
+        </div>
         <nav aria-label="Main navigation">
           <a href="#models">Models</a>
           <a href="#data">Data</a>

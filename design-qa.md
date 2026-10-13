@@ -45,4 +45,5 @@ Local evidence (screenshots are not committed):
 - User review may change section order, typography, content, or visual storytelling.
 - Self-host fonts if offline operation is required; the current draft loads Google Fonts with system fallbacks.
 - Live inference and predictive-quality checks are outside this website draft.
-- Versioned docs synchronization and tag-controlled public deployment remain future work. Main pushes currently run checks only.
+- Versioned docs synchronization remains future work. Public deployment now runs only for `site-v*` release tags on main; ordinary main pushes run checks only.
+- The published draft has a visible amber Draft label beside the header wordmark, including on mobile and the docs placeholder.

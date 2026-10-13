@@ -49,6 +49,22 @@
           serif;
         text-decoration: none;
       }
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .draft-label {
+        font:
+          500 10px/1.2 "DM Sans",
+          sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #795318;
+        background: #f7edd6;
+        border: 1px solid #dbc79f;
+        padding: 6px 8px;
+      }
       header > a:last-child {
         font-size: 13px;
       }
@@ -105,8 +121,11 @@
   </head>
   <body>
     <header>
-      <a href="/" class="logo">social-jev.</a
-      ><a href="/">Back to the project</a>
+      <div class="brand-lockup">
+        <a href="/" class="logo">social-jev.</a
+        ><span class="draft-label">Draft</span>
+      </div>
+      <a href="/">Back to the project</a>
     </header>
     <main>
       <p class="eyebrow">The Python package</p>

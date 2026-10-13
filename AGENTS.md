@@ -13,7 +13,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - This is the social-jev project website, separate from the Python package repository.
 - Follow the selected workbench concept: restrained academic typography, off-white paper, muted green, pale document/question/answer surfaces, and a single landing page with linked sections.
 - Keep the project overview, models, data, training, evaluation and package on the landing page. Package documentation alone has a version selector.
-- Pushes to main run checks only. Public website updates require a website release tag; no deployment is configured in this first draft.
+- Pushes to main run checks only. Public website updates require a `site-v*` release tag pointing to a commit on main.
+- The public website is a draft. Keep a prominent Draft label beside the header wordmark on desktop, mobile, and the docs placeholder until explicitly asked to remove it.
 - Later, package release tags publish docs independently, while retaining the last released website. Do not deploy unfinished website main content when package docs change.
 - Never fabricate benchmark numbers or live model predictions. Examples are explicitly illustrative; larger model sizes are planned until released.
 - Do not edit or create README.md without explicit user approval.

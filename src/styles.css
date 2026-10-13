@@ -96,6 +96,23 @@ section[id] {
 .wordmark-dot {
   color: var(--green);
 }
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.draft-label {
+  font:
+    600 10px/1.2 "DM Sans",
+    sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #795318;
+  background: #f7edd6;
+  border: 1px solid #dbc79f;
+  padding: 6px 8px;
+}
 .site-header nav {
   display: flex;
   gap: 32px;
@@ -847,6 +864,16 @@ pre {
   }
 }
 @media (max-width: 480px) {
+  .brand-lockup {
+    gap: 8px;
+  }
+  .draft-label {
+    font-size: 9px;
+    padding: 5px 6px;
+  }
+  .site-header nav a {
+    white-space: nowrap;
+  }
   html {
     scroll-padding-top: 80px;
   }
