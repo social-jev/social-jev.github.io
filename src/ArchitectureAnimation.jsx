@@ -20,7 +20,7 @@ const vocabulary = [
 
 export function ArchitectureAnimation() {
   const playback = usePlayback(4, 5000);
-  const [selected, setSelected] = useState(9);
+  const [selected, setSelected] = useState(6);
   const reader = tokens[playback.step >= 2 ? 9 : selected];
   return (
     <figure className="architecture-figure visual-surface computation-figure">
