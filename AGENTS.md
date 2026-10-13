@@ -18,3 +18,11 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Later, package release tags publish docs independently, while retaining the last released website. Do not deploy unfinished website main content when package docs change.
 - Never fabricate benchmark numbers or live model predictions. Examples are explicitly illustrative; larger model sizes are planned until released.
 - Do not edit or create README.md without explicit user approval.
+
+## Visual walkthrough draft
+
+- Pair each section with a short explanation and a substantial visual, usually text on the left and visual on the right.
+- Applications use a looping input → model → output scene; evaluation uses a static Pareto figure; data uses a treemap; training shows the objective and curves rather than a full pipeline.
+- Explain the decision head and logical positions with a focused animation; provide an attention-mask playground separately.
+- User-authorized mock data is permitted for this design draft only. Label all simulated results, dataset sizes, training curves, and model outputs prominently. Never present them as measured findings.
+- Keep this visual iteration on its draft branch. Do not publish a website tag without explicit authorization for this iteration.

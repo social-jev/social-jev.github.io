@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { examples, datasets, filterDatasets } from "../src/examples.js";
+import { examples, datasets } from "../src/examples.js";
 
 test("every example changes document, question and candidate labels together", () => {
   assert.equal(
@@ -14,19 +14,10 @@ test("every example changes document, question and candidate labels together", (
   }
 });
 
-test("domain filters form a complete non-overlapping partition of the mixture", () => {
-  const categories = [...new Set(datasets.map((dataset) => dataset.category))];
-  assert.equal(filterDatasets("All domains").length, 16);
-  const partition = categories.flatMap((category) => filterDatasets(category));
-  assert.equal(partition.length, datasets.length);
+test("dataset catalogue has distinct entries for the treemap", () => {
+  assert.equal(datasets.length, 16);
   assert.equal(
-    new Set(partition.map((dataset) => dataset.slug)).size,
+    new Set(datasets.map((dataset) => dataset.slug)).size,
     datasets.length,
   );
-  for (const category of categories)
-    assert.ok(
-      filterDatasets(category).every(
-        (dataset) => dataset.category === category,
-      ),
-    );
 });

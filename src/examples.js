@@ -129,9 +129,3 @@ export const datasets = [
     slug: "opp-115",
   },
 ];
-
-export function filterDatasets(category) {
-  return category === "All domains"
-    ? datasets
-    : datasets.filter((dataset) => dataset.category === category);
-}
