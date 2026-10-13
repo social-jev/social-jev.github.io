@@ -1,204 +1,63 @@
 import { useState } from "react";
 import { usePlayback, PlaybackButton } from "./usePlayback.jsx";
-const stages = [
-  "Encode the request",
-  "Apply the LM head",
-  "Select answer codes",
-  "Normalize the choices",
-];
+import { attentionTokens, canAttend } from "./visual-data.js";
+
+const tokens = attentionTokens.slice(0, 10);
+const stages = ["Attention", "Position IDs", "Unembedding", "Choose an answer"];
 const descriptions = [
-  "The transformer processes the masked request. Each question has an answer-prefix readout location.",
-  "The hidden state at that location goes through the pretrained language-model head to obtain vocabulary logits.",
-  "Keep the logits for A, B, and C: the letter codes assigned to the candidate answers.",
-  "A softmax over those candidate logits yields probabilities for this question. No free-form response is generated.",
+  "Select any tile. Solid tiles are visible to it; faded tiles are masked. Each option sees the document and question, but not the other option.",
+  "Storage order keeps increasing. Position IDs do not: both options occupy positions 5–6. The answer starts at 7, after the longest option.",
+  "At the answer prefix, take the final hidden vector h. Multiply by the pretrained unembedding matrix Wᵤ, exactly as in normal next-token prediction.",
+  "Keep the vocabulary logits for the answer-code tokens A and B. Softmax over just these logits gives probabilities for the supplied choices.",
 ];
-const positionRows = [
-  { name: "Document", physical: [0, 1, 2], logical: [0, 1, 2], type: "state" },
-  { name: "Question", physical: [3, 4], logical: [3, 4], type: "query" },
-  { name: "Option A", physical: [5, 6], logical: [5, 6], type: "option" },
-  { name: "Option B", physical: [7, 8], logical: [5, 6], type: "option" },
-  { name: "Answer", physical: [9], logical: [7], type: "answer" },
+const vocabulary = [
+  { word: "the", value: "−0.8" },
+  { word: "A", value: "2.4", choice: true },
+  { word: "is", value: "0.6" },
+  { word: "B", value: "0.1", choice: true },
+  { word: "…", value: "…" },
 ];
 
 export function ArchitectureAnimation() {
-  const [mode, setMode] = useState("head");
-  const playback = usePlayback(4, 2600);
+  const playback = usePlayback(4, 5000);
+  const [selected, setSelected] = useState(9);
+  const reader = tokens[playback.step >= 2 ? 9 : selected];
   return (
-    <figure className="architecture-figure visual-surface">
+    <figure className="architecture-figure visual-surface computation-figure">
       <div className="visual-topline">
-        <div
-          className="segmented-control"
-          role="group"
-          aria-label="Architecture explanation"
-        >
-          <button
-            aria-pressed={mode === "head"}
-            onClick={() => setMode("head")}
-          >
-            Decision head
-          </button>
-          <button
-            aria-pressed={mode === "positions"}
-            onClick={() => setMode("positions")}
-          >
-            Positions
-          </button>
-        </div>
+        <strong>One sequence → one answer vector → vocabulary logits</strong>
         <PlaybackButton {...playback} label="architecture animation" />
       </div>
-      {mode === "head" ? (
-        <div className="head-animation">
-          <div className="readout-sequence">
-            <span>Document</span>
-            <span>Question</span>
-            <span>A · B · C</span>
-            <span className="answer-prefix">answer prefix</span>
-          </div>
-          <div className="head-stages">
-            <div
-              className={
-                playback.step === 0 ? "head-stage current" : "head-stage"
-              }
-            >
-              <span className="stage-label">01 / Backbone</span>
-              <h3>Qwen3</h3>
-              <p>
-                One hidden state
-                <br />
-                at the answer prefix
-              </p>
-              <span className="hidden-state">
-                h<sub>answer</sub>
-              </span>
-            </div>
-            <div
-              className={
-                playback.step === 1 ? "head-stage current" : "head-stage"
-              }
-            >
-              <span className="stage-label">02 / Decision head</span>
-              <h3>LM head</h3>
-              <p>
-                Pretrained vocabulary
-                <br />
-                projection
-              </p>
-              <div className="vocabulary-strip">
-                <span>the</span>
-                <span>A</span>
-                <span>is</span>
-                <span>B</span>
-                <span>C</span>
-                <span>…</span>
-              </div>
-            </div>
-            <div
-              className={
-                playback.step >= 2 ? "head-stage current" : "head-stage"
-              }
-            >
-              <span className="stage-label">03 / Candidate codes</span>
-              <h3>A · B · C</h3>
-              <p>
-                Keep the supplied
-                <br />
-                answer-code logits
-              </p>
-              <div className="candidate-logits">
-                <span>
-                  A <b>2.4</b>
-                </span>
-                <span>
-                  B <b>0.1</b>
-                </span>
-                <span>
-                  C <b>−0.6</b>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`normalized-answer ${playback.step === 3 ? "visible-answer" : ""}`}
-          >
-            <span>softmax(A, B, C)</span>
-            <strong>
-              {playback.step === 3 ? "A → Support" : "Candidate probabilities"}
-            </strong>
-            <span>{playback.step === 3 ? "87% · 9% · 4%" : "— · — · —"}</span>
-          </div>
-          <div
-            className="stage-navigation"
-            role="group"
-            aria-label="Readout animation steps"
-          >
-            {stages.map((stage, index) => (
-              <button
-                key={stage}
-                aria-pressed={playback.step === index}
-                onClick={() => playback.choose(index)}
-              >
-                <span>0{index + 1}</span>
-                {stage}
-              </button>
-            ))}
-          </div>
-          <p className="animation-explanation">{descriptions[playback.step]}</p>
+      <div className="computation-body">
+        <div className="computation-steps" role="group" aria-label="Architecture steps">
+          {stages.map((stage, index) => <button key={stage} aria-pressed={playback.step === index} onClick={() => playback.choose(index)}><span>0{index + 1}</span>{stage}</button>)}
         </div>
-      ) : (
-        <div className="position-animation">
-          <div className="position-caption">
-            <span>Physical sequence order</span>
-            <span>Assigned logical positions</span>
+        <p className="computation-explanation">{descriptions[playback.step]}</p>
+        <div className="sequence-scroll" tabIndex="0" role="region" aria-label="Token sequence with storage indices and position IDs">
+          <div className="computation-sequence">
+            <div className="tile-axis"><span>Stored slot</span><strong>Token</strong><span>Position ID</span></div>
+            {tokens.map((token) => {
+              const visible = canAttend(reader, token);
+              return <button key={token.index} className={`computation-token ${token.role} ${visible ? "attends" : "masked"} ${reader.index === token.index ? "reader" : ""} ${playback.step === 1 && token.role === "option" ? "reused" : ""}`} aria-pressed={reader.index === token.index} aria-label={`${token.label}: ${token.word}, stored slot ${token.index}, position ${token.position}${visible ? ", visible to selected token" : ", masked"}`} onClick={() => { setSelected(token.index); playback.choose(playback.step < 2 ? playback.step : 0); }}>
+                <span>{token.index}</span><strong>{token.word}</strong><span>{token.position}</span><small>{token.role === "answer" ? "Readout" : token.role === "option" ? token.id === "a1" ? "Option A" : "Option B" : token.label}</small>
+              </button>;
+            })}
           </div>
-          {positionRows.map((row, index) => (
-            <div
-              key={row.name}
-              className={`position-row ${row.type} ${playback.step >= 2 && row.type === "option" ? "position-highlight" : ""}`}
-            >
-              <span>{row.name}</span>
-              <div>
-                {row.physical.map((value) => (
-                  <span key={value}>{value}</span>
-                ))}
-              </div>
-              <span className="position-arrow" aria-hidden="true">
-                →
-              </span>
-              <div>
-                {(playback.step < 2 ? row.physical : row.logical).map(
-                  (value) => (
-                    <span key={value}>{value}</span>
-                  ),
-                )}
-              </div>
-            </div>
-          ))}
-          <div className="position-takeaway">
-            <strong>
-              {playback.step < 2
-                ? "One stored sequence."
-                : "Branches share a starting position."}
-            </strong>
-            <p>
-              {playback.step < 2
-                ? "Tokens occupy different physical slots in the request."
-                : "Options A and B both start at position 5. The answer prefix follows the longest option, rather than the sum of option lengths."}
-            </p>
-          </div>
-          <button
-            className="text-button"
-            onClick={() => playback.choose(playback.step < 2 ? 2 : 0)}
-          >
-            {playback.step < 2
-              ? "Show reassigned positions"
-              : "Reset positions"}
-          </button>
         </div>
-      )}
-      <figcaption className="figure-note">
-        Mechanism follows the released 0.6B LM-head implementation. Tokens are
-        schematic; logits and probabilities are illustrative.
-      </figcaption>
+        <p className="tile-key">Selected: <strong>{reader.label} · {reader.word}</strong> <span>Solid = visible · faded = masked · outlined = selected</span></p>
+        <div className={`unembedding-flow ${playback.step >= 2 ? "active" : "waiting"}`}>
+          <div className="answer-vector"><span>Answer hidden state</span><strong>h<sub>answer</sub></strong><div aria-hidden="true">▥ ▥ ▥ ▥</div><small>Transformer output</small></div>
+          <span className="math-operator" aria-hidden="true">×</span>
+          <div className="unembedding-matrix"><span>Pretrained unembedding</span><strong>W<sub>u</sub></strong><div className="matrix-grid" aria-hidden="true">{Array.from({length: 24}, (_, i) => <i key={i} className={i % 6 === 1 || i % 6 === 3 ? "code-column" : ""} />)}</div><small>Hidden dimension × vocabulary</small></div>
+          <span className="math-operator" aria-hidden="true">→</span>
+          <div className="vocabulary-logits"><span>Vocabulary logits</span>{vocabulary.map(entry => <div key={entry.word} className={entry.choice ? "code-logit" : "other-logit"}><b>{entry.word}</b><span>{entry.value}</span></div>)}</div>
+        </div>
+        <div className={`choice-readout ${playback.step === 3 ? "revealed" : ""}`}>
+          <span>Gather A, B → softmax([2.4, 0.1])</span>
+          <div><strong>A · Support <b>91%</b></strong><span>B · Oppose <b>9%</b></span></div>
+        </div>
+      </div>
+      <figcaption className="figure-note">Schematic tokens omit role markers and examples. Uses the normal LM unembedding head, fine-tuned with the backbone. Logits and probabilities are illustrative.</figcaption>
     </figure>
   );
 }

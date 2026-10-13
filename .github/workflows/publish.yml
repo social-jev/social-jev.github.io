@@ -1,7 +1,7 @@
-name: Publish website release
+name: Publish website
 on:
   push:
-    tags: ["site-v*"]
+    branches: [main]
 permissions:
   contents: read
 concurrency:
@@ -15,10 +15,6 @@ jobs:
       pages: read
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Require a release from main
-        run: git merge-base --is-ancestor HEAD origin/main
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -40,6 +36,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Publish tagged website
+      - name: Publish main website
         id: deployment
         uses: actions/deploy-pages@v4

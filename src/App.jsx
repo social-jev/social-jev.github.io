@@ -167,8 +167,8 @@ export function App() {
               <br />A different readout.
             </>
           }
-          description="Use the hidden state at an answer prefix, keep the logits for candidate letter codes, and normalize over those choices."
-          detail="Switch to Positions to see how branches reuse logical indices even though their tokens occupy different physical slots."
+          description="Control which tokens see each other and which positions they share. Decode the answer through the language model’s normal unembedding matrix."
+          detail="Follow the tiles from attention and position IDs to the answer vector, vocabulary logits, and probabilities for your choices."
           link={{ href: modelUrl, label: "Read the released model card" }}
         >
           <ArchitectureAnimation />

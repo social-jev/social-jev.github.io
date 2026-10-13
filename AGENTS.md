@@ -13,7 +13,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - This is the social-jev project website, separate from the Python package repository.
 - Follow the selected workbench concept: restrained academic typography, off-white paper, muted green, pale document/question/answer surfaces, and a single landing page with linked sections.
 - Keep the project overview, models, data, training, evaluation and package on the landing page. Package documentation alone has a version selector.
-- Pushes to main run checks only. Public website updates require a `site-v*` release tag pointing to a commit on main.
+- During active website development, pushes to main publish immediately. Release tags are not required; existing tags remain historical.
 - The public website is a draft. Keep a prominent Draft label beside the header wordmark on desktop, mobile, and the docs placeholder until explicitly asked to remove it.
 - Later, package release tags publish docs independently, while retaining the last released website. Do not deploy unfinished website main content when package docs change.
 - Never fabricate benchmark numbers or live model predictions. Examples are explicitly illustrative; larger model sizes are planned until released.
@@ -25,4 +25,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Applications use a looping input → model → output scene; evaluation uses a static Pareto figure; data uses a treemap; training shows the objective and curves rather than a full pipeline.
 - Explain the decision head and logical positions with a focused animation; provide an attention-mask playground separately.
 - User-authorized mock data is permitted for this design draft only. Label all simulated results, dataset sizes, training curves, and model outputs prominently. Never present them as measured findings.
-- Keep this visual iteration on its draft branch. Do not publish a website tag without explicit authorization for this iteration.
+- Architecture uses persistent token tiles to connect attention masks and reused position IDs to the normal pretrained unembedding matrix, vocabulary logits, and answer-code softmax.
