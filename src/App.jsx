@@ -120,14 +120,37 @@ export function App() {
             </a>
           ))}
         </nav>
-        <section id="usage" className="package-callout">
-          <div><p className="eyebrow">Usage</p><h2>Using SocialJev</h2></div>
-          <div>
-            <p>Define the state, query, and candidate answers in a typed request. SocialJev returns a typed response containing a probability for each candidate answer.</p>
-            <p>The 0.6B checkpoint is available. Versioned documentation covering installation, request and response types, and inference is being prepared.</p>
-            <a className="button primary" href="/docs/">Documentation ↗</a>
-            <a className="text-link" href={packageUrl}>SocialJev source ↗</a>
-            <a className="text-link" href={modelUrl}>Released checkpoint ↗</a>
+        <section id="usage" className="package-callout interface-section">
+          <div className="interface-heading">
+            <p className="eyebrow">Usage</p><h2>Using SocialJev</h2>
+            <p>A typed request specifies the state, query, and candidate answers. Each query returns a Result with the selected answer and its candidate probabilities.</p>
+            <div className="interface-links">
+              <a className="button primary" href="/docs/">Documentation ↗</a>
+              <a className="text-link" href={modelUrl}>Model ↗</a>
+              <a className="text-link github-link" href={packageUrl}>
+                <img src="/github.svg" width="20" height="20" alt="" /> GitHub ↗
+              </a>
+            </div>
+          </div>
+          <div className="interface-code">
+            <div className="interface-code-label">Python · core interface</div>
+            <pre><code>{`from social_jev import Query, Request, SocialJev
+
+model = SocialJev.from_pretrained(
+    "social-jev/social-jev-0.6B-v1"
+)
+
+request = Request(
+    state="The council expanded the bus network.",
+    queries=[Query(
+        text="Which policy area does this document concern?",
+        options=["Transport", "Education", "Healthcare"],
+    )],
+)
+
+result = model.query(request)[0]
+result.choice         # Selected candidate answer
+result.probabilities  # dict[str, float]`}</code></pre>
           </div>
         </section>
         <Chapter

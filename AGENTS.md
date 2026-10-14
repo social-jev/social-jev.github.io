@@ -33,3 +33,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Lead with a Jev-like classification foundation model: general transformer capabilities and social-science decision training, fast direct inference, and a flexible typed interface.
 - Explain large-dataset labelling, then show usage prominently before evaluation. Include a pending matched 30,000-request speed comparison; never invent its result.
 - Label example inputs State and Query explicitly, with complete sentences.
+
+- Show the actual typed core interface in the usage section, with separate Documentation, Model, and GitHub links. Include the GitHub icon. Verify examples against the package source.
