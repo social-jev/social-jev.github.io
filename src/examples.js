@@ -4,8 +4,8 @@ export const examples = [
     title: "Stance",
     source: "A statement about housing policy",
     document:
-      "I support the proposed rent cap. Housing should remain affordable for the people who live here.",
-    question: "What is the stance toward the rent cap?",
+      "The city council proposed limiting annual rent increases to two percent. I support this measure because it would help tenants remain in their homes.",
+    question: "What is the author’s stance toward the proposed limit on annual rent increases?",
     options: ["Support", "Oppose", "Unclear"],
     selected: "Support",
   },

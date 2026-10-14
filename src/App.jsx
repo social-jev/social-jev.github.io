@@ -59,11 +59,12 @@ export function App() {
       <header className="site-header">
         <div className="brand-lockup">
           <a className="wordmark" href="#">
-            social-jev<span className="wordmark-dot">.</span>
+            SocialJev<span className="wordmark-dot">.</span>
           </a>
           <span className="draft-label">Draft</span>
         </div>
         <nav aria-label="Main navigation">
+          <a href="#usage">Usage</a>
           <a href="#evaluation">Evaluation</a>
           <a href="#architecture">How it works</a>
           <a href="/docs/">Docs ↗</a>
@@ -86,25 +87,18 @@ export function App() {
         >
           <div className="hero-copy">
             <p className="eyebrow">
-              Classification foundation models for social science
+              Social science classification
             </p>
-            <h1 id="hero-title">
-              Your questions.
-              <br />
-              Your labels.
-              <br />
-              <em>One shared model.</em>
-            </h1>
-            <p className="hero-intro">
-              Bring a document, a research question, and candidate answers.
-              social-jev turns them into a classification.
-            </p>
+            <h1 id="hero-title" className="descriptive-title">SocialJev — a Classification Foundation Model for the Social Sciences</h1>
+            <p className="hero-intro">SocialJev is a Jev-like model that combines the general capabilities of transformers with decision training for social science. Direct answer scoring enables fast inference, while typed requests and responses provide a flexible, predictable interface.</p>
+            <h2 className="motivation-title">Classification at dataset scale</h2>
+            <p className="chapter-detail">Large-scale labelling can make frontier language models prohibitively expensive, while lightweight classifiers often require task-specific training. SocialJev applies a shared model across tasks, using direct scoring instead of autoregressive decoding to reduce inference time and cost.</p>
             <div className="hero-actions">
               <a className="button primary" href="#evaluation">
-                Explore the evidence ↓
+                Evaluation ↓
               </a>
-              <a className="text-link" href="/docs/">
-                Use in Python ↗
+              <a className="text-link" href="#usage">
+                Using SocialJev ↓
               </a>
             </div>
             <p className="release-note">
@@ -126,31 +120,31 @@ export function App() {
             </a>
           ))}
         </nav>
+        <section id="usage" className="package-callout">
+          <div><p className="eyebrow">Usage</p><h2>Using SocialJev</h2></div>
+          <div>
+            <p>Define the state, query, and candidate answers in a typed request. SocialJev returns a typed response containing a probability for each candidate answer.</p>
+            <p>The 0.6B checkpoint is available. Versioned documentation covering installation, request and response types, and inference is being prepared.</p>
+            <a className="button primary" href="/docs/">Documentation ↗</a>
+            <a className="text-link" href={packageUrl}>SocialJev source ↗</a>
+            <a className="text-link" href={modelUrl}>Released checkpoint ↗</a>
+          </div>
+        </section>
         <Chapter
           id="evaluation"
           number="02"
-          title={
-            <>
-              Small models.
-              <br />A bigger question.
-            </>
-          }
-          description="Where does classification performance meet computational cost? Compare model families at a glance."
-          detail="The final figure will use measured scores and a common evaluation protocol. These points only demonstrate the intended chart."
+          title="Classification performance, inference time, and cost"
+          description="We evaluate SocialJev across classification tasks and compare its performance, model size, and inference cost with other models. A matched comparison of 30,000 requests will measure the runtime difference between autoregressive decoding and SocialJev inference."
+          detail="The speed comparison is pending. The performance figure currently uses illustrative values."
         >
           <ParetoChart />
         </Chapter>
         <Chapter
           id="data"
           number="03"
-          title={
-            <>
-              Many domains.
-              <br />A shared foundation.
-            </>
-          }
-          description="Different documents and codebooks become a common question-and-answer format. A treemap makes the mixture visible."
-          detail="Each rectangle will represent a dataset’s share of usable training questions. Select a block to inspect it."
+          title="The training mixture"
+          description="SocialJev is trained across datasets covering political, social, and economic classification tasks. The treemap shows each dataset’s contribution to the training mixture."
+          detail="Rectangle areas will represent the number of training questions. The current proportions are illustrative."
           link={{
             href: "https://huggingface.co/social-jev",
             label: "Explore the datasets",
@@ -161,14 +155,9 @@ export function App() {
         <Chapter
           id="architecture"
           number="04"
-          title={
-            <>
-              A language model.
-              <br />A different readout.
-            </>
-          }
-          description="Control which tokens see each other and which positions they share. Decode the answer through the language model’s normal unembedding matrix."
-          detail="Follow the tiles from attention and position IDs to the answer vector, vocabulary logits, and probabilities for your choices."
+          title="Classification without autoregressive decoding"
+          description="At each answer prefix, SocialJev uses the language model’s unembedding matrix to score eligible answer codes. It retains the codes present in that query and normalizes their scores into candidate-answer probabilities."
+          detail="The same language-model head is fine-tuned with the backbone; classification does not require generating an answer as text."
           link={{ href: modelUrl, label: "Read the released model card" }}
         >
           <ArchitectureAnimation />
@@ -176,68 +165,35 @@ export function App() {
         <Chapter
           id="attention"
           number="05"
-          title={
-            <>
-              Shared context.
-              <br />
-              Separate questions.
-            </>
-          }
-          description="The document is shared. Each question and its options follow explicit attention rules. An answer prefix can read all options for its own question."
-          detail="Choose a token to inspect its context. Toggle physical and logical numbering to connect attention with position assignments."
+          title="Attention masks and position assignments"
+          description="Queries share the state while their candidate answers remain separate attention branches. Candidate answers reuse a common starting position, and each answer prefix follows its query’s longest candidate."
+          detail="Select a token to inspect its permitted context. Compare physical sequence indices with the assigned position IDs."
         >
           <AttentionPlayground />
         </Chapter>
         <Chapter
           id="training"
           number="06"
-          title={
-            <>
-              Learn to choose.
-              <br />
-              Measure the learning.
-            </>
-          }
-          description="Train on the correct candidate answer with cross-entropy. Follow loss and validation performance as optimization progresses."
-          detail="Architecture explains the mechanism; these figures will show the learning dynamics of actual runs."
+          title="Training objective and learning curves"
+          description="SocialJev is trained to maximize the probability of the correct candidate answer. The figures show the classification objective, training loss, and validation performance."
+          detail="The current curves are illustrative; measured learning curves will replace them."
         >
           <TrainingCharts />
         </Chapter>
-        <section className="package-callout">
-          <div>
-            <p className="eyebrow">Bring it into your research</p>
-            <h2>
-              A Python interface.
-              <br />
-              Your next question.
-            </h2>
-          </div>
-          <div>
-            <p>
-              The first 0.6B checkpoint is available. Package documentation is
-              being prepared.
-            </p>
-            <a className="button primary" href="/docs/">
-              Package documentation ↗
-            </a>
-            <a className="text-link" href={modelUrl}>
-              Explore the checkpoint ↗
-            </a>
-          </div>
-        </section>
+
       </main>
       <footer className="site-footer">
         <div>
           <a className="wordmark" href="#">
-            social-jev.
+            SocialJev.
           </a>
-          <p>Classification foundation models for social science.</p>
+          <p>Social science classification.</p>
         </div>
         <nav aria-label="Resources">
           <a href={packageUrl}>Package</a>
           <a href="https://huggingface.co/social-jev">Models & data</a>
           <a href="/docs/">Documentation</a>
-          <a href="https://github.com/social-jev/social-jev.github.io">
+          <a href="https://github.com/social-jev/SocialJev.github.io">
             Website source
           </a>
         </nav>

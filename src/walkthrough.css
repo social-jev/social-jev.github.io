@@ -1611,3 +1611,7 @@ button {
 .choice-readout > div > * { display: flex; justify-content: space-between; padding: 8px; }
 .choice-readout strong { background: #234b3d; color: white; }
 @media (max-width: 600px) { .computation-body { padding: 16px; } .computation-steps button { flex: 1 1 40%; } .unembedding-flow { gap: 3px; grid-template-columns: 1fr 12px 1.2fr 12px 1fr; } .unembedding-flow > div > span { font-size: 9px; } .computation-figure .visual-topline > strong { font-size: 11px; max-width: 65%; } }
+
+.hero-copy .descriptive-title { font-size: clamp(32px, 3.4vw, 52px); line-height: 1.08; }
+.motivation-title { font: 26px/1.2 "Newsreader", Georgia, serif; margin: 24px 0 12px; }
+#usage { scroll-margin-top: 90px; }

@@ -26,3 +26,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Explain the decision head and logical positions with a focused animation; provide an attention-mask playground separately.
 - User-authorized mock data is permitted for this design draft only. Label all simulated results, dataset sizes, training curves, and model outputs prominently. Never present them as measured findings.
 - Architecture uses persistent token tiles to connect attention masks and reused position IDs to the normal pretrained unembedding matrix, vocabulary logits, and answer-code softmax.
+
+## Copy decisions
+
+- Use SocialJev in prose; retain social-jev in package and model identifiers. Use descriptive academic headings, without slogans.
+- Lead with a Jev-like classification foundation model: general transformer capabilities and social-science decision training, fast direct inference, and a flexible typed interface.
+- Explain large-dataset labelling, then show usage prominently before evaluation. Include a pending matched 30,000-request speed comparison; never invent its result.
+- Label example inputs State and Query explicitly, with complete sentences.

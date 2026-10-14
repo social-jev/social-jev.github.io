@@ -10,7 +10,7 @@ export function ApplicationAnimation() {
     <figure className="application-animation visual-surface">
       <div className="visual-topline">
         <span className="small-label">
-          One interface. Different research questions.
+          Classification request and response
         </span>
         <PlaybackButton {...playback} label="application animation" />
       </div>
@@ -18,15 +18,15 @@ export function ApplicationAnimation() {
         <div className="flow-input">
           <div className="small-label">01 / Input</div>
           <div className="input-document">
-            <span>Document</span>
+            <span>State — text to classify</span>
             <p>{example.document}</p>
           </div>
           <div className="input-query">
-            <span>Question</span>
+            <span>Query — classification question</span>
             <p>{example.question}</p>
           </div>
           <div className="input-options">
-            <span>Candidate labels</span>
+            <span>Candidate answers</span>
             <p>{example.options.join(" · ")}</p>
           </div>
         </div>
@@ -35,13 +35,13 @@ export function ApplicationAnimation() {
             →
           </span>
           <div className="model-core">
-            <span className="model-wordmark">social-jev</span>
+            <span className="model-wordmark">SocialJev</span>
             <span>
               {phase === 0
                 ? "Read the input"
                 : phase === 1
                   ? "Score the choices"
-                  : "Return a choice"}
+                  : "Return probabilities"}
             </span>
             <div className="model-activity" aria-hidden="true">
               <i />
@@ -55,7 +55,7 @@ export function ApplicationAnimation() {
         </div>
         <div className={`flow-output ${phase === 2 ? "output-revealed" : ""}`}>
           <div className="small-label">02 / Output</div>
-          <span className="output-caption">Model choice</span>
+          <span className="output-caption">Highest-probability answer</span>
           <p className="output-choice">
             {phase === 2 ? example.selected : "…"}
           </p>
