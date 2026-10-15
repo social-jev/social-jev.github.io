@@ -117,7 +117,7 @@ export function App() {
             <pre><code>{`from social_jev import Query, Request, SocialJev
 
 model = SocialJev.from_pretrained(
-    "/path/to/scalar-head-checkpoint"
+    "social-jev/social-jev-0.6B-preview"
 )
 
 request = Request(
