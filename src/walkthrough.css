@@ -1703,3 +1703,28 @@ button {
 @media(max-width:600px) { .request-result-flow { grid-template-columns: 1fr; gap: 16px; } .request-model { flex-direction: column; } .request-model > span { transform: rotate(90deg); } .request-model > div { padding: 16px 30px; font-size: 20px; } .result-probabilities { gap: 20px; } }
 @media(prefers-reduced-motion:reduce) { .result-track i { transition: none; } }
 .refined-application.application-animation { border: 0; background: transparent; padding: 0; }
+
+.cutaway-scroll { overflow-x: auto; }
+.cutaway-svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.cutaway-svg text { fill: #243e32; text-anchor: middle; font-family: "Newsreader", Georgia, serif; font-size: 20px; }
+.cutaway-svg .model-outline { fill: none; stroke: #305e4d; stroke-width: 1.5; }
+.cutaway-svg .closed-model-box { fill: #305e4d; }
+.cutaway-svg .closed-model-label { fill: #fff; font-size: 24px; }
+.cutaway-svg .model-name { text-anchor: start; font-size: 22px; }
+.cutaway-svg .token-label { font-family: "DM Sans", sans-serif; font-size: 12px; }
+.cutaway-svg .state-tile { fill: #e5eff5; stroke: #b4cdd8; }
+.cutaway-svg .query-tile { fill: #eae6f1; stroke: #c9bfde; }
+.cutaway-svg .option-tile, .cutaway-svg .vector-cell, .cutaway-svg .score-cell { fill: #edf3e7; stroke: #8ea88b; }
+.cutaway-svg .option-group-label { font-size: 17px; }
+.cutaway-svg .cutaway-arrow { fill: none; stroke: #305e4d; stroke-width: 1.6; marker-end: url(#cutaway-arrow); }
+.cutaway-svg .cutaway-bracket, .cutaway-svg .hidden-state-brace { fill: none; stroke: #305e4d; stroke-width: 1.5; }
+.cutaway-svg .residual-stream { fill: none; stroke: #d7dbd4; stroke-width: 4; }
+.cutaway-svg .selected-stream { stroke: #668769; }
+.cutaway-svg .transformer-layer { fill: #e5eff5; stroke: #8faeb7; }
+.cutaway-svg .decision-head { fill: #e5eff5; stroke: #8faeb7; }
+.cutaway-svg .brace-label { text-anchor: start; font-size: 20px; }
+.cutaway-svg .probability-column { fill: #668769; }
+.cutaway-svg .current { fill: #305e4d; stroke: #305e4d; }
+.cutaway-svg .cutaway-active rect { fill: #d7e8ce; stroke: #305e4d; stroke-width: 2; }
+.cutaway-svg { min-width: 640px; }
+.cutaway-svg .token-label { font-size: 14px; }

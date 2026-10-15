@@ -54,3 +54,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Attention diagram depicts TRAINING, sourced from MERT attention.py with option_context=full, not package inference: one packed state/query/options sequence, branch-isolated causal options, shared state/query visibility, and reused option position offsets. No shared answer prefix. Keep one large matrix, token tiles above, selected-token detail beside it.
 
 - The application animation has no overall enclosing frame, title bar, clickable scene selectors, counter, or local illustration disclaimers. Keep Request and Result borders and cycle examples automatically.
+
+- The decoding section uses the approved vertical model cutaway: closed Request/Result boxes, token-aligned residual streams through transformer layers, short numeric final hidden-state vectors with a labelled brace, one Decision Head, scores and softmax. No headings or playback controls within the visual. Keep diagram typography legible; allow horizontal diagram scrolling on narrow screens instead of shrinking labels.

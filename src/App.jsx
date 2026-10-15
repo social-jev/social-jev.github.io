@@ -160,7 +160,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
           number="04"
           title="Classification without autoregressive decoding"
           description="SocialJev applies a shared linear or MLP head to the final hidden state of each candidate sequence. Each candidate receives one scalar score; softmax within the query produces candidate probabilities."
-          detail="Each sequence contains the state, query, and one candidate. The scoring head is shared across candidates and queries."
+          detail="The diagram shows the packed training sequence. Each option’s final hidden state is read by the same Decision Head; softmax normalizes the scores within its query."
         >
           <ArchitectureAnimation />
         </Chapter>
