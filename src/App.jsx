@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApplicationAnimation } from "./ApplicationAnimation.jsx";
 import { ParetoChart, TrainingCharts } from "./ResearchCharts.jsx";
 import { MixtureTreemap } from "./MixtureTreemap.jsx";
@@ -38,6 +38,16 @@ function Chapter({ id, number, title, children, description, link, detail }) {
 
 export function App() {
   const [active, setActive] = useState("applications");
+  const codeRef = useRef(null);
+  const [copyStatus, setCopyStatus] = useState("Copy");
+  async function copyCode() {
+    try {
+      await navigator.clipboard.writeText(codeRef.current.textContent);
+      setCopyStatus("Copied");
+    } catch {
+      setCopyStatus("Select code to copy");
+    }
+  }
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -113,8 +123,8 @@ export function App() {
             </div>
           </div>
           <div className="interface-code">
-            <div className="interface-code-label">Python · core interface</div>
-            <pre><code>{`from social_jev import Query, Request, SocialJev
+            <div className="interface-code-label"><span>Python · core interface</span><button className="copy-code-button" onClick={copyCode} aria-label="Copy Python code"><span aria-live="polite">{copyStatus}</span></button></div>
+            <pre><code ref={codeRef}>{`from social_jev import Query, Request, SocialJev
 
 model = SocialJev.from_pretrained(
     "social-jev/social-jev-0.6B-preview"

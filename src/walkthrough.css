@@ -1728,3 +1728,6 @@ button {
 .cutaway-svg .cutaway-active rect { fill: #d7e8ce; stroke: #305e4d; stroke-width: 2; }
 .cutaway-svg { min-width: 640px; }
 .cutaway-svg .token-label { font-size: 14px; }
+.interface-code-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.copy-code-button { padding: 5px 9px; background: transparent; border: 1px solid #a7b4a7; border-radius: 4px; color: inherit; font: inherit; cursor: pointer; }
+.copy-code-button:hover { background: #edf2e6; }
