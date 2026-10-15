@@ -95,7 +95,7 @@ export function App() {
           <h1 id="hero-title">SocialJev</h1>
           <p className="academic-subtitle">A Classification Foundation Model<br />for the Social Sciences</p>
           <ul className="author-list" aria-label="Authors">
-            <li>Elliott Ashe</li><li>Felix Drinkall</li><li>Pranav Garg</li><li>Daniel Göttlich</li>
+            <li>Elliott Ash</li><li>Felix Drinkall</li><li>Pranav Garg</li><li>Daniel Göttlich</li>
           </ul>
           <p className="academic-affiliation">ETH Zurich</p>
           <div className="academic-links">
