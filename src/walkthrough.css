@@ -1662,3 +1662,7 @@ button {
 .scalar-figure > .figure-note { margin-top: 20px; }
 @media(max-width:800px) { .academic-overview, .visual-chapter { grid-template-columns: 1fr; gap: 24px; } }
 @media(max-width:420px) { .scalar-lane { grid-template-columns: minmax(0, 1.2fr) 10px minmax(0, 1fr) 10px 48px; gap: 4px; } .candidate-sequence, .scalar-head { padding: 10px; } .scalar-head strong { font-size: 12px; } .scalar-score strong { font-size: 23px; } }
+.candidate-mask-grid { display: grid; gap: 16px; }
+.candidate-mask strong { display: block; font-size: 13px; }
+.candidate-mask svg { max-width: 210px; width: 100%; display: block; }
+.candidate-mask small { font-size: 10px; display: block; line-height: 1.5; }

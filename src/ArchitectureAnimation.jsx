@@ -1,4 +1,4 @@
-import { usePlayback, PlaybackButton } from "./usePlayback.jsx";
+import { usePlayback } from "./usePlayback.jsx";
 const stages = ["Candidate inputs", "Candidate states", "Shared head", "Probabilities"];
 const descriptions = [
   "Each candidate is encoded with the same state and query.",
@@ -9,7 +9,7 @@ const descriptions = [
 export function ArchitectureAnimation() {
   const playback = usePlayback(4, 3000);
   return <figure className="visual-surface scalar-figure">
-    <div className="visual-topline"><strong>Candidate scoring</strong><PlaybackButton {...playback} label="architecture animation" /></div>
+    <div className="visual-topline"><strong>Candidate scoring</strong></div>
     <div className="computation-steps" role="group" aria-label="Candidate scoring steps">{stages.map((stage,i)=><button key={stage} aria-pressed={playback.step===i} onClick={()=>playback.choose(i)}>{stage}</button>)}</div>
     <p className="computation-explanation">{descriptions[playback.step]}</p>
     <div className="scalar-lanes">

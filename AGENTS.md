@@ -45,3 +45,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep the academic header centered; below it restore explanation-left/visual-right sections, stacking on mobile.
 - Current architecture uses a shared scalar linear/MLP head on each candidate’s final nonpadding hidden state, followed by query-local softmax. Remove answer-code, unembedding, and shared answer-prefix explanations. Attention follows independent causal state–query–candidate sequences with positions restarting per sequence.
 - Remove the initial application animation’s Pause button.
+
+- Verify the current scalar-head architecture against GitHub social-jev PR #3, not merely a local checkout. Display separate candidate attention matrices, not a single packed block-diagonal mask. Remove all playback buttons; preserve the application input/model/probabilities visual.

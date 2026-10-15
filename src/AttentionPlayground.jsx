@@ -55,58 +55,22 @@ export function AttentionPlayground() {
       <div className="attention-inspector">
         <div className="matrix-container">
           <span className="matrix-axis-label">Keys / context →</span>
-          <svg
-            viewBox="0 0 340 340"
-            role="img"
-            aria-label={`Schematic attention mask. Highlighted row: token ${selected}, ${reader.word}. Green cells are permitted attention.`}
-          >
-            {attentionTokens.map((row) =>
-              attentionTokens.map((key) => (
-                <rect
-                  key={`${row.index}-${key.index}`}
-                  x={30 + key.index * 14}
-                  y={15 + row.index * 14}
-                  width="12"
-                  height="12"
-                  rx="1"
-                  fill={
-                    canAttend(row, key)
-                      ? row.index === selected
-                        ? "#305e4d"
-                        : "#bfd0c2"
-                      : row.index === selected
-                        ? "#ebe6d9"
-                        : "#f0f1eb"
-                  }
-                  stroke={row.index === selected ? "#8b9e8c" : "none"}
-                  strokeWidth=".5"
-                />
-              )),
-            )}
-            {[0, 7, 14, 21].map(boundary => <path key={boundary} d={`M${30 + boundary * 14} 15V309 M30 ${15 + boundary * 14}H324`} fill="none" stroke="#738477" strokeWidth="1" />)}
-            {attentionTokens.map((token) => (
-              <g key={token.index}>
-                <text
-                  x={37 + token.index * 14}
-                  y="324"
-                  textAnchor="middle"
-                  className="matrix-index"
-                >
-                  {logical ? token.position : token.index}
-                </text>
-                <text
-                  x="19"
-                  y={26 + token.index * 14}
-                  textAnchor="end"
-                  className="matrix-index"
-                >
-                  {token.index}
-                </text>
-              </g>
-            ))}
-          </svg>
+          <div className="candidate-mask-grid">
+            {["Support", "Oppose", "Unclear"].map((candidate, branch) => {
+              const tokens = attentionTokens.filter(token => token.branch === branch);
+              return <div key={candidate} className="candidate-mask">
+                <strong>{candidate}</strong>
+                <svg viewBox="0 0 180 190" role="img" aria-label={`${candidate}: separate causal sequence, positions zero through six`}>
+                  {tokens.map(row => tokens.map(key => <rect key={`${row.index}-${key.index}`} x={28+key.position*20} y={20+row.position*20} width="18" height="18" fill={canAttend(row,key) ? row.index===selected ? "#305e4d" : "#bfd0c2" : "#f0f1eb"} />))}
+                  {[0,3,5,7].map(boundary=><path key={boundary} d={`M${28+boundary*20} 20V160 M28 ${20+boundary*20}H168`} fill="none" stroke="#738477" strokeWidth="1" />)}
+                  {tokens.map(token=><g key={token.index}><text x={37+token.position*20} y="178" textAnchor="middle" className="matrix-index">{token.position}</text><text x="19" y={33+token.position*20} textAnchor="end" className="matrix-index">{token.position}</text></g>)}
+                </svg>
+                <small>State 0–2 · query 3–4 · candidate 5–6</small>
+              </div>;
+            })}
+          </div>
           <span className="matrix-footnote">
-            Rows = readers · columns = context tokens
+            Each square is a separate input · rows = readers · columns = context tokens
           </span>
         </div>
         <div className="visibility-detail" aria-live="polite">
