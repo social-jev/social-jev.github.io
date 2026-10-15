@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="SocialJev documentation is being prepared."
+    />
+    <title>Documentation · SocialJev</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #fcfcf9;
+        color: #203330;
+        font:
+          16px/1.7 "DM Sans",
+          sans-serif;
+      }
+      header,
+      main,
+      footer {
+        max-width: 1100px;
+        margin: auto;
+        padding: 28px 32px;
+      }
+      header {
+        border-bottom: 1px solid #dce2dc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 5px;
+      }
+      a:focus-visible {
+        outline: 2px solid #305e4d;
+        outline-offset: 5px;
+      }
+      .logo {
+        font:
+          32px "Newsreader",
+          Georgia,
+          serif;
+        text-decoration: none;
+      }
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .draft-label {
+        font:
+          500 10px/1.2 "DM Sans",
+          sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #795318;
+        background: #f7edd6;
+        border: 1px solid #dbc79f;
+        padding: 6px 8px;
+      }
+      header > a:last-child {
+        font-size: 13px;
+      }
+      main {
+        padding-top: 120px;
+        padding-bottom: 120px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #305e4d;
+      }
+      h1 {
+        font:
+          64px/1.05 "Newsreader",
+          Georgia,
+          serif;
+        letter-spacing: -1.5px;
+        margin: 24px 0;
+      }
+      main > p:not(.eyebrow) {
+        max-width: 560px;
+        color: #586762;
+      }
+      .links {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        margin-top: 36px;
+        font-size: 14px;
+      }
+      footer {
+        border-top: 1px solid #dce2dc;
+        font-size: 12px;
+        color: #586762;
+      }
+      @media (max-width: 600px) {
+        main {
+          padding-top: 72px;
+          padding-bottom: 80px;
+        }
+        h1 {
+          font-size: 46px;
+        }
+        header,
+        main,
+        footer {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand-lockup">
+        <a href="/" class="logo">SocialJev.</a
+        ><span class="draft-label">Draft</span>
+      </div>
+      <a href="/">Back to the project</a>
+    </header>
+    <main>
+      <p class="eyebrow">The Python package</p>
+      <h1>Documentation<br />is on its way.</h1>
+      <p>
+        We’re preparing installation instructions, classification examples, and
+        the API reference. Each package release will have its own documentation
+        version here.
+      </p>
+      <div class="links">
+        <a href="https://github.com/DGoettlich/social-jev"
+          >Explore the package</a
+        ><a href="https://huggingface.co/social-jev/social-jev-0.6B-v1"
+          >Read the 0.6B model card</a
+        >
+      </div>
+    </main>
+    <footer>
+      social-jev · Classification foundation models for social science.
+    </footer>
+  </body>
+</html>
