@@ -39,7 +39,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Academic header
 
 - Use the approved centered academic layout: SocialJev title, descriptive subtitle, author list, ETH Zurich, then GitHub/Models/Documentation links above all explanations. No checkpoint availability line.
-- Author order: Elliott Ashe, Felix Drinkall, Pranav Garg, Daniel Göttlich.
+- Author order: Elliott Ash, Felix Drinkall, Pranav Garg, Daniel Göttlich.
 - Start Overview and the wide application animation below the title block; usage follows. Keep restrained cream and green styling.
 
 - Keep the academic header centered; below it restore explanation-left/visual-right sections, stacking on mobile.
@@ -56,3 +56,11 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The application animation has no overall enclosing frame, title bar, clickable scene selectors, counter, or local illustration disclaimers. Keep Request and Result borders and cycle examples automatically.
 
 - The decoding section uses the approved vertical model cutaway: closed Request/Result boxes, token-aligned residual streams through transformer layers, short numeric final hidden-state vectors with a labelled brace, one Decision Head, scores and softmax. No headings or playback controls within the visual. Keep diagram typography legible; allow horizontal diagram scrolling on narrow screens instead of shrinking labels.
+
+## Documentation publishing
+
+- Package docs source and the locked `docs` dependency group belong in DGoettlich/social-jev. Documentation tooling must not become package runtime dependencies or published extras.
+- The website `published` branch stores generated landing-page files and immutable `docs/vMAJOR.MINOR.PATCH/` builds. Website main pushes rebuild the landing page while preserving docs. Docs dispatches and hourly recovery runs reuse the stored landing page.
+- The website workflow reconciles missing stable package tags reachable from package main and containing mkdocs.yml. It builds with `uv sync --locked --group docs` and `DOCS_VERSION` set for MkDocs.
+- `/docs/versions.json` contains `{latest, versions}` with newest stable first; `/docs/` redirects to latest once a stable docs build exists. Keep the placeholder before that.
+- Immediate cross-repository dispatch requires package secret WEBSITE_PUBLISH_TOKEN scoped to website repository Contents:write; hourly reconciliation recovers missed notifications.
