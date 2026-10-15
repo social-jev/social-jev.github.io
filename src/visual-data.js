@@ -1,15 +1,4 @@
-// All values in these charts are invented for the layout draft.
-export const mockModels = [
-  { name: "Small baseline", params: 0.35, score: 65, ours: false },
-  { name: "social-jev 0.6B", params: 0.6, score: 79, ours: true },
-  { name: "social-jev 1.7B", params: 1.7, score: 85, ours: true },
-  { name: "social-jev 4B", params: 4, score: 88, ours: true },
-  { name: "Baseline 7B", params: 7, score: 82, ours: false },
-  { name: "Baseline 14B", params: 14, score: 89.5, ours: false },
-  { name: "Baseline 32B", params: 32, score: 92, ours: false },
-  { name: "Baseline 70B", params: 70, score: 93, ours: false },
-];
-
+// Dataset weights and training curves remain illustrative.
 export function paretoFrontier(models) {
   return models
     .filter(

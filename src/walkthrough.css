@@ -1731,3 +1731,10 @@ button {
 .interface-code-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .copy-code-button { padding: 5px 9px; background: transparent; border: 1px solid #a7b4a7; border-radius: 4px; color: inherit; font: inherit; cursor: pointer; }
 .copy-code-button:hover { background: #edf2e6; }
+
+.measured-evaluation .pareto-chart { min-width: 680px; }
+.measured-evaluation .axis-text { font-size: 16px; }
+.measured-evaluation .axis-title { font-size: 17px; }
+.measured-evaluation .ours-label { font-size: 18px; }
+.measured-evaluation .baseline-label { font-size: 16px; fill: #586762; }
+.measured-evaluation figcaption a { color: var(--green); text-underline-offset: 3px; }

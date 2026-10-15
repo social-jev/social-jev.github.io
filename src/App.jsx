@@ -87,7 +87,7 @@ export function App() {
       <div className="mock-data-banner">
         Design preview{" "}
         <span>
-          Charts, dataset sizes, and example outputs use simulated data.
+          Evaluation scores are measured. Dataset sizes, training curves, and example outputs remain illustrative.
         </span>
       </div>
       <main id="main">
@@ -148,7 +148,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
           number="02"
           title="Classification performance, inference time, and cost"
           description="We evaluate SocialJev across classification tasks and compare its performance, model size, and inference cost with other models. A matched comparison of 30,000 requests will measure the runtime difference between autoregressive decoding and SocialJev inference."
-          detail="The speed comparison is pending. The performance figure currently uses illustrative values."
+          detail="Evaluated on our internal benchmark, SocialJevBench (v0.1alpha). The matched speed and cost comparison is pending."
         >
           <ParetoChart />
         </Chapter>
@@ -209,7 +209,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
             Website source
           </a>
         </nav>
-        <span className="footer-note">Design draft · simulated figures.</span>
+        <span className="footer-note">Design draft · measured evals; illustrative data and training figures.</span>
       </footer>
     </>
   );

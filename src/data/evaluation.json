@@ -1,0 +1,79 @@
+{
+  "dataset": "social-jev/evals",
+  "revision": "v0.1alpha",
+  "split": "test",
+  "limit": 512,
+  "metric": "Correct queries divided by evaluated queries; every query has equal weight",
+  "models": [
+    {
+      "model": "cloudflare/clef",
+      "accuracy": 0.96484375,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "clef/results.json"
+    },
+    {
+      "model": "cloudflare/clef-flash",
+      "accuracy": 0.93359375,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "clef-flash/results.json"
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash",
+      "accuracy": 0.98828125,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "deepseek-v4.1-flash/results.json"
+    },
+    {
+      "model": "fastino/GLiNER2.5-Decide",
+      "accuracy": 0.623046875,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "gliner/results.json"
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "accuracy": 0.98828125,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "glm-5.3-flash/results.json"
+    },
+    {
+      "model": "LiquidAI/d1-3B",
+      "accuracy": 0.900390625,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "liquid/results.json"
+    },
+    {
+      "model": "social-jev/social-jev-0.6B-v1",
+      "accuracy": 0.919921875,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "social-jev-0.6b/results.json"
+    },
+    {
+      "model": "typesafe/jev-1.13",
+      "accuracy": 0.99609375,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "typesafe/results.json"
+    },
+    {
+      "model": "social-jev/social-jev-1.7B-preview",
+      "accuracy": 0.974609375,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "social-jev-1.7b/results.json"
+    },
+    {
+      "model": "social-jev/social-jev-4B-preview",
+      "accuracy": 0.98046875,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "social-jev-4b/results.json"
+    }
+  ]
+}
