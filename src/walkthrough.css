@@ -1644,3 +1644,21 @@ button {
 .visual-chapter .section-heading .eyebrow { display: none; }
 @media(max-width:600px) { .academic-hero { padding: 40px 20px; } .academic-overview, .interface-section, .visual-chapter { padding: 28px 20px; } .author-list { gap: 10px 18px; font-size: 14px; } .academic-links { gap: 8px; } .academic-links a { padding: 10px 12px; font-size: 12px; } .academic-overview h2, .visual-chapter .section-heading h2 { font-size: 30px; } }
 @media(max-width:600px) { .site-header nav { display: none; } }
+
+.academic-overview { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.35fr); gap: 48px; align-items: start; padding-top: 56px; padding-bottom: 56px; }
+.academic-overview > .application-animation { margin: 0; }
+.overview-copy p { font-size: 14px; line-height: 1.75; margin-top: 16px; }
+.visual-chapter { grid-template-columns: 290px minmax(0, 1fr); gap: 48px; padding-top: 56px; padding-bottom: 56px; }
+.visual-chapter .section-heading h2 { font-size: 36px; }
+.scalar-lanes { display: grid; gap: 20px; }
+.scalar-lane { display: grid; grid-template-columns: minmax(0, 1.3fr) 16px minmax(0, 1fr) 16px 70px; gap: 8px; align-items: center; }
+.candidate-sequence, .scalar-head { padding: 14px; background: #edf1e9; }
+.candidate-sequence small, .scalar-head small, .scalar-score small { display: block; font-size: 11px; margin-bottom: 8px; }
+.candidate-sequence strong, .scalar-head strong { display: block; font-size: 14px; }
+.scalar-state { display: block; padding: 8px; margin-top: 12px; background: #dce5d7; font-size: 10px; }
+.scalar-state.active, .scalar-head.active { background: #315d4c; color: #fff; }
+.scalar-head small { margin: 8px 0 0; }
+.scalar-score strong { font: 28px Georgia, serif; }
+.scalar-figure > .figure-note { margin-top: 20px; }
+@media(max-width:800px) { .academic-overview, .visual-chapter { grid-template-columns: 1fr; gap: 24px; } }
+@media(max-width:420px) { .scalar-lane { grid-template-columns: minmax(0, 1.2fr) 10px minmax(0, 1fr) 10px 48px; gap: 4px; } .candidate-sequence, .scalar-head { padding: 10px; } .scalar-head strong { font-size: 12px; } .scalar-score strong { font-size: 23px; } }

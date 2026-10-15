@@ -1,5 +1,5 @@
 import { examples } from "./examples.js";
-import { usePlayback, PlaybackButton } from "./usePlayback.jsx";
+import { usePlayback } from "./usePlayback.jsx";
 
 export function ApplicationAnimation() {
   const playback = usePlayback(examples.length * 3, 1800);
@@ -12,7 +12,6 @@ export function ApplicationAnimation() {
         <span className="small-label">
           Classification request and response
         </span>
-        <PlaybackButton {...playback} label="application animation" />
       </div>
       <div className="application-flow" key={example.id}>
         <div className="flow-input">

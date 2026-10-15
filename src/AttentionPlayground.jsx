@@ -1,31 +1,31 @@
 import { useState } from "react";
 import { attentionTokens, canAttend } from "./visual-data.js";
 const presets = [
-  { index: 4, label: "Question 1" },
-  { index: 6, label: "Option A" },
-  { index: 9, label: "Answer 1" },
-  { index: 16, label: "Answer 2" },
+  { index: 4, label: "Query" },
+  { index: 6, label: "Support readout" },
+  { index: 13, label: "Oppose readout" },
+  { index: 20, label: "Unclear readout" },
 ];
 
 export function AttentionPlayground() {
-  const [selected, setSelected] = useState(9);
+  const [selected, setSelected] = useState(6);
   const [logical, setLogical] = useState(false);
   const reader = attentionTokens[selected];
   const visible = attentionTokens.filter((token) => canAttend(reader, token));
   return (
     <figure className="attention-figure visual-surface">
       <div className="visual-topline">
-        <span className="small-label">Who can see what?</span>
+        <span className="small-label">Separate candidate sequences</span>
         <div
           className="segmented-control"
           role="group"
           aria-label="Position numbering"
         >
           <button aria-pressed={!logical} onClick={() => setLogical(false)}>
-            Physical
+            Stored index
           </button>
           <button aria-pressed={logical} onClick={() => setLogical(true)}>
-            Logical
+            Position ID
           </button>
         </div>
       </div>
@@ -64,10 +64,10 @@ export function AttentionPlayground() {
               attentionTokens.map((key) => (
                 <rect
                   key={`${row.index}-${key.index}`}
-                  x={30 + key.index * 17}
-                  y={15 + row.index * 17}
-                  width="14"
-                  height="14"
+                  x={30 + key.index * 14}
+                  y={15 + row.index * 14}
+                  width="12"
+                  height="12"
                   rx="1"
                   fill={
                     canAttend(row, key)
@@ -83,10 +83,11 @@ export function AttentionPlayground() {
                 />
               )),
             )}
+            {[0, 7, 14, 21].map(boundary => <path key={boundary} d={`M${30 + boundary * 14} 15V309 M30 ${15 + boundary * 14}H324`} fill="none" stroke="#738477" strokeWidth="1" />)}
             {attentionTokens.map((token) => (
               <g key={token.index}>
                 <text
-                  x={37 + token.index * 17}
+                  x={37 + token.index * 14}
                   y="324"
                   textAnchor="middle"
                   className="matrix-index"
@@ -95,7 +96,7 @@ export function AttentionPlayground() {
                 </text>
                 <text
                   x="19"
-                  y={26 + token.index * 17}
+                  y={26 + token.index * 14}
                   textAnchor="end"
                   className="matrix-index"
                 >
@@ -120,13 +121,8 @@ export function AttentionPlayground() {
             <p>{visible.map((token) => token.word).join(" ")}</p>
           </div>
           <p className="mask-explanation">
-            {reader.role === "answer"
-              ? "The answer prefix sees its document, its own question, and all candidate options for that question."
-              : reader.role === "option"
-                ? "An option sees the document, its own question, and its own prefix. Sibling options remain isolated."
-                : reader.role === "query"
-                  ? "A question sees the document and its own prefix. Other questions remain isolated."
-                  : "Document tokens attend causally within the document."}
+            Each token sees only the causal prefix of its own candidate sequence.
+            The final token provides the hidden state for the shared scalar head.
           </p>
           <div
             className="attention-presets"
@@ -146,9 +142,7 @@ export function AttentionPlayground() {
         </div>
       </div>
       <figcaption className="figure-note">
-        Schematic mask from the released full-context LM-head path, without
-        examples, role markers, or padding. Dark green highlights one reader’s
-        allowed context.
+        Independent causal sequences from the scalar-head inference path. Role markers and padding are omitted. The selected row highlights permitted context; sequence positions restart at zero.
       </figcaption>
     </figure>
   );

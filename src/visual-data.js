@@ -33,97 +33,14 @@ export const mockCurves = Array.from({ length: 21 }, (_, index) => ({
   accuracy: 50 + 36 * (1 - Math.exp(-index / 5)) + Math.sin(index * 1.2) * 0.6,
 }));
 
-// Message fragments are schematic: each displayed word stands for one token.
-const groups = [
-  {
-    id: "state",
-    label: "Document",
-    role: "state",
-    query: null,
-    words: ["The", "rent", "cap."],
-    offset: 0,
-  },
-  {
-    id: "q1",
-    label: "Question 1",
-    role: "query",
-    query: 1,
-    words: ["Stance", "?"],
-    offset: 3,
-  },
-  {
-    id: "a1",
-    label: "Option A",
-    role: "option",
-    query: 1,
-    words: ["A:", "Support"],
-    offset: 5,
-  },
-  {
-    id: "b1",
-    label: "Option B",
-    role: "option",
-    query: 1,
-    words: ["B:", "Oppose"],
-    offset: 5,
-  },
-  {
-    id: "r1",
-    label: "Answer 1",
-    role: "answer",
-    query: 1,
-    words: ["answer"],
-    offset: 7,
-  },
-  {
-    id: "q2",
-    label: "Question 2",
-    role: "query",
-    query: 2,
-    words: ["Topic", "?"],
-    offset: 3,
-  },
-  {
-    id: "a2",
-    label: "Option A",
-    role: "option",
-    query: 2,
-    words: ["A:", "Housing"],
-    offset: 5,
-  },
-  {
-    id: "b2",
-    label: "Option B",
-    role: "option",
-    query: 2,
-    words: ["B:", "Trade"],
-    offset: 5,
-  },
-  {
-    id: "r2",
-    label: "Answer 2",
-    role: "answer",
-    query: 2,
-    words: ["answer"],
-    offset: 7,
-  },
-];
-export const attentionTokens = groups
-  .flatMap((group) =>
-    group.words.map((word, index) => ({
-      ...group,
-      word,
-      position: group.offset + index,
-    })),
-  )
-  .map((token, index) => ({ ...token, index }));
-
+// Separate causal state–query–candidate sequences, omitting role markers and padding.
+export const attentionTokens = ["Support", "Oppose", "Unclear"].flatMap((candidate, branch) =>
+  ["The", "rent", "cap.", "Stance", "?", candidate, "end"].map((word, position) => ({
+    index: branch * 7 + position, position, branch, word,
+    role: position < 3 ? "state" : position < 5 ? "query" : "option",
+    label: `${candidate} sequence · ${position < 3 ? "State" : position < 5 ? "Query" : "Candidate"}`,
+  }))
+);
 export function canAttend(reader, key) {
-  if (reader.id === key.id) return key.index <= reader.index;
-  if (reader.role === "state") return false;
-  if (key.role === "state") return true;
-  if (reader.query !== key.query) return false;
-  if (reader.role === "query") return false;
-  if (key.role === "query") return true;
-  return reader.role === "answer" && key.role === "option";
+  return reader.branch === key.branch && key.position <= reader.position;
 }

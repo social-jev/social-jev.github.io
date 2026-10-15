@@ -95,9 +95,9 @@ export function App() {
           </div>
         </section>
         <section id="applications" className="academic-overview" aria-labelledby="overview-title">
-          <h2 id="overview-title">Overview</h2>
+          <div className="overview-copy"><h2 id="overview-title">Overview</h2>
           <p>SocialJev is a Jev-like model that combines general transformer capabilities with decision training for social science, fast inference, and a flexible typed interface.</p>
-          <p>It is designed for large-scale labelling, where frontier language models can be prohibitively expensive and lightweight classifiers often require task-specific training. SocialJev scores candidate answers directly instead of generating responses token by token.</p>
+          <p>It is designed for large-scale labelling, where frontier language models can be prohibitively expensive and lightweight classifiers often require task-specific training. SocialJev scores candidate answers directly instead of generating responses token by token.</p></div>
           <ApplicationAnimation />
         </section>
         <section id="usage" className="package-callout interface-section">
@@ -117,7 +117,7 @@ export function App() {
             <pre><code>{`from social_jev import Query, Request, SocialJev
 
 model = SocialJev.from_pretrained(
-    "social-jev/social-jev-0.6B-v1"
+    "/path/to/scalar-head-checkpoint"
 )
 
 request = Request(
@@ -128,7 +128,7 @@ request = Request(
     )],
 )
 
-result = model.query(request)[0]
+result = model.query(request)[0][0]
 result.choice         # Selected candidate answer
 result.probabilities  # dict[str, float]`}</code></pre>
           </div>
@@ -159,9 +159,8 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="architecture"
           number="04"
           title="Classification without autoregressive decoding"
-          description="At each answer prefix, SocialJev uses the language model’s unembedding matrix to score eligible answer codes. It retains the codes present in that query and normalizes their scores into candidate-answer probabilities."
-          detail="The same language-model head is fine-tuned with the backbone; classification does not require generating an answer as text."
-          link={{ href: modelUrl, label: "Read the released model card" }}
+          description="SocialJev applies a shared linear or MLP head to the final hidden state of each candidate sequence. Each candidate receives one scalar score; softmax within the query produces candidate probabilities."
+          detail="Each sequence contains the state, query, and one candidate. The scoring head is shared across candidates and queries."
         >
           <ArchitectureAnimation />
         </Chapter>
@@ -169,8 +168,8 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="attention"
           number="05"
           title="Attention masks and position assignments"
-          description="Queries share the state while their candidate answers remain separate attention branches. Candidate answers reuse a common starting position, and each answer prefix follows its query’s longest candidate."
-          detail="Select a token to inspect its permitted context. Compare physical sequence indices with the assigned position IDs."
+          description="Each candidate sequence contains the state, its query, and one candidate answer, with causal attention. Other candidates are encoded separately and cannot attend to this sequence."
+          detail="Select a token to inspect its permitted context. Positions start from zero in each sequence; candidate positions follow that sequence’s state and query."
         >
           <AttentionPlayground />
         </Chapter>

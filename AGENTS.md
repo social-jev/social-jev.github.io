@@ -41,3 +41,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Use the approved centered academic layout: SocialJev title, descriptive subtitle, author list, ETH Zurich, then GitHub/Models/Documentation links above all explanations. No checkpoint availability line.
 - Author order: Elliott Ashe, Felix Drinkall, Pranav Garg, Daniel Göttlich.
 - Start Overview and the wide application animation below the title block; usage follows. Keep restrained cream and green styling.
+
+- Keep the academic header centered; below it restore explanation-left/visual-right sections, stacking on mobile.
+- Current architecture uses a shared scalar linear/MLP head on each candidate’s final nonpadding hidden state, followed by query-local softmax. Remove answer-code, unembedding, and shared answer-prefix explanations. Attention follows independent causal state–query–candidate sequences with positions restarting per sequence.
+- Remove the initial application animation’s Pause button.

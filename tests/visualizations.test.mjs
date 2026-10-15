@@ -6,30 +6,16 @@ import {
   paretoFrontier,
 } from "../src/visual-data.js";
 
-test("options share positions while remaining isolated from sibling options", () => {
-  const optionA = attentionTokens[6],
-    optionB = attentionTokens[8];
-  assert.equal(optionA.position, optionB.position);
-  assert.ok(canAttend(optionA, attentionTokens[2]));
-  assert.ok(canAttend(optionA, attentionTokens[4]));
-  assert.ok(canAttend(optionA, attentionTokens[5]));
-  assert.ok(!canAttend(optionB, optionA));
-  assert.ok(!canAttend(optionA, optionB));
-  assert.ok(!canAttend(attentionTokens[5], optionA));
+test("candidate readouts see their complete sequence and no sibling candidate", () => {
+  for (const reader of attentionTokens.filter(token => token.position === 6)) {
+    for (const key of attentionTokens) assert.equal(canAttend(reader, key), reader.branch === key.branch);
+  }
 });
-test("an answer sees all own candidates but none of the other question", () => {
-  const answer = attentionTokens[9];
-  for (const token of attentionTokens.slice(0, 10))
-    assert.ok(canAttend(answer, token));
-  for (const token of attentionTokens.slice(10))
-    assert.ok(!canAttend(answer, token));
-  assert.ok(canAttend(attentionTokens[16], attentionTokens[2]));
-  assert.ok(!canAttend(attentionTokens[16], answer));
-});
-test("document and query context stays causal and branch-local", () => {
-  assert.ok(!canAttend(attentionTokens[0], attentionTokens[1]));
-  assert.ok(!canAttend(attentionTokens[3], attentionTokens[4]));
-  assert.ok(!canAttend(attentionTokens[4], attentionTokens[10]));
+test("each candidate uses causal attention and starts positions at zero", () => {
+  for (const reader of attentionTokens) {
+    assert.equal(reader.position, reader.index % 7);
+    for (const key of attentionTokens) assert.equal(canAttend(reader,key), reader.branch === key.branch && key.position <= reader.position);
+  }
 });
 test("Pareto frontier excludes dominated points and sorts by parameter count", () => {
   const points = [
