@@ -64,6 +64,7 @@ export function App() {
           <span className="draft-label">Draft</span>
         </div>
         <nav aria-label="Main navigation">
+          <a href="#applications">Overview</a>
           <a href="#usage">Usage</a>
           <a href="#evaluation">Evaluation</a>
           <a href="#architecture">How it works</a>
@@ -80,46 +81,25 @@ export function App() {
         </span>
       </div>
       <main id="main">
-        <section
-          id="applications"
-          className="hero visual-hero"
-          aria-labelledby="hero-title"
-        >
-          <div className="hero-copy">
-            <p className="eyebrow">
-              Social science classification
-            </p>
-            <h1 id="hero-title" className="descriptive-title">SocialJev — a Classification Foundation Model for the Social Sciences</h1>
-            <p className="hero-intro">SocialJev is a Jev-like model that combines the general capabilities of transformers with decision training for social science. Direct answer scoring enables fast inference, while typed requests and responses provide a flexible, predictable interface.</p>
-            <h2 className="motivation-title">Classification at dataset scale</h2>
-            <p className="chapter-detail">Large-scale labelling can make frontier language models prohibitively expensive, while lightweight classifiers often require task-specific training. SocialJev applies a shared model across tasks, using direct scoring instead of autoregressive decoding to reduce inference time and cost.</p>
-            <div className="hero-actions">
-              <a className="button primary" href="#evaluation">
-                Evaluation ↓
-              </a>
-              <a className="text-link" href="#usage">
-                Using SocialJev ↓
-              </a>
-            </div>
-            <p className="release-note">
-              <span className="availability-dot" />
-              0.6B v1 available · 1.7B and 4B planned
-            </p>
+        <section className="academic-hero" aria-labelledby="hero-title">
+          <h1 id="hero-title">SocialJev</h1>
+          <p className="academic-subtitle">A Classification Foundation Model<br />for the Social Sciences</p>
+          <ul className="author-list" aria-label="Authors">
+            <li>Elliott Ashe</li><li>Felix Drinkall</li><li>Pranav Garg</li><li>Daniel Göttlich</li>
+          </ul>
+          <p className="academic-affiliation">ETH Zurich</p>
+          <div className="academic-links">
+            <a href={packageUrl}><img src="/github.svg" width="20" height="20" alt="" />GitHub</a>
+            <a href={modelUrl}><span aria-hidden="true">🤗</span>Models</a>
+            <a href="/docs/"><span aria-hidden="true">▤</span>Documentation</a>
           </div>
+        </section>
+        <section id="applications" className="academic-overview" aria-labelledby="overview-title">
+          <h2 id="overview-title">Overview</h2>
+          <p>SocialJev is a Jev-like model that combines general transformer capabilities with decision training for social science, fast inference, and a flexible typed interface.</p>
+          <p>It is designed for large-scale labelling, where frontier language models can be prohibitively expensive and lightweight classifiers often require task-specific training. SocialJev scores candidate answers directly instead of generating responses token by token.</p>
           <ApplicationAnimation />
         </section>
-        <nav className="chapter-nav" aria-label="Page sections">
-          {sections.map(([id, label], index) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              aria-current={active === id ? "location" : undefined}
-            >
-              <span>0{index + 1}</span>
-              {label}
-            </a>
-          ))}
-        </nav>
         <section id="usage" className="package-callout interface-section">
           <div className="interface-heading">
             <p className="eyebrow">Usage</p><h2>Using SocialJev</h2>

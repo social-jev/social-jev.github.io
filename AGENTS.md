@@ -35,3 +35,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Label example inputs State and Query explicitly, with complete sentences.
 
 - Show the actual typed core interface in the usage section, with separate Documentation, Model, and GitHub links. Include the GitHub icon. Verify examples against the package source.
+
+## Academic header
+
+- Use the approved centered academic layout: SocialJev title, descriptive subtitle, author list, ETH Zurich, then GitHub/Models/Documentation links above all explanations. No checkpoint availability line.
+- Author order: Elliott Ashe, Felix Drinkall, Pranav Garg, Daniel Göttlich.
+- Start Overview and the wide application animation below the title block; usage follows. Keep restrained cream and green styling.
