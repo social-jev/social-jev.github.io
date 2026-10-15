@@ -7,8 +7,7 @@ export function ApplicationAnimation() {
   const phase = playback.step % 3;
   const example = examples[index];
   const probabilities = [83, 11, 6];
-  return <figure className="application-animation visual-surface refined-application">
-    <div className="visual-topline"><span className="small-label">Classification request and response</span></div>
+  return <figure className="application-animation visual-surface refined-application" aria-label="Classification request and result">
     <div className="request-result-flow" key={example.id}>
       <div className="request-box">
         <h3>Request</h3>
@@ -22,10 +21,7 @@ export function ApplicationAnimation() {
           <div><span>{option}</span><strong>{phase===2?`${probabilities[i]}%`:'—'}</strong></div>
           <div className="result-track"><i className={i===0?'winning':''} style={{width:phase===2?`${probabilities[i]}%`:'0%'}} /></div>
         </div>)}</div>
-        <span className="simulated-output">Illustrative probabilities</span>
       </div>
     </div>
-    <div className="animation-footer"><div className="scene-selector" role="group" aria-label="Application scenes">{examples.map((item,i)=><button key={item.id} aria-pressed={index===i} onClick={()=>playback.choose(i*3+2)}>{item.title}</button>)}</div><span className="scene-count">0{index+1} / 0{examples.length}</span></div>
-    <figcaption className="figure-note">Illustrative examples and simulated outputs. No inference runs in your browser.</figcaption>
   </figure>;
 }

@@ -1702,3 +1702,4 @@ button {
 @media(max-width:1050px) and (min-width:801px) { .academic-overview { grid-template-columns: 230px minmax(0,1fr); gap: 28px; } .request-result-flow { grid-template-columns: minmax(0,1.4fr) 70px minmax(0,1fr); gap: 6px; } .request-model { gap: 2px; } .request-model > div { font-size: 13px; padding: 20px 4px; } .request-box, .result-box { padding: 10px; } }
 @media(max-width:600px) { .request-result-flow { grid-template-columns: 1fr; gap: 16px; } .request-model { flex-direction: column; } .request-model > span { transform: rotate(90deg); } .request-model > div { padding: 16px 30px; font-size: 20px; } .result-probabilities { gap: 20px; } }
 @media(prefers-reduced-motion:reduce) { .result-track i { transition: none; } }
+.refined-application.application-animation { border: 0; background: transparent; padding: 0; }

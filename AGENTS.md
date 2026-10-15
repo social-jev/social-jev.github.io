@@ -52,3 +52,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - Classification: a Request outer box encloses State, Query, and an Options box with individually outlined choices. A SocialJev block connects to a Result box with animated labelled probability bars. No Candidate probabilities subtitle or Pause buttons.
 - Attention diagram depicts TRAINING, sourced from MERT attention.py with option_context=full, not package inference: one packed state/query/options sequence, branch-isolated causal options, shared state/query visibility, and reused option position offsets. No shared answer prefix. Keep one large matrix, token tiles above, selected-token detail beside it.
+
+- The application animation has no overall enclosing frame, title bar, clickable scene selectors, counter, or local illustration disclaimers. Keep Request and Result borders and cycle examples automatically.
