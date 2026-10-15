@@ -5,7 +5,7 @@ package_dir="$1"
 output_dir="$2"
 cd "$package_dir"
 
-# Reconcile all releases so a missed dispatch cannot lose a documentation version.
+# A release notification also picks up versions missed by earlier notifications.
 while IFS= read -r version; do
   [[ "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || continue
   [[ ! -d "$output_dir/docs/$version" ]] || continue

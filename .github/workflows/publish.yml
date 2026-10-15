@@ -5,9 +5,6 @@ on:
   repository_dispatch:
     types: [package-docs]
   workflow_dispatch:
-  # Recover releases whose dispatch was missed or replaced in the pending queue.
-  schedule:
-    - cron: '17 * * * *'
 permissions:
   contents: write
   pages: write
@@ -49,6 +46,7 @@ jobs:
           npm test
           rsync -a --delete --exclude docs/ --exclude .git/ dist/client/ ../published/
       - name: Build missing package releases
+        if: github.event_name == 'repository_dispatch'
         run: |
           bash website/scripts/build-release-docs.sh "$GITHUB_WORKSPACE/package" "$GITHUB_WORKSPACE/published"
           node website/scripts/update-doc-versions.mjs "$GITHUB_WORKSPACE/published/docs"

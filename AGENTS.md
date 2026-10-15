@@ -60,7 +60,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Documentation publishing
 
 - Package docs source and the locked `docs` dependency group belong in DGoettlich/social-jev. Documentation tooling must not become package runtime dependencies or published extras.
-- The website `published` branch stores generated landing-page files and immutable `docs/vMAJOR.MINOR.PATCH/` builds. Website main pushes rebuild the landing page while preserving docs. Docs dispatches and hourly recovery runs reuse the stored landing page.
+- The website `published` branch stores generated landing-page files and immutable `docs/vMAJOR.MINOR.PATCH/` builds. Website main pushes rebuild the landing page while preserving docs. Package release dispatches reuse the stored landing page. Never schedule hourly or other periodic deployments.
 - The website workflow reconciles missing stable package tags reachable from package main and containing mkdocs.yml. It builds with `uv sync --locked --group docs` and `DOCS_VERSION` set for MkDocs.
 - `/docs/versions.json` contains `{latest, versions}` with newest stable first; `/docs/` redirects to latest once a stable docs build exists. Keep the placeholder before that.
-- Immediate cross-repository dispatch requires package secret WEBSITE_PUBLISH_TOKEN scoped to website repository Contents:write; hourly reconciliation recovers missed notifications.
+- Immediate cross-repository dispatch uses the configured package secret WEBSITE_PUBLISH_TOKEN scoped to website repository Contents:write. Failed docs publishing is retried explicitly; there is no scheduled polling.
