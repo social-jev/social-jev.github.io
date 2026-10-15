@@ -168,8 +168,8 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="attention"
           number="05"
           title="Attention masks and position assignments"
-          description="Each candidate sequence contains the state, its query, and one candidate answer, with causal attention. Other candidates are encoded separately and cannot attend to this sequence."
-          detail="Select a token to inspect its permitted context. Positions start from zero in each sequence; candidate positions follow that sequence’s state and query."
+          description="During training, state, query, and candidate options are packed into one sequence. Each option can attend to the state and its query, but not to sibling options."
+          detail="Options reuse the same starting position after the state and query. The shared linear or MLP head reads each option’s final hidden state."
         >
           <AttentionPlayground />
         </Chapter>

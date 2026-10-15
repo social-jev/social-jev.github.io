@@ -1,113 +1,25 @@
-import { useState } from "react";
 import { attentionTokens, canAttend } from "./visual-data.js";
-const presets = [
-  { index: 4, label: "Query" },
-  { index: 6, label: "Support readout" },
-  { index: 13, label: "Oppose readout" },
-  { index: 20, label: "Unclear readout" },
-];
-
+import { usePlayback } from "./usePlayback.jsx";
+const groups = [{name:'State',start:0,end:3},{name:'Query',start:3,end:5},{name:'Option 1',start:5,end:7},{name:'Option 2',start:7,end:9}];
 export function AttentionPlayground() {
-  const [selected, setSelected] = useState(6);
-  const [logical, setLogical] = useState(false);
-  const reader = attentionTokens[selected];
-  const visible = attentionTokens.filter((token) => canAttend(reader, token));
-  return (
-    <figure className="attention-figure visual-surface">
-      <div className="visual-topline">
-        <span className="small-label">Separate candidate sequences</span>
-        <div
-          className="segmented-control"
-          role="group"
-          aria-label="Position numbering"
-        >
-          <button aria-pressed={!logical} onClick={() => setLogical(false)}>
-            Stored index
-          </button>
-          <button aria-pressed={logical} onClick={() => setLogical(true)}>
-            Position ID
-          </button>
-        </div>
+  const playback = usePlayback(attentionTokens.length, 1700);
+  const selected=playback.step;
+  const reader=attentionTokens[selected];
+  const visible=attentionTokens.filter(token=>canAttend(reader,token));
+  return <figure className="attention-figure visual-surface training-mask-figure">
+    <div className="visual-topline"><span className="small-label">Packed training sequence · linear / MLP head</span></div>
+    <p className="playground-instruction">Select a token to inspect its context. Numbers below tiles are position IDs.</p>
+    <div className="training-token-scroll"><div className="training-token-groups">{groups.map(group=><div key={group.name} className="training-token-group"><span>{group.name}</span><div>{attentionTokens.slice(group.start,group.end).map(token=><button key={token.index} className={`training-token ${token.role} ${canAttend(reader,token)?'visible':'masked'}`} aria-pressed={selected===token.index} aria-label={`${token.label}: ${token.word}, stored slot ${token.index}, position ${token.position}`} onClick={()=>playback.choose(token.index)}><strong>{token.word}</strong><small>{token.position}</small></button>)}</div></div>)}</div></div>
+    <div className="attention-inspector">
+      <div className="matrix-container"><span className="matrix-axis-label">Keys / context →</span>
+        <svg viewBox="0 0 340 350" role="img" aria-label={`Training attention mask. Selected reader ${reader.label}, ${reader.word}. Options see state and query but not sibling options.`}>
+          {attentionTokens.map(row=>attentionTokens.map(key=><rect key={`${row.index}-${key.index}`} x={32+key.index*32} y={15+row.index*32} width="29" height="29" fill={canAttend(row,key)?row.index===selected?'#305e4d':'#bfd0c2':'#f0f1eb'} />))}
+          {[0,3,5,7,9].map(b=><path key={b} d={`M${30+b*32} 13V303 M30 ${13+b*32}H320`} fill="none" stroke="#788b7c" strokeWidth="1" />)}
+          {attentionTokens.map(token=><g key={token.index}><text x={46+token.index*32} y="323" textAnchor="middle" className="matrix-index">{token.position}</text><text x="19" y={34+token.index*32} textAnchor="end" className="matrix-index">{token.index}</text></g>)}
+        </svg><span className="matrix-footnote">Rows = readers · columns = context · bottom numbers = position IDs</span>
       </div>
-      <p className="playground-instruction">
-        Select a token. Its visible context lights up below.
-      </p>
-      <div className="token-scroll">
-        <div
-          className="attention-token-strip"
-          role="group"
-          aria-label="Select a reader token"
-        >
-          {attentionTokens.map((token) => (
-            <button
-              key={token.index}
-              className={`token ${token.role} ${canAttend(reader, token) ? "token-visible" : "token-hidden"}`}
-              aria-pressed={selected === token.index}
-              aria-label={`Token ${token.index}: ${token.word}, ${token.label}`}
-              onClick={() => setSelected(token.index)}
-            >
-              <span>{token.word}</span>
-              <small>{logical ? token.position : token.index}</small>
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="attention-inspector">
-        <div className="matrix-container">
-          <span className="matrix-axis-label">Keys / context →</span>
-          <div className="candidate-mask-grid">
-            {["Support", "Oppose", "Unclear"].map((candidate, branch) => {
-              const tokens = attentionTokens.filter(token => token.branch === branch);
-              return <div key={candidate} className="candidate-mask">
-                <strong>{candidate}</strong>
-                <svg viewBox="0 0 180 190" role="img" aria-label={`${candidate}: separate causal sequence, positions zero through six`}>
-                  {tokens.map(row => tokens.map(key => <rect key={`${row.index}-${key.index}`} x={28+key.position*20} y={20+row.position*20} width="18" height="18" fill={canAttend(row,key) ? row.index===selected ? "#305e4d" : "#bfd0c2" : "#f0f1eb"} />))}
-                  {[0,3,5,7].map(boundary=><path key={boundary} d={`M${28+boundary*20} 20V160 M28 ${20+boundary*20}H168`} fill="none" stroke="#738477" strokeWidth="1" />)}
-                  {tokens.map(token=><g key={token.index}><text x={37+token.position*20} y="178" textAnchor="middle" className="matrix-index">{token.position}</text><text x="19" y={33+token.position*20} textAnchor="end" className="matrix-index">{token.position}</text></g>)}
-                </svg>
-                <small>State 0–2 · query 3–4 · candidate 5–6</small>
-              </div>;
-            })}
-          </div>
-          <span className="matrix-footnote">
-            Each square is a separate input · rows = readers · columns = context tokens
-          </span>
-        </div>
-        <div className="visibility-detail" aria-live="polite">
-          <p className="small-label">Selected reader</p>
-          <h3>{reader.word}</h3>
-          <p className="reader-description">
-            {reader.label} · physical {reader.index} · position{" "}
-            {reader.position}
-          </p>
-          <div className="context-summary">
-            <span>Visible context</span>
-            <p>{visible.map((token) => token.word).join(" ")}</p>
-          </div>
-          <p className="mask-explanation">
-            Each token sees only the causal prefix of its own candidate sequence.
-            The final token provides the hidden state for the shared scalar head.
-          </p>
-          <div
-            className="attention-presets"
-            role="group"
-            aria-label="Example reader positions"
-          >
-            {presets.map((preset) => (
-              <button
-                key={preset.index}
-                aria-pressed={selected === preset.index}
-                onClick={() => setSelected(preset.index)}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      <figcaption className="figure-note">
-        Independent causal sequences from the scalar-head inference path. Role markers and padding are omitted. The selected row highlights permitted context; sequence positions restart at zero.
-      </figcaption>
-    </figure>
-  );
+      <div className="visibility-detail" aria-live="off"><p className="small-label">Selected token</p><h3>{reader.word}</h3><p className="reader-description">{reader.label} · stored slot {reader.index} · position {reader.position}</p><div className="context-summary"><span>Visible context</span><p>{visible.map(token=>token.word).join(' ')}</p></div><p className="mask-explanation">{reader.role==='option'?'This option sees the state, its query, and its own causal prefix. Sibling options are masked.':reader.role==='query'?'The query sees the state and its own causal prefix.':'State tokens attend causally within the state.'}</p>{reader.readout&&<div className="training-readout"><span>Final option hidden state</span><span>↓ Shared linear / MLP head</span><strong>One scalar score</strong></div>}</div>
+    </div>
+    <figcaption className="figure-note">Training mask and positions follow MERT’s full-context scalar-head path. Options start at the same position. Role markers, padding, and optional examples are omitted.</figcaption>
+  </figure>;
 }

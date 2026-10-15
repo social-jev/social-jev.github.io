@@ -47,3 +47,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Remove the initial application animation’s Pause button.
 
 - Verify the current scalar-head architecture against GitHub social-jev PR #3, not merely a local checkout. Display separate candidate attention matrices, not a single packed block-diagonal mask. Remove all playback buttons; preserve the application input/model/probabilities visual.
+
+## Approved classification and training visuals
+
+- Classification: a Request outer box encloses State, Query, and an Options box with individually outlined choices. A SocialJev block connects to a Result box with animated labelled probability bars. No Candidate probabilities subtitle or Pause buttons.
+- Attention diagram depicts TRAINING, sourced from MERT attention.py with option_context=full, not package inference: one packed state/query/options sequence, branch-isolated causal options, shared state/query visibility, and reused option position offsets. No shared answer prefix. Keep one large matrix, token tiles above, selected-token detail beside it.

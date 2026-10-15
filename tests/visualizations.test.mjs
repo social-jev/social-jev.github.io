@@ -6,16 +6,22 @@ import {
   paretoFrontier,
 } from "../src/visual-data.js";
 
-test("candidate readouts see their complete sequence and no sibling candidate", () => {
-  for (const reader of attentionTokens.filter(token => token.position === 6)) {
-    for (const key of attentionTokens) assert.equal(canAttend(reader, key), reader.branch === key.branch);
+test("training options share positions and read state/query without sibling leakage", () => {
+  const first=attentionTokens[6],second=attentionTokens[8];
+  assert.equal(first.position,second.position);
+  assert.ok(first.readout && second.readout);
+  for(const reader of [first,second]) {
+    for(const token of attentionTokens.slice(0,5)) assert.ok(canAttend(reader,token));
+    for(const token of attentionTokens.filter(t=>t.role==="option")) assert.equal(canAttend(reader,token),reader.branch===token.branch);
   }
 });
-test("each candidate uses causal attention and starts positions at zero", () => {
-  for (const reader of attentionTokens) {
-    assert.equal(reader.position, reader.index % 7);
-    for (const key of attentionTokens) assert.equal(canAttend(reader,key), reader.branch === key.branch && key.position <= reader.position);
+test("training mask is causal within each message and cannot read future roles", () => {
+  for(const reader of attentionTokens) {
+    for(const key of attentionTokens.filter(t=>t.branch===reader.branch)) assert.equal(canAttend(reader,key),key.index<=reader.index);
   }
+  assert.ok(!canAttend(attentionTokens[0],attentionTokens[3]));
+  assert.ok(!canAttend(attentionTokens[4],attentionTokens[5]));
+  assert.deepEqual(attentionTokens.map(t=>t.position),[0,1,2,3,4,5,6,5,6]);
 });
 test("Pareto frontier excludes dominated points and sorts by parameter count", () => {
   const points = [

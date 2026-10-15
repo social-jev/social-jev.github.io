@@ -2,104 +2,30 @@ import { examples } from "./examples.js";
 import { usePlayback } from "./usePlayback.jsx";
 
 export function ApplicationAnimation() {
-  const playback = usePlayback(examples.length * 3, 1800);
+  const playback = usePlayback(examples.length * 3, 2200);
   const index = Math.floor(playback.step / 3);
   const phase = playback.step % 3;
   const example = examples[index];
-  return (
-    <figure className="application-animation visual-surface">
-      <div className="visual-topline">
-        <span className="small-label">
-          Classification request and response
-        </span>
+  const probabilities = [83, 11, 6];
+  return <figure className="application-animation visual-surface refined-application">
+    <div className="visual-topline"><span className="small-label">Classification request and response</span></div>
+    <div className="request-result-flow" key={example.id}>
+      <div className="request-box">
+        <h3>Request</h3>
+        <div className="request-state"><h4>State</h4><p>{example.document}</p></div>
+        <div className="request-query"><h4>Query</h4><p>{example.question}</p></div>
+        <div className="request-options"><h4>Options</h4><ul>{(example.optionText || example.options).map(option=><li key={option}>{option}</li>)}</ul></div>
       </div>
-      <div className="application-flow" key={example.id}>
-        <div className="flow-input">
-          <div className="small-label">01 / Input</div>
-          <div className="input-document">
-            <span>State — text to classify</span>
-            <p>{example.document}</p>
-          </div>
-          <div className="input-query">
-            <span>Query — classification question</span>
-            <p>{example.question}</p>
-          </div>
-          <div className="input-options">
-            <span>Candidate answers</span>
-            <p>{example.options.join(" · ")}</p>
-          </div>
-        </div>
-        <div className={`flow-model ${phase === 1 ? "processing" : ""}`}>
-          <span className="flow-arrow" aria-hidden="true">
-            →
-          </span>
-          <div className="model-core">
-            <span className="model-wordmark">SocialJev</span>
-            <span>
-              {phase === 0
-                ? "Read the input"
-                : phase === 1
-                  ? "Score the choices"
-                  : "Return probabilities"}
-            </span>
-            <div className="model-activity" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-            </div>
-          </div>
-          <span className="flow-arrow" aria-hidden="true">
-            →
-          </span>
-        </div>
-        <div className={`flow-output ${phase === 2 ? "output-revealed" : ""}`}>
-          <div className="small-label">02 / Output</div>
-          <span className="output-caption">Highest-probability answer</span>
-          <p className="output-choice">
-            {phase === 2 ? example.selected : "…"}
-          </p>
-          <div className="score-bars">
-            {example.options.map((option, optionIndex) => (
-              <div key={option}>
-                <span>{option}</span>
-                <div>
-                  <i
-                    style={{
-                      width:
-                        phase === 2 ? `${[83, 11, 6][optionIndex]}%` : "0%",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          <span className="simulated-output">Simulated output</span>
-        </div>
+      <div className={`request-model ${phase===1?'scoring':''}`}><span aria-hidden="true">→</span><div>SocialJev</div><span aria-hidden="true">→</span></div>
+      <div className="result-box"><h3>Result</h3>
+        <div className="result-probabilities">{example.options.map((option,i)=><div className="result-probability" key={option}>
+          <div><span>{option}</span><strong>{phase===2?`${probabilities[i]}%`:'—'}</strong></div>
+          <div className="result-track"><i className={i===0?'winning':''} style={{width:phase===2?`${probabilities[i]}%`:'0%'}} /></div>
+        </div>)}</div>
+        <span className="simulated-output">Illustrative probabilities</span>
       </div>
-      <div className="animation-footer">
-        <div
-          className="scene-selector"
-          role="group"
-          aria-label="Application scenes"
-        >
-          {examples.map((item, i) => (
-            <button
-              key={item.id}
-              aria-pressed={index === i}
-              onClick={() => playback.choose(i * 3 + 2)}
-            >
-              {item.title}
-            </button>
-          ))}
-        </div>
-        <span className="scene-count">
-          0{index + 1} / 0{examples.length}
-        </span>
-      </div>
-      <figcaption className="figure-note">
-        Illustrative examples and simulated outputs. No inference runs in your
-        browser.
-      </figcaption>
-    </figure>
-  );
+    </div>
+    <div className="animation-footer"><div className="scene-selector" role="group" aria-label="Application scenes">{examples.map((item,i)=><button key={item.id} aria-pressed={index===i} onClick={()=>playback.choose(i*3+2)}>{item.title}</button>)}</div><span className="scene-count">0{index+1} / 0{examples.length}</span></div>
+    <figcaption className="figure-note">Illustrative examples and simulated outputs. No inference runs in your browser.</figcaption>
+  </figure>;
 }

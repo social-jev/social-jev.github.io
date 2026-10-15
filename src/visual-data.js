@@ -33,14 +33,20 @@ export const mockCurves = Array.from({ length: 21 }, (_, index) => ({
   accuracy: 50 + 36 * (1 - Math.exp(-index / 5)) + Math.sin(index * 1.2) * 0.6,
 }));
 
-// Separate causal state–query–candidate sequences, omitting role markers and padding.
-export const attentionTokens = ["Support", "Oppose", "Unclear"].flatMap((candidate, branch) =>
-  ["The", "rent", "cap.", "Stance", "?", candidate, "end"].map((word, position) => ({
-    index: branch * 7 + position, position, branch, word,
-    role: position < 3 ? "state" : position < 5 ? "query" : "option",
-    label: `${candidate} sequence · ${position < 3 ? "State" : position < 5 ? "Query" : "Candidate"}`,
-  }))
-);
-export function canAttend(reader, key) {
-  return reader.branch === key.branch && key.position <= reader.position;
+// Packed full-context training path from mert/main/src/mert/attention.py.
+const groups = [
+  {label:"State",role:"state",words:["The","rent","cap"],offset:0},
+  {label:"Query",role:"query",words:["Stance","?"],offset:3},
+  {label:"Option 1",role:"option",words:["Support","end"],offset:5},
+  {label:"Option 2",role:"option",words:["Oppose","end"],offset:5},
+];
+export const attentionTokens=groups.flatMap((group,branch)=>group.words.map((word,i)=>({
+  label:group.label,role:group.role,word,branch,position:group.offset+i,
+  readout:group.role==="option" && i===group.words.length-1,
+}))).map((token,index)=>({...token,index}));
+export function canAttend(reader,key) {
+  if(reader.branch===key.branch) return key.index<=reader.index;
+  if(reader.role==="state") return false;
+  if(key.role==="state") return true;
+  return reader.role==="option" && key.role==="query";
 }
