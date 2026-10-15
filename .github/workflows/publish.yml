@@ -45,8 +45,8 @@ jobs:
         working-directory: website
         run: |
           npm ci
-          npm test
           npm run build
+          npm test
           rsync -a --delete --exclude docs/ --exclude .git/ dist/client/ ../published/
       - name: Build missing package releases
         run: |
