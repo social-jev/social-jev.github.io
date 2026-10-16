@@ -3,7 +3,7 @@ import { evaluationModels, evaluation } from "./evaluation-data.js";
 
 export function ParetoChart() {
   const x = value => 80 + Math.log10(value / 0.23) / Math.log10(1500 / 0.23) * 790;
-  const y = value => 440 - (value - 60) / 42 * 350;
+  const y = value => 440 - (value - 50) / 52 * 350;
   const frontier = paretoFrontier(evaluationModels);
   return (
     <figure className="chart-figure visual-surface measured-evaluation">
@@ -14,7 +14,7 @@ export function ParetoChart() {
         <svg className="pareto-chart" viewBox="0 0 920 530" role="img" aria-labelledby="pareto-title pareto-desc">
           <title id="pareto-title">Classification accuracy and total model size</title>
           <desc id="pareto-desc">Classification accuracy on the internal SocialJevBench benchmark. TypeSafe Jev model size is estimated; see the note below.</desc>
-          {[60, 70, 80, 90, 100].map(value => (
+          {[50, 60, 70, 80, 90, 100].map(value => (
             <g key={value}>
               <line x1="80" x2="870" y1={y(value)} y2={y(value)} className="chart-grid" />
               <text x="63" y={y(value) + 6} textAnchor="end" className="axis-text">{value}</text>

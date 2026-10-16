@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { evaluation, evaluationModels } from '../src/evaluation-data.js';
 import { paretoFrontier } from '../src/visual-data.js';
 
-test('all ten measured models have size metadata and scores on 512 queries', () => {
-  assert.equal(evaluationModels.length, 10);
+test('all eleven measured models have size metadata and scores on 512 queries', () => {
+  assert.equal(evaluationModels.length, 11);
   assert.equal(evaluation.limit, 512);
   for (const model of evaluationModels) {
     assert.ok(model.name);
@@ -23,5 +23,5 @@ test('estimated Jev size retains asterisk placement and ends the displayed front
   assert.equal(estimated[0].name, 'TypeSafe Jev*');
   assert.equal(estimated[0].params, 9);
   const frontier = paretoFrontier(evaluationModels);
-  assert.deepEqual(frontier.map(model => model.name), ['GLiNER 2.5-Decide', 'SocialJev 0.6B', 'SocialJev 1.7B', 'SocialJev 4B', 'TypeSafe Jev*']);
+  assert.deepEqual(frontier.map(model => model.name), ['GLiNER 2.5-multi-Decide', 'GLiNER 2.5-Decide', 'SocialJev 0.6B', 'SocialJev 1.7B', 'SocialJev 4B', 'TypeSafe Jev*']);
 });

@@ -11,3 +11,5 @@ Only size values and the illustrative TypeSafe Jev placement are retained from t
 
 - CLEF 27B: https://openrouter.ai/cloudflare/clef
 - CLEF Flash 9B: https://openrouter.ai/cloudflare/clef-flash
+
+- GLiNER2.5-multi-Decide 0.287B: https://huggingface.co/fastino/GLiNER2.5-multi-Decide . Added October 16, 2026, from the same evaluation snapshot.

@@ -74,6 +74,13 @@
       "evaluated": 512,
       "skipped": 0,
       "results": "social-jev-0.6b-preview--v0.1a/results.json"
+    },
+    {
+      "model": "fastino/GLiNER2.5-multi-Decide",
+      "accuracy": 0.515625,
+      "evaluated": 512,
+      "skipped": 0,
+      "results": "gliner2.5-multi-decide--e173bca1/results.json"
     }
   ]
 }

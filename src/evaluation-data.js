@@ -2,6 +2,7 @@ import evaluation from './data/evaluation.json' with { type: 'json' };
 
 // Sizes and Jev placement retained from the earlier eval-size-plot/sources.md.
 const sizes = {
+  'fastino/GLiNER2.5-multi-Decide': { name: 'GLiNER 2.5-multi-Decide', params: 0.287, dx: 12, dy: -12 },
   'fastino/GLiNER2.5-Decide': { name: 'GLiNER 2.5-Decide', params: 0.34, dx: 12, dy: -12 },
   'social-jev/social-jev-0.6B-preview': { name: 'SocialJev 0.6B', params: 0.6, dx: 12, dy: 52 },
   'social-jev/social-jev-1.7B-preview': { name: 'SocialJev 1.7B', params: 1.7, dx: 12, dy: -76 },
