@@ -1,4 +1,4 @@
-import { paretoFrontier, mockCurves } from "./visual-data.js";
+import { paretoFrontier } from "./visual-data.js";
 import { evaluationModels, evaluation } from "./evaluation-data.js";
 
 export function ParetoChart() {
@@ -49,104 +49,6 @@ export function ParetoChart() {
         SocialJevBench ({evaluation.revision}).
         <br />
         * Jev size is estimated. <a href="https://jevresearch.github.io/Jev-Research/">API analysis ↗</a>
-      </figcaption>
-    </figure>
-  );
-}
-
-function Curve({ metric }) {
-  const isLoss = metric === "loss";
-  const x = (step) => 45 + step * 2.65;
-  const y = (value) =>
-    isLoss ? 210 - (value / 1.8) * 160 : 210 - ((value - 40) / 60) * 160;
-  const ticks = isLoss ? [0, 0.5, 1, 1.5] : [40, 60, 80, 100];
-  const path = (key) =>
-    mockCurves
-      .map(
-        (point, index) =>
-          `${index ? "L" : "M"}${x(point.step)},${y(point[key])}`,
-      )
-      .join(" ");
-  return (
-    <svg
-      viewBox="0 0 340 260"
-      role="img"
-      aria-label={`Simulated ${isLoss ? "training and validation loss" : "validation accuracy"} curve. Not actual training results.`}
-    >
-      {ticks.map((value) => (
-        <g key={value}>
-          <line
-            x1="45"
-            x2="310"
-            y1={y(value)}
-            y2={y(value)}
-            className="chart-grid"
-          />
-          <text x="34" y={y(value) + 4} textAnchor="end" className="axis-text">
-            {value}
-          </text>
-        </g>
-      ))}
-      {[0, 25, 50, 75, 100].map((step) => (
-        <text
-          key={step}
-          x={x(step)}
-          y="233"
-          textAnchor="middle"
-          className="axis-text"
-        >
-          {step}
-        </text>
-      ))}
-      <text x="178" y="255" textAnchor="middle" className="axis-title">
-        Optimizer step
-      </text>
-      <text x="175" y="142" textAnchor="middle" className="curve-watermark">
-        SIMULATED
-      </text>
-      <path
-        d={path(isLoss ? "train" : "accuracy")}
-        className="training-curve"
-      />
-      {isLoss && <path d={path("validation")} className="validation-curve" />}
-    </svg>
-  );
-}
-
-export function TrainingCharts() {
-  return (
-    <figure className="training-figure visual-surface">
-      <div className="visual-topline">
-        <span className="small-label">The objective & learning curves</span>
-        <span className="mock-label">Simulated curves</span>
-      </div>
-      <div className="objective-strip">
-        <span>Cross-entropy on the correct choice</span>
-        <span className="objective-equation">L = −log p(correct answer)</span>
-      </div>
-      <div className="learning-curves">
-        <div>
-          <h3>Loss</h3>
-          <Curve metric="loss" />
-          <div className="chart-legend">
-            <span>
-              <i className="legend-line green" />
-              Train
-            </span>
-            <span>
-              <i className="legend-line warm" />
-              Validation
-            </span>
-          </div>
-        </div>
-        <div>
-          <h3>Validation accuracy</h3>
-          <Curve metric="accuracy" />
-        </div>
-      </div>
-      <figcaption className="figure-note">
-        Synthetic curves demonstrate the intended figures. They do not describe
-        the released checkpoint or an actual training run.
       </figcaption>
     </figure>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ApplicationAnimation } from "./ApplicationAnimation.jsx";
-import { ParetoChart, TrainingCharts } from "./ResearchCharts.jsx";
+import { ParetoChart } from "./ResearchCharts.jsx";
 import { MixtureTreemap } from "./MixtureTreemap.jsx";
 import { ArchitectureAnimation } from "./ArchitectureAnimation.jsx";
 import { AttentionPlayground } from "./AttentionPlayground.jsx";
@@ -12,7 +12,6 @@ const sections = [
   ["data", "Data"],
   ["architecture", "Architecture"],
   ["attention", "Attention"],
-  ["training", "Training"],
 ];
 
 function Chapter({ id, number, title, children, description, link, detail }) {
@@ -87,7 +86,7 @@ export function App() {
       <div className="mock-data-banner">
         Design preview{" "}
         <span>
-          Evaluation scores are measured. Dataset sizes, training curves, and example outputs remain illustrative.
+          Evaluation scores are measured. Dataset sizes and example outputs remain illustrative.
         </span>
       </div>
       <main id="main">
@@ -183,15 +182,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
         >
           <AttentionPlayground />
         </Chapter>
-        <Chapter
-          id="training"
-          number="06"
-          title="Training objective and learning curves"
-          description="SocialJev is trained to maximize the probability of the correct candidate answer. The figures show the classification objective, training loss, and validation performance."
-          detail="The current curves are illustrative; measured learning curves will replace them."
-        >
-          <TrainingCharts />
-        </Chapter>
+
 
       </main>
       <footer className="site-footer">
@@ -209,7 +200,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
             Website source
           </a>
         </nav>
-        <span className="footer-note">Design draft · measured evals; illustrative data and training figures.</span>
+        <span className="footer-note">Design draft · measured evals; illustrative dataset sizes.</span>
       </footer>
     </>
   );

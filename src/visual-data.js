@@ -1,4 +1,4 @@
-// Dataset weights and training curves remain illustrative.
+// Dataset weights remain illustrative.
 export function paretoFrontier(models) {
   return models
     .filter(
@@ -14,14 +14,6 @@ export function paretoFrontier(models) {
 }
 
 export const mockWeights = [22, 15, 11, 9, 8, 7, 6, 5, 5, 4, 4, 3, 3, 3, 2, 2];
-export const mockCurves = Array.from({ length: 21 }, (_, index) => ({
-  step: index * 5,
-  train: 1.45 * Math.exp(-index / 5) + 0.16,
-  validation:
-    1.22 * Math.exp(-index / 4) + 0.32 + Math.max(0, index - 12) * 0.009,
-  accuracy: 50 + 36 * (1 - Math.exp(-index / 5)) + Math.sin(index * 1.2) * 0.6,
-}));
-
 // Packed full-context training path from mert/main/src/mert/attention.py.
 const groups = [
   {label:"State",role:"state",words:["The","rent","cap"],offset:0},

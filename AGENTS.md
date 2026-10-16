@@ -64,3 +64,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The website workflow reconciles missing stable, alpha, beta, and release-candidate package tags reachable from package main and containing mkdocs.yml. It builds with `uv sync --locked --group docs` and `DOCS_VERSION` set for MkDocs.
 - `/docs/versions.json` contains `{latest, versions}` in descending release order; latest prefers the newest stable release or the newest prerelease if no stable docs exist. `/docs/` redirects to latest once docs exist. Keep the placeholder before that.
 - Immediate cross-repository dispatch uses the configured package secret WEBSITE_PUBLISH_TOKEN scoped to website repository Contents:write. Failed docs publishing is retried explicitly; there is no scheduled polling.
+
+- The final training-objective and learning-curves section has been removed at the user’s request. Keep the training-mixture/data section and training attention explanation.
