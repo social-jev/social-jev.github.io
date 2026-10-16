@@ -32,9 +32,10 @@ export function ParetoChart() {
           <polyline points={frontier.map(point => `${x(point.params)},${y(point.score)}`).join(' ')} className="frontier-line" />
           {evaluationModels.map(point => (
             <g key={point.model}>
-              <title>{point.name}: {point.score.toFixed(2)}% accuracy; {point.params}B{point.estimated ? ' illustrative size placement' : ' total parameters'}</title>
+              <title>{point.name}{point.ours ? ' (preview)' : ''}: {point.score.toFixed(2)}% accuracy; {point.params}B{point.estimated ? ' illustrative size placement' : ' total parameters'}</title>
+              <line x1={x(point.params)} y1={y(point.score)} x2={x(point.params) + point.dx + (point.anchor === 'end' ? 6 : -6)} y2={y(point.score) + point.dy - 6} className={point.ours ? 'chart-label-connector ours-connector' : 'chart-label-connector'} />
               <circle cx={x(point.params)} cy={y(point.score)} r={point.ours ? 8 : 6} className={point.ours ? 'ours-point' : 'baseline-point'} />
-              <text x={x(point.params) + point.dx} y={y(point.score) + point.dy} textAnchor={point.anchor || 'start'} className={point.ours ? 'ours-label' : 'baseline-label'}>{point.name}</text>
+              <text x={x(point.params) + point.dx} y={y(point.score) + point.dy} textAnchor={point.anchor || 'start'} className={point.ours ? 'ours-label' : 'baseline-label'}>{point.name}{point.ours && <tspan className="preview-label"> (preview)</tspan>}</text>
             </g>
           ))}
         </svg>

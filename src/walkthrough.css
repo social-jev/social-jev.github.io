@@ -1738,3 +1738,7 @@ button {
 .measured-evaluation .ours-label { font-size: 18px; }
 .measured-evaluation .baseline-label { font-size: 16px; fill: #586762; }
 .measured-evaluation figcaption a { color: var(--green); text-underline-offset: 3px; }
+
+.chart-label-connector { stroke: #9caaa0; stroke-width: 1; fill: none; }
+.ours-connector { stroke: var(--green); }
+.measured-evaluation .preview-label { font-size: 14px; font-weight: 400; }
