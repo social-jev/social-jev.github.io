@@ -79,8 +79,8 @@ export function App() {
           <a href="#architecture">How it works</a>
           <a href="/docs/">Docs ↗</a>
         </nav>
-        <a className="header-source" href={packageUrl}>
-          GitHub ↗
+        <a className="header-source resource-icon-link" href={packageUrl}>
+          <img src="/github.svg" width="20" height="20" alt="" /> GitHub ↗
         </a>
       </header>
       <div className="mock-data-banner">
@@ -114,8 +114,8 @@ export function App() {
             <p className="eyebrow">Usage</p><h2>Using SocialJev</h2>
             <p>A typed request specifies the state, query, and candidate answers. Each query returns a Result with the selected answer and its candidate probabilities.</p>
             <div className="interface-links">
-              <a className="button primary" href="/docs/">Documentation ↗</a>
-              <a className="text-link" href={modelUrl}>Model ↗</a>
+              <a className="button primary resource-icon-link" href="/docs/"><span aria-hidden="true">▤</span>Documentation ↗</a>
+              <a className="text-link resource-icon-link" href={modelUrl}><span aria-hidden="true">🤗</span>Models ↗</a>
               <a className="text-link github-link" href={packageUrl}>
                 <img src="/github.svg" width="20" height="20" alt="" /> GitHub ↗
               </a>
