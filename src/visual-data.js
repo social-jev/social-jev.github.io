@@ -13,7 +13,6 @@ export function paretoFrontier(models) {
     .sort((a, b) => a.params - b.params);
 }
 
-export const mockWeights = [22, 15, 11, 9, 8, 7, 6, 5, 5, 4, 4, 3, 3, 3, 2, 2];
 // Packed full-context training path from mert/main/src/mert/attention.py.
 export const attentionGroups = [
   {label:"State",role:"state",words:["The","rent","cap"],offset:0,query:null},

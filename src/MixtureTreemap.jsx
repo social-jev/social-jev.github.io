@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { hierarchy, treemap } from "d3-hierarchy";
 import { datasets } from "./examples.js";
-import { mockWeights } from "./visual-data.js";
+import mixture from "./data/training-mixture.json";
 const colors = {
   "Politics & policy": "#d8e5dc",
   "Media & society": "#e4e7ef",
@@ -13,9 +13,9 @@ const shortNames = {
   "measuring-hate-speech": "Hate speech",
   "environmental-claims": "Env. claims",
 };
-const sample = datasets.map((dataset, index) => ({
+const sample = datasets.map((dataset) => ({
   ...dataset,
-  value: mockWeights[index],
+  value: mixture.datasets[dataset.slug].questions,
 }));
 const categories = [...new Set(sample.map((dataset) => dataset.category))];
 const root = hierarchy({
@@ -38,13 +38,13 @@ export function MixtureTreemap() {
   return (
     <figure className="mixture-figure visual-surface">
       <div className="visual-topline">
-        <span className="small-label">A shared training mixture</span>
-        <span className="mock-label">Invented sizes</span>
+        <span className="small-label">Share of training questions</span>
+        <span className="small-label">20,516 questions</span>
       </div>
       <div
         className="treemap"
         role="group"
-        aria-label="Illustrative dataset composition. Rectangle areas use invented sizes."
+        aria-label="Dataset composition by the number of labelled training questions."
       >
         {tiles.map((tile) => (
           <button
@@ -53,7 +53,7 @@ export function MixtureTreemap() {
             onClick={() => setSelected(tile.data)}
             aria-label={tile.data.name}
             aria-pressed={selected.slug === tile.data.slug}
-            title={`${tile.data.name}: illustrative weight ${tile.data.value}`}
+            title={`${tile.data.name}: ${tile.data.value.toLocaleString()} training questions`}
             style={{
               left: `${tile.x0 / 7.6}%`,
               top: `${tile.y0 / 3.9}%`,
@@ -87,15 +87,15 @@ export function MixtureTreemap() {
         </div>
         <span>
           {((selected.value / total) * 100).toFixed(1)}%{" "}
-          <small>illustrative share</small>
+          <small>of training questions</small>
         </span>
         <a href={`https://huggingface.co/datasets/social-jev/${selected.slug}`}>
           Dataset ↗
         </a>
       </div>
       <figcaption className="figure-note">
-        Dataset names are real; rectangle sizes and percentages are invented.
-        The final view will use verified training-question counts.
+        Areas represent labelled training questions: 20,516 questions across 3,385 examples.
+        Counts verified from the current Hugging Face training splits on 16 October 2026.
       </figcaption>
     </figure>
   );

@@ -1,0 +1,72 @@
+{
+  "source": "Hugging Face social-jev/* labelled/train Parquet files",
+  "retrieved": "2026-10-16",
+  "total_examples": 3385,
+  "total_questions": 20516,
+  "datasets": {
+    "opp-115": {
+      "examples": 181,
+      "questions": 1356
+    },
+    "mfrc": {
+      "examples": 312,
+      "questions": 1892
+    },
+    "babe": {
+      "examples": 362,
+      "questions": 2152
+    },
+    "social-bias-frames": {
+      "examples": 184,
+      "questions": 1055
+    },
+    "cad": {
+      "examples": 165,
+      "questions": 1040
+    },
+    "edos": {
+      "examples": 160,
+      "questions": 861
+    },
+    "environmental-claims": {
+      "examples": 308,
+      "questions": 1771
+    },
+    "valueeval": {
+      "examples": 184,
+      "questions": 1130
+    },
+    "basil": {
+      "examples": 201,
+      "questions": 1337
+    },
+    "uk-acts": {
+      "examples": 120,
+      "questions": 718
+    },
+    "uk-pmqs": {
+      "examples": 120,
+      "questions": 696
+    },
+    "semeval-2016-stance": {
+      "examples": 220,
+      "questions": 1229
+    },
+    "fomc": {
+      "examples": 120,
+      "questions": 670
+    },
+    "demig": {
+      "examples": 160,
+      "questions": 1005
+    },
+    "manifesto": {
+      "examples": 200,
+      "questions": 1332
+    },
+    "measuring-hate-speech": {
+      "examples": 388,
+      "questions": 2272
+    }
+  }
+}

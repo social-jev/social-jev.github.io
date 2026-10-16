@@ -86,7 +86,7 @@ export function App() {
       <div className="mock-data-banner">
         Design preview{" "}
         <span>
-          Evaluation scores are measured. Dataset sizes and example outputs remain illustrative.
+          Evaluation scores and dataset counts are measured. Example outputs remain illustrative.
         </span>
       </div>
       <main id="main">
@@ -164,8 +164,8 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="data"
           number="03"
           title="The training mixture"
-          description="SocialJev is trained across datasets covering political, social, and economic classification tasks. The treemap shows each dataset’s contribution to the training mixture."
-          detail="Rectangle areas will represent the number of training questions. The current proportions are illustrative."
+          description="SocialJev is trained across datasets covering political, social, and economic classification tasks. The treemap shows each dataset’s share of labelled training questions."
+          detail="The labelled training splits contain 20,516 classification questions across 3,385 examples. Rectangle areas represent question counts, rather than token exposure during training."
           link={{
             href: "https://huggingface.co/social-jev",
             label: "Explore the datasets",
