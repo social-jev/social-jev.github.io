@@ -103,6 +103,15 @@ export function App() {
             <a href="/docs/"><span aria-hidden="true">▤</span>Documentation</a>
           </div>
         </section>
+        <section className="wikipedia-highlight" aria-labelledby="wikipedia-title">
+          <h2 id="wikipedia-title">Wikipedia-scale labelling —<br />for the price of two coffees.</h2>
+          <p className="wikipedia-description">SocialJev 0.6B (preview) classifies all 7.25 million English Wikipedia articles in an estimated 6½ hours on one GH200 — approximately $15 in GPU rental.</p>
+          <figure>
+            <img className="wikipedia-illustration" src="/wikipedia-coffee.png" width="2172" height="724" alt="SocialJev about to swallow the Wikipedia globe, approximately equal in cost to two plain takeaway coffees." />
+            <div className="wikipedia-labels" aria-hidden="true"><span>English Wikipedia</span><span>Two coffees</span></div>
+            <figcaption>Extrapolated from 100,000 articles · one binary question per chunk · $2.29/GPU-hour · excludes preparation and startup</figcaption>
+          </figure>
+        </section>
         <section id="applications" className="academic-overview" aria-labelledby="overview-title">
           <div className="overview-copy"><h2 id="overview-title">Overview</h2>
           <p>SocialJev is a Jev-like model that combines general transformer capabilities with decision training for social science, fast inference, and a flexible typed interface.</p>

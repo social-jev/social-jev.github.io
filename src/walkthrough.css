@@ -1754,3 +1754,12 @@ button {
 .multi-query-attention .reader-description, .multi-query-attention .mask-explanation { font-size: 12px; }
 @media(max-width:600px) { .multi-query-attention .attention-inspector { grid-template-columns: 1fr; } }
 
+
+.wikipedia-highlight { max-width: 1120px; margin: 0 auto; padding: 48px 32px 56px; border-bottom: 1px solid var(--line); }
+.wikipedia-highlight h2 { font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.06; margin: 0 0 20px; letter-spacing: -.025em; }
+.wikipedia-description { font-size: 17px; line-height: 1.65; max-width: 940px; color: var(--muted); margin: 0; }
+.wikipedia-highlight figure { margin: 24px 0 0; }
+.wikipedia-illustration { display: block; width: 100%; height: auto; }
+.wikipedia-labels { display: grid; grid-template-columns: 3fr 2fr; text-align: center; font-size: 18px; margin: 0 0 28px; }
+.wikipedia-highlight figcaption { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 11px; line-height: 1.7; text-align: center; }
+@media (max-width: 600px) { .wikipedia-highlight { padding: 32px 20px; } .wikipedia-description { font-size: 14px; } .wikipedia-labels { font-size: 13px; margin-bottom: 20px; } }
