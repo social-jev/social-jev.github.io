@@ -14,7 +14,7 @@ test('all ten measured models have size metadata and scores on 512 queries', () 
     assert.equal(Number.isInteger(model.accuracy * 512), true);
     assert.equal(model.score, model.accuracy * 100);
   }
-  assert.deepEqual(evaluationModels.filter(model => model.ours).map(model => Math.round(model.accuracy * 512)), [471, 499, 502]);
+  assert.deepEqual(evaluationModels.filter(model => model.ours).sort((a, b) => a.params - b.params).map(model => Math.round(model.accuracy * 512)), [492, 499, 502]);
 });
 
 test('estimated Jev size retains asterisk placement and ends the displayed frontier', () => {
