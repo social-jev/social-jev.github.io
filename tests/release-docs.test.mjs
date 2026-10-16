@@ -23,7 +23,8 @@ test('release build skips historical tags, preserves versions, and retries faile
     await writeFile(join(repo, 'package.txt'), 'package');
     git('add', '.'); git('commit', '-m', 'Historical package'); git('tag', 'v0.1.0');
     await writeFile(join(repo, 'mkdocs.yml'), 'site_name: Test');
-    git('add', '.'); git('commit', '-m', 'Add docs'); git('tag', 'v0.2.0');
+    git('add', '.'); git('commit', '-m', 'Add docs');
+    for (const version of ['v0.1.0a2', 'v0.2.0b1', 'v0.2.0rc1', 'v0.2.0']) git('tag', version);
     git('update-ref', 'refs/remotes/origin/main', 'main');
     await writeFile(join(bin, 'uv'), `#!/usr/bin/env bash
 set -eu
@@ -41,7 +42,9 @@ if [[ "\${FAIL_BUILD:-}" == 1 ]]; then exit 1; fi
     await assert.rejects(access(join(output, 'docs/v0.2.0')));
     const result = build(false);
     assert.equal(result.status, 0, result.stderr);
-    assert.equal(await readFile(join(output, 'docs/v0.2.0/index.html'), 'utf8'), 'v0.2.0\n');
+    for (const version of ['v0.1.0a2', 'v0.2.0b1', 'v0.2.0rc1', 'v0.2.0']) {
+      assert.equal(await readFile(join(output, `docs/${version}/index.html`), 'utf8'), `${version}\n`);
+    }
     await assert.rejects(access(join(output, 'docs/v0.1.0')));
     assert.equal(build(true).status, 0, 'existing release must not rebuild');
   } finally {

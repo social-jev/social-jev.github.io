@@ -7,7 +7,7 @@ cd "$package_dir"
 
 # A release notification also picks up versions missed by earlier notifications.
 while IFS= read -r version; do
-  [[ "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || continue
+  [[ "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(([ab]|rc)[0-9]+)?$ ]] || continue
   [[ ! -d "$output_dir/docs/$version" ]] || continue
   git merge-base --is-ancestor "$version" origin/main || continue
   git cat-file -e "$version:mkdocs.yml" 2>/dev/null || continue
