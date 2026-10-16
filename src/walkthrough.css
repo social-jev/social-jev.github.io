@@ -1754,4 +1754,3 @@ button {
 .multi-query-attention .reader-description, .multi-query-attention .mask-explanation { font-size: 12px; }
 @media(max-width:600px) { .multi-query-attention .attention-inspector { grid-template-columns: 1fr; } }
 
-#attention .attention-figure { grid-column: 1 / -1; }
