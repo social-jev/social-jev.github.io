@@ -39,7 +39,6 @@ export function MixtureTreemap() {
     <figure className="mixture-figure visual-surface">
       <div className="visual-topline">
         <span className="small-label">Share of training questions</span>
-        <span className="small-label">20,516 questions</span>
       </div>
       <div
         className="treemap"
@@ -53,7 +52,7 @@ export function MixtureTreemap() {
             onClick={() => setSelected(tile.data)}
             aria-label={tile.data.name}
             aria-pressed={selected.slug === tile.data.slug}
-            title={`${tile.data.name}: ${tile.data.value.toLocaleString()} training questions`}
+            title={`${tile.data.name}: ${((tile.data.value / total) * 100).toFixed(1)}% of training questions`}
             style={{
               left: `${tile.x0 / 7.6}%`,
               top: `${tile.y0 / 3.9}%`,
@@ -94,8 +93,7 @@ export function MixtureTreemap() {
         </a>
       </div>
       <figcaption className="figure-note">
-        Areas represent labelled training questions: 20,516 questions across 3,385 examples.
-        Counts verified from the current Hugging Face training splits on 16 October 2026.
+        Rectangle areas represent each dataset’s share of training questions.
       </figcaption>
     </figure>
   );

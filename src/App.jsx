@@ -164,8 +164,8 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="data"
           number="03"
           title="The training mixture"
-          description="SocialJev is trained across datasets covering political, social, and economic classification tasks. The treemap shows each dataset’s share of labelled training questions."
-          detail="The labelled training splits contain 20,516 classification questions across 3,385 examples. Rectangle areas represent question counts, rather than token exposure during training."
+          description="SocialJev is trained across datasets covering political, social, and economic classification tasks. We assemble shorter sequences into passages and use an LLM to generate synthetic queries, with human labels and codebooks as reference."
+          detail="The treemap shows each dataset’s share of training questions."
           link={{
             href: "https://huggingface.co/social-jev",
             label: "Explore the datasets",
