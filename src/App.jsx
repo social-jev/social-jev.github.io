@@ -4,7 +4,7 @@ import { ParetoChart, TrainingCharts } from "./ResearchCharts.jsx";
 import { MixtureTreemap } from "./MixtureTreemap.jsx";
 import { ArchitectureAnimation } from "./ArchitectureAnimation.jsx";
 import { AttentionPlayground } from "./AttentionPlayground.jsx";
-const modelUrl = "https://huggingface.co/social-jev/social-jev-0.6B-v1";
+const modelUrl = "https://huggingface.co/social-jev";
 const packageUrl = "https://github.com/DGoettlich/social-jev";
 const sections = [
   ["applications", "Applications"],
