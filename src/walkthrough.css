@@ -1742,3 +1742,16 @@ button {
 .chart-label-connector { stroke: #9caaa0; stroke-width: 1; fill: none; }
 .ours-connector { stroke: var(--green); }
 .measured-evaluation .preview-label { font-size: 14px; font-weight: 400; }
+
+.multi-query-attention .training-token-groups { min-width: max-content; gap: 10px; }
+.multi-query-attention .training-token-line { display: flex; gap: 10px; }
+.multi-query-attention .training-token-group > span { font-size: 11px; white-space: nowrap; }
+.multi-query-attention .training-token strong, .multi-query-attention .training-token small { font-size: 11px; }
+.multi-query-attention .attention-inspector { grid-template-columns: minmax(0,1.65fr) minmax(170px,1fr); gap: 20px; }
+.multi-query-attention .matrix-container svg { max-width: none; }
+.multi-query-attention .matrix-index { font-size: 15px; }
+.multi-query-attention .visibility-detail { padding: 18px; }
+.multi-query-attention .reader-description, .multi-query-attention .mask-explanation { font-size: 12px; }
+@media(max-width:600px) { .multi-query-attention .attention-inspector { grid-template-columns: 1fr; } }
+
+#attention .attention-figure { grid-column: 1 / -1; }

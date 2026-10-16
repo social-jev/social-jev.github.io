@@ -21,7 +21,7 @@ test("training mask is causal within each message and cannot read future roles",
   }
   assert.ok(!canAttend(attentionTokens[0],attentionTokens[3]));
   assert.ok(!canAttend(attentionTokens[4],attentionTokens[5]));
-  assert.deepEqual(attentionTokens.map(t=>t.position),[0,1,2,3,4,5,6,5,6]);
+  assert.deepEqual(attentionTokens.map(t=>t.position),[0,1,2,3,4,5,6,5,6,3,4,5,6,5,6]);
 });
 test("Pareto frontier excludes dominated points and sorts by parameter count", () => {
   const points = [
@@ -34,4 +34,15 @@ test("Pareto frontier excludes dominated points and sorts by parameter count", (
     paretoFrontier(points).map((point) => point.name),
     ["small", "large"],
   );
+});
+
+
+test("queries are isolated and each option reads only its own query", () => {
+  const queries=attentionTokens.filter(token=>token.role==='query');
+  for (const reader of queries) {
+    for (const key of queries.filter(token=>token.query!==reader.query)) assert.equal(canAttend(reader,key),false);
+  }
+  for (const reader of attentionTokens.filter(token=>token.role==='option')) {
+    for (const key of queries) assert.equal(canAttend(reader,key),reader.query===key.query);
+  }
 });

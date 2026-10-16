@@ -177,7 +177,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="attention"
           number="05"
           title="Attention masks and position assignments"
-          description="During training, state, query, and candidate options are packed into one sequence. Each option can attend to the state and its query, but not to sibling options."
+          description="During training, the state, multiple queries, and their candidate options are packed into one sequence. Queries cannot attend to each other. Each option can attend to the state and its own query, but not to other options."
           detail="Options reuse the same starting position after the state and query. The shared linear or MLP head reads each option’s final hidden state."
         >
           <AttentionPlayground />

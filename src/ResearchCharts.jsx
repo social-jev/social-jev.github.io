@@ -28,7 +28,7 @@ export function ParetoChart() {
           ))}
           <line x1="80" x2="870" y1="440" y2="440" className="chart-axis" />
           <text x="475" y="515" textAnchor="middle" className="axis-title">Total parameters (billions · log scale)</text>
-          <text transform="translate(24 265) rotate(-90)" textAnchor="middle" className="axis-title">Query-weighted accuracy (%)</text>
+          <text transform="translate(24 265) rotate(-90)" textAnchor="middle" className="axis-title">Accuracy</text>
           <polyline points={frontier.map(point => `${x(point.params)},${y(point.score)}`).join(' ')} className="frontier-line" />
           {evaluationModels.map(point => (
             <g key={point.model}>

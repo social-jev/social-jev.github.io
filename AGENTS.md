@@ -66,3 +66,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Immediate cross-repository dispatch uses the configured package secret WEBSITE_PUBLISH_TOKEN scoped to website repository Contents:write. Failed docs publishing is retried explicitly; there is no scheduled polling.
 
 - The final training-objective and learning-curves section has been removed at the user’s request. Keep the training-mixture/data section and training attention explanation.
+
+- The attention visualization uses one continuous sequence: State, Query 1 and its options, Query 2 and its options. Keep query branches isolated and reuse logical positions across queries and options. The Pareto y-axis is labelled Accuracy.
