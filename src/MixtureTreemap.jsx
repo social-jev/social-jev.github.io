@@ -89,7 +89,7 @@ export function MixtureTreemap() {
           <small>of training questions</small>
         </span>
         <a href={`https://huggingface.co/datasets/social-jev/${selected.slug}`}>
-          Dataset ↗
+          Dataset
         </a>
       </div>
       <figcaption className="figure-note">

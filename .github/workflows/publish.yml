@@ -45,6 +45,9 @@ jobs:
           npm run build
           npm test
           rsync -a --delete --exclude docs/ --exclude .git/ dist/client/ ../published/
+          if [[ ! -f ../published/docs/versions.json ]]; then
+            cp dist/client/docs/index.html ../published/docs/index.html
+          fi
       - name: Build missing package releases
         if: github.event_name == 'repository_dispatch'
         run: |

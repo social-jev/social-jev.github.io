@@ -48,7 +48,7 @@ export function ParetoChart() {
       <figcaption className="figure-note">
         SocialJevBench ({evaluation.revision}).
         <br />
-        * Jev size is estimated. <a href="https://jevresearch.github.io/Jev-Research/">API analysis ↗</a>
+        * Jev size is estimated. <a href="https://jevresearch.github.io/Jev-Research/">API analysis</a>
       </figcaption>
     </figure>
   );

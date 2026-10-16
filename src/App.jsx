@@ -26,7 +26,7 @@ function Chapter({ id, number, title, children, description, link, detail }) {
         {detail && <p className="chapter-detail">{detail}</p>}
         {link && (
           <a className="text-link" href={link.href}>
-            {link.label} <span aria-hidden="true">↗</span>
+            {link.label} 
           </a>
         )}
       </div>
@@ -77,10 +77,10 @@ export function App() {
           <a href="#usage">Usage</a>
           <a href="#evaluation">Evaluation</a>
           <a href="#architecture">How it works</a>
-          <a href="/docs/">Docs ↗</a>
+          <a href="/docs/">Docs</a>
         </nav>
         <a className="header-source resource-icon-link" href={packageUrl}>
-          <img src="/github.svg" width="20" height="20" alt="" /> GitHub ↗
+          <img src="/github.svg" width="20" height="20" alt="" /> GitHub
         </a>
       </header>
       <div className="mock-data-banner">
@@ -123,10 +123,10 @@ export function App() {
             <p className="eyebrow">Usage</p><h2>Using SocialJev</h2>
             <p>A typed request specifies the state, query, and candidate answers. Each query returns a Result with the selected answer and its candidate probabilities.</p>
             <div className="interface-links">
-              <a className="button primary resource-icon-link" href="/docs/"><span aria-hidden="true">▤</span>Documentation ↗</a>
-              <a className="text-link resource-icon-link" href={modelUrl}><span aria-hidden="true">🤗</span>Models ↗</a>
+              <a className="button primary resource-icon-link" href="/docs/"><span aria-hidden="true">▤</span>Documentation</a>
+              <a className="text-link resource-icon-link" href={modelUrl}><span aria-hidden="true">🤗</span>Models</a>
               <a className="text-link github-link" href={packageUrl}>
-                <img src="/github.svg" width="20" height="20" alt="" /> GitHub ↗
+                <img src="/github.svg" width="20" height="20" alt="" /> GitHub
               </a>
             </div>
           </div>
@@ -209,7 +209,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
             Website source
           </a>
         </nav>
-        <span className="footer-note">Design draft · measured evals; illustrative dataset sizes.</span>
+        <span className="footer-note">Design draft · measured evals and dataset shares.</span>
       </footer>
     </>
   );
