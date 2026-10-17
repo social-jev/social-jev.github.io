@@ -69,4 +69,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - The attention visualization uses one continuous sequence: State, Query 1 and its options, Query 2 and its options. Keep query branches isolated and reuse logical positions across queries and options. The Pareto y-axis is labelled Accuracy.
 
-- Use the approved thin outlined external-link SVG symbol on every text link, including internal navigation and resource links. Keep brand wordmarks and the accessibility skip link free of the symbol. Do not use Unicode arrow glyphs for links.
+- Use the approved thin outlined external-link SVG symbol on every text link, on resource links. Section navigation links (Overview, Usage, Evaluation, How it works) have no symbol. Keep brand wordmarks and the accessibility skip link free of the symbol. Do not use Unicode arrow glyphs for links.
