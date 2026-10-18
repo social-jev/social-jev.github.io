@@ -1778,3 +1778,5 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 }
 
 .site-header nav a[href^="#"]::after { content: none; }
+
+.interface-section { align-items: start; }
