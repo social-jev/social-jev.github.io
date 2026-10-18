@@ -14,7 +14,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Follow the selected workbench concept: restrained academic typography, off-white paper, muted green, pale document/question/answer surfaces, and a single landing page with linked sections.
 - Keep the project overview, models, data, training, evaluation and package on the landing page. Package documentation alone has a version selector.
 - During active website development, pushes to main publish immediately. Release tags are not required; existing tags remain historical.
-- The public website is a draft. Keep a prominent Draft label beside the header wordmark on desktop, mobile, and the docs placeholder until explicitly asked to remove it.
+- The public website no longer displays Draft labels or the Design preview banner. The user explicitly requested their removal.
 - Later, package release tags publish docs independently, while retaining the last released website. Do not deploy unfinished website main content when package docs change.
 - Never fabricate benchmark numbers or live model predictions. Examples are explicitly illustrative; larger model sizes are planned until released.
 - Do not edit or create README.md without explicit user approval.
@@ -70,3 +70,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The attention visualization uses one continuous sequence: State, Query 1 and its options, Query 2 and its options. Keep query branches isolated and reuse logical positions across queries and options. The Pareto y-axis is labelled Accuracy.
 
 - Use the approved thin outlined external-link SVG symbol on every text link, on resource links. Section navigation links (Overview, Usage, Evaluation, How it works) have no symbol. Keep brand wordmarks and the accessibility skip link free of the symbol. Do not use Unicode arrow glyphs for links.
+
+## Future roadmap
+
+- Extend SocialJev to modalities beyond text. This is a future direction, not a claim about currently supported inputs. Do not add a public roadmap section yet.

@@ -70,7 +70,6 @@ export function App() {
           <a className="wordmark" href="#">
             SocialJev<span className="wordmark-dot">.</span>
           </a>
-          <span className="draft-label">Draft</span>
         </div>
         <nav aria-label="Main navigation">
           <a href="#applications">Overview</a>
@@ -83,12 +82,6 @@ export function App() {
           <img src="/github.svg" width="20" height="20" alt="" /> GitHub
         </a>
       </header>
-      <div className="mock-data-banner">
-        Design preview{" "}
-        <span>
-          Evaluation scores and dataset counts are measured. Example outputs remain illustrative.
-        </span>
-      </div>
       <main id="main">
         <section className="academic-hero" aria-labelledby="hero-title">
           <h1 id="hero-title">SocialJev</h1>
@@ -154,7 +147,7 @@ result.probabilities  # dict[str, float]`}</code></pre>
         <Chapter
           id="evaluation"
           number="02"
-          title="Classification performance, inference time, and cost"
+          title="Evaluation"
           description="We evaluate SocialJev across classification tasks and compare its performance, model size, and inference cost with other models. A matched comparison of 30,000 requests will measure the runtime difference between autoregressive decoding and SocialJev inference."
           detail="Evaluated on our internal benchmark, SocialJevBench (v0.1alpha). The matched speed and cost comparison is pending."
         >
@@ -209,7 +202,6 @@ result.probabilities  # dict[str, float]`}</code></pre>
             Website source
           </a>
         </nav>
-        <span className="footer-note">Design draft · measured evals and dataset shares.</span>
       </footer>
     </>
   );
