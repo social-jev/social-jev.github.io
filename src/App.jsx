@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ApplicationAnimation } from "./ApplicationAnimation.jsx";
+import { EvaluationExamples } from "./EvaluationExamples.jsx";
 import { ParetoChart } from "./ResearchCharts.jsx";
 import { MixtureTreemap } from "./MixtureTreemap.jsx";
 import { ArchitectureAnimation } from "./ArchitectureAnimation.jsx";
@@ -148,10 +149,10 @@ result.probabilities  # dict[str, float]`}</code></pre>
           id="evaluation"
           number="02"
           title="Evaluation"
-          description="We evaluate SocialJev across classification tasks and compare its performance, model size, and inference cost with other models. A matched comparison of 30,000 requests will measure the runtime difference between autoregressive decoding and SocialJev inference."
-          detail="Evaluated on our internal benchmark, SocialJevBench (v0.1alpha). The matched speed and cost comparison is pending."
+          description="We currently evaluate four classification tasks central to social-science research: topic presence, stance, sentiment and framing."
+          detail="On SocialJevBench, the SocialJev models lie on the Pareto frontier of accuracy and model size: none of the evaluated alternatives achieves equal or higher accuracy with fewer parameters. Future versions of the benchmark will extend its task coverage."
         >
-          <ParetoChart />
+          <div className="evaluation-content"><ParetoChart /><EvaluationExamples /></div>
         </Chapter>
         <Chapter
           id="data"
