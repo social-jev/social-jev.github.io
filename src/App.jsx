@@ -189,7 +189,6 @@ export function App() {
           <a className="wordmark" href="#">
             SocialJev.
           </a>
-          <p>Social science classification.</p>
         </div>
         <nav aria-label="Resources">
           <a href={packageUrl}>Package</a>

@@ -1845,6 +1845,7 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .task-example-body .example-answer-note, .reader-description, .mask-explanation,
 .interface-code-label, .text-link, .interface-links a, .visual-topline .small-label,
 .site-footer p, .site-footer a, .small-label { font-size: 16px !important; line-height: 1.6; }
+.site-footer .wordmark { font-size: 36px !important; }
 .request-box p, .request-options li, .result-probability > div:first-child,
 .example-state p, .example-query p, .example-options li { font-size: 16px; }
 .interface-code pre { font-size: 14px; }
