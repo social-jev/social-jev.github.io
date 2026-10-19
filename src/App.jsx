@@ -7,7 +7,7 @@ import { MixtureTreemap } from "./MixtureTreemap.jsx";
 import { ArchitectureAnimation } from "./ArchitectureAnimation.jsx";
 import { AttentionPlayground } from "./AttentionPlayground.jsx";
 const modelUrl = "https://huggingface.co/social-jev";
-const packageUrl = "https://github.com/DGoettlich/social-jev";
+const packageUrl = "https://github.com/social-jev/social-jev";
 const sections = [
   ["applications", "Applications"],
   ["evaluation", "Evaluation"],

@@ -28,7 +28,7 @@ jobs:
           path: published
       - uses: actions/checkout@v4
         with:
-          repository: DGoettlich/social-jev
+          repository: social-jev/social-jev
           ref: main
           fetch-depth: 0
           persist-credentials: false
