@@ -167,8 +167,8 @@ export function App() {
           id="architecture"
           number="04"
           title="Classification without autoregressive decoding"
-          description="SocialJev applies a shared linear or MLP head to the final hidden state of each candidate sequence. Each candidate receives one scalar score; softmax within the query produces candidate probabilities."
-          detail="The diagram shows the packed training sequence. Each option’s final hidden state is read by the same Decision Head; softmax normalizes the scores within its query."
+          description="SocialJev reads the text, question, and candidate answers, then scores how well each answer fits. It returns a probability for each option directly, rather than writing an answer token by token."
+          detail="This avoids the repeated generation steps of a conventional language model, making classification much faster. The answers are supplied with each request, so you can change the task and its possible answers without retraining the model."
         >
           <ArchitectureAnimation />
         </Chapter>
