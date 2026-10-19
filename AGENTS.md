@@ -82,3 +82,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Pareto chart: keep full SocialJev names with inline preview suffixes visible close to their dots, linked by vertical connectors. Reference model names appear on hover, keyboard focus or tap as borderless text with a cream halo; omit accuracy and parameter counts from hover labels.
 
 - Omit the figure headings “Accuracy × model size”, “Share of training questions” and “Packed training sequence · linear / MLP head”. Keep the attention interaction instruction at 16px.
+
+- Hero authors use 22px medium text and the institution uses 20px darker text, with 44px above the author line. On mobile use 20px authors and 18px affiliation.

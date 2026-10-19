@@ -1871,3 +1871,8 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .multi-query-attention .playground-instruction { font-size: 16px; line-height: 1.6; margin: 0 0 20px; }
 
 .model-label-connector { stroke: var(--green); stroke-width: 1.5; }
+
+/* Prominent author and institutional attribution. */
+.author-list { font-size: 22px; font-weight: 500; line-height: 1.5; gap: 12px 30px; margin: 44px 0 12px; }
+.academic-affiliation { font-size: 20px; line-height: 1.5; color: var(--ink); margin-bottom: 30px; }
+@media(max-width:600px) { .author-list { font-size: 20px; gap: 10px 22px; } .academic-affiliation { font-size: 18px; } }
