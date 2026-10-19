@@ -2,13 +2,15 @@ import { examples } from "./examples.js";
 import { usePlayback } from "./usePlayback.jsx";
 
 export function ApplicationAnimation() {
-  const playback = usePlayback(examples.length * 3, 2200);
-  const index = Math.floor(playback.step / 3);
-  const phase = playback.step % 3;
+  // Half-second steps: 1s request, 0.5s scoring, 10s result, 0.5s transition.
+  const playback = usePlayback(examples.length * 24, 500);
+  const index = Math.floor(playback.step / 24);
+  const exampleStep = playback.step % 24;
+  const phase = exampleStep < 2 ? 0 : exampleStep < 3 ? 1 : 2;
   const example = examples[index];
   const probabilities = [83, 11, 6];
   return <figure className="application-animation visual-surface refined-application" aria-label="Classification request and result">
-    <div className="request-result-flow" key={example.id}>
+    <div className="request-result-flow" key={example.id} style={{ opacity: exampleStep === 23 ? 0 : 1, transition: "opacity 0.5s" }}>
       <div className="request-box">
         <h3>Request</h3>
         <div className="request-state"><h4>State</h4><p>{example.document}</p></div>
