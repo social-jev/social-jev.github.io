@@ -78,3 +78,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Keep landing-page body copy at 18px and supporting captions, legends, plot notes and controls at 16px. Maintain readable text on mobile rather than shrinking it to fit.
 
 - Application examples put task definitions in the query and use short answer options. The stance example uses Support, Oppose and Unclear.
+
+- Pareto chart: keep full SocialJev names and preview suffixes visible without label connectors. Reference model names appear on hover, keyboard focus or tap as borderless text with a cream halo; omit accuracy and parameter counts from hover labels.

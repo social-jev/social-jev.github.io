@@ -1739,7 +1739,6 @@ button {
 .measured-evaluation .baseline-label { font-size: 16px; fill: #586762; }
 .measured-evaluation figcaption a { color: var(--green); text-underline-offset: 3px; }
 
-.chart-label-connector { stroke: #9caaa0; stroke-width: 1; fill: none; }
 .ours-connector { stroke: var(--green); }
 .measured-evaluation .preview-label { font-size: 14px; font-weight: 400; }
 
@@ -1863,3 +1862,8 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .request-options ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .request-options li { text-align: center; overflow-wrap: anywhere; }
 @media (min-width:601px) and (max-width:1100px) { .request-options ul { grid-template-columns: 1fr; } }
+
+.reference-model { cursor: pointer; outline: none; }
+.reference-model:hover .baseline-point, .reference-model:focus .baseline-point { fill: var(--green); stroke: var(--green); stroke-width: 3px; }
+.measured-evaluation .hover-model-label, .measured-evaluation .ours-label { paint-order: stroke; stroke: var(--paper, #fcfcf9); stroke-width: 7px; stroke-linejoin: round; }
+.measured-evaluation .hover-model-label { font: 22px "DM Sans", sans-serif; fill: var(--ink); pointer-events: none; }

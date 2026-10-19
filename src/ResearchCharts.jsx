@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { paretoFrontier } from "./visual-data.js";
 import { evaluationModels, evaluation } from "./evaluation-data.js";
 
@@ -5,6 +6,8 @@ export function ParetoChart() {
   const x = value => 80 + Math.log10(value / 0.23) / Math.log10(1500 / 0.23) * 790;
   const y = value => 440 - (value - 50) / 52 * 350;
   const frontier = paretoFrontier(evaluationModels);
+  const [activeModel, setActiveModel] = useState(null);
+  const active = evaluationModels.find(point => point.model === activeModel);
   return (
     <figure className="chart-figure visual-surface measured-evaluation">
       <div className="visual-topline">
@@ -31,13 +34,35 @@ export function ParetoChart() {
           <text transform="translate(24 265) rotate(-90)" textAnchor="middle" className="axis-title">Accuracy</text>
           <polyline points={frontier.map(point => `${x(point.params)},${y(point.score)}`).join(' ')} className="frontier-line" />
           {evaluationModels.map(point => (
-            <g key={point.model}>
-              <title>{point.name}{point.ours ? ' (preview)' : ''}: {point.score.toFixed(2)}% accuracy; {point.params}B{point.estimated ? ' illustrative size placement' : ' total parameters'}</title>
-              <line x1={x(point.params)} y1={y(point.score)} x2={x(point.params) + point.dx + (point.anchor === 'end' ? 6 : -6)} y2={y(point.score) + point.dy - 6} className={point.ours ? 'chart-label-connector ours-connector' : 'chart-label-connector'} />
+            <g key={point.model}
+              className={point.ours ? 'ours-model' : 'reference-model'}
+              tabIndex={point.ours ? undefined : 0}
+              role={point.ours ? undefined : 'button'}
+              aria-label={point.name}
+              onMouseEnter={() => setActiveModel(point.ours ? null : point.model)}
+              onMouseLeave={() => setActiveModel(null)}
+              onFocus={() => setActiveModel(point.model)}
+              onBlur={() => setActiveModel(null)}
+              onClick={() => setActiveModel(point.model)}
+              onKeyDown={event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setActiveModel(point.model);
+                }
+              }}>
+              {!point.ours && <circle cx={x(point.params)} cy={y(point.score)} r="16" fill="transparent" />}
               <circle cx={x(point.params)} cy={y(point.score)} r={point.ours ? 8 : 6} className={point.ours ? 'ours-point' : 'baseline-point'} />
-              <text x={x(point.params) + point.dx} y={y(point.score) + point.dy} textAnchor={point.anchor || 'start'} className={point.ours ? 'ours-label' : 'baseline-label'}>{point.name}{point.ours && <tspan className="preview-label"> (preview)</tspan>}</text>
+              {point.ours && <text x={x(point.params) + point.dx} y={y(point.score) + point.dy} className="ours-label">{point.name}<tspan className="preview-label"> (preview)</tspan></text>}
             </g>
           ))}
+          {active && !active.ours && (
+            <text className="hover-model-label"
+              x={x(active.params) + (active.params > 10 ? -14 : 14)}
+              y={y(active.score) + 34}
+              textAnchor={active.params > 10 ? 'end' : 'start'}>
+              {active.name}
+            </text>
+          )}
         </svg>
       </div>
       <div className="chart-legend">
