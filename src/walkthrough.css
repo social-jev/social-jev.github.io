@@ -1836,3 +1836,26 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .interface-code .syntax-string { color: #9a612f; }
 .interface-code .syntax-function { color: #286c86; }
 .interface-code .syntax-comment { color: #78837b; font-style: italic; }
+
+/* Readable body copy and supporting text across the landing page. */
+.visual-chapter .section-heading > p:not(.eyebrow) { font-size: 18px; line-height: 1.6; }
+.section-heading > .chapter-detail { font-size: 16px !important; color: var(--muted) !important; }
+.overview-copy p, .interface-section p:not(.eyebrow), .wikipedia-description { font-size: 18px !important; line-height: 1.6; }
+.figure-note, .chart-figure > .figure-note, .mixture-figure > .figure-note, .wikipedia-highlight figcaption,
+.chart-legend, .dataset-detail small, .dataset-detail div > span, .dataset-detail > a,
+.examples-subtitle, .examples-toggle, .example-toggle, .task-definition, .option-status,
+.task-example-body .example-answer-note, .reader-description, .mask-explanation,
+.interface-code-label, .text-link, .interface-links a, .visual-topline .small-label,
+.site-footer p, .site-footer a, .small-label { font-size: 16px !important; line-height: 1.6; }
+.request-box p, .request-options li, .result-probability > div:first-child,
+.example-state p, .example-query p, .example-options li { font-size: 16px; }
+.interface-code pre { font-size: 14px; }
+.chart-legend { flex-wrap: wrap; row-gap: 12px; }
+.measured-evaluation .axis-text, .measured-evaluation .baseline-label { font-size: 22px; }
+.measured-evaluation .axis-title, .measured-evaluation .ours-label { font-size: 23px; }
+.measured-evaluation .preview-label { font-size: 20px; }
+.pareto-chart { min-width: 700px; }
+.task-example > summary { grid-template-columns: 120px minmax(0, 1fr) 154px; }
+@media(max-width:600px) { .task-example > summary { grid-template-columns: minmax(0,1fr) 154px; } }
+
+.treemap > button > small { font-size: 14px; }
