@@ -37,7 +37,7 @@ jobs:
           path: published
       - uses: actions/checkout@v4
         with:
-          repository: DGoettlich/social-jev
+          repository: social-jev/social-jev
           ref: ${{ format('refs/heads/{0}', inputs.fetch_docs_from_branch || 'main') }}
           fetch-depth: 0
           persist-credentials: false
