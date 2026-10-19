@@ -108,7 +108,7 @@ export function App() {
         </section>
         <section id="applications" className="academic-overview" aria-labelledby="overview-title">
           <div className="overview-copy"><h2 id="overview-title">Overview</h2>
-          <p>SocialJev is a Jev-like model that combines general transformer capabilities with decision training for social science, fast inference, and a flexible typed interface.</p>
+          <p>SocialJev is a general classifier for the social sciences, inspired by <a href="https://jevresearch.github.io/Jev-Research/">TypeSafe’s Jev</a>. It combines transformer capabilities with social-science training, fast inference and a flexible interface for specifying tasks and candidate answers at inference time.</p>
           <p>It is designed for large-scale labelling, where frontier language models can be prohibitively expensive and lightweight classifiers often require task-specific training. SocialJev scores candidate answers directly instead of generating responses token by token.</p></div>
           <ApplicationAnimation />
         </section>
