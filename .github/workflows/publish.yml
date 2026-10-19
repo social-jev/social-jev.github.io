@@ -5,6 +5,15 @@ on:
   repository_dispatch:
     types: [package-docs]
   workflow_dispatch:
+    inputs:
+      docs_version:
+        description: 'Existing documentation version to update; leave empty to publish the website'
+        type: string
+        default: ''
+      fetch_docs_from_branch:
+        description: 'Package branch containing the corrected documentation'
+        type: string
+        default: main
 permissions:
   contents: write
   pages: write
@@ -29,7 +38,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: DGoettlich/social-jev
-          ref: main
+          ref: ${{ format('refs/heads/{0}', inputs.fetch_docs_from_branch || 'main') }}
           fetch-depth: 0
           persist-credentials: false
           path: package
@@ -38,7 +47,7 @@ jobs:
           node-version: 22
       - uses: astral-sh/setup-uv@v6
       - name: Build website only for website updates
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.docs_version == '')
         working-directory: website
         run: |
           npm ci
@@ -53,6 +62,15 @@ jobs:
         run: |
           bash website/scripts/build-release-docs.sh "$GITHUB_WORKSPACE/package" "$GITHUB_WORKSPACE/published"
           node website/scripts/update-doc-versions.mjs "$GITHUB_WORKSPACE/published/docs"
+      - name: Rebuild selected documentation version
+        if: github.event_name == 'workflow_dispatch' && inputs.docs_version != ''
+        env:
+          DOCS_VERSION: ${{ inputs.docs_version }}
+        run: |
+          bash website/scripts/rebuild-docs.sh \
+            "$GITHUB_WORKSPACE/package" \
+            "$GITHUB_WORKSPACE/published" \
+            "$DOCS_VERSION"
       - name: Check for publishing changes
         id: changes
         working-directory: published

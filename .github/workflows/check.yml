@@ -17,3 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv run --no-project python tests/rebuild-docs.e2e.py
