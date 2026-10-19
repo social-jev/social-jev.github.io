@@ -23,6 +23,5 @@ export function AttentionPlayground() {
       </div>
       <div className="visibility-detail" aria-live="off"><p className="small-label">Selected token</p><h3>{reader.word}</h3><p className="reader-description">{reader.label} · stored slot {reader.index} · position {reader.position}</p><div className="context-summary"><span>Visible context</span><p>{visible.map(token=>token.word).join(' ')}</p></div><p className="mask-explanation">{reader.role==='option'?`This option sees the state and Query ${reader.query} only, plus its own causal prefix. Other queries and options are masked.`:reader.role==='query'?'This query sees the state and its own causal prefix. Other queries and all options are masked.':'State tokens attend causally within the state.'}</p>{reader.readout&&<div className="training-readout"><span>Final option hidden state</span><span>↓ Shared linear / MLP head</span><strong>One scalar score</strong></div>}</div>
     </div>
-    <figcaption className="figure-note">Training mask and positions follow MERT’s full-context scalar-head path. Options start at the same position. Role markers, padding, and optional examples are omitted.</figcaption>
   </figure>;
 }

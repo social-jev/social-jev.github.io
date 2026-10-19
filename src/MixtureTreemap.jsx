@@ -89,9 +89,6 @@ export function MixtureTreemap() {
           Dataset
         </a>
       </div>
-      <figcaption className="figure-note">
-        Rectangle areas represent each dataset’s share of training questions.
-      </figcaption>
     </figure>
   );
 }
