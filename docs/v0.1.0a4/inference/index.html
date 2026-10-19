@@ -88,7 +88,9 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <a class="docs-brand" href="..">SocialJev</a>
+    
     <span class="docs-badge">Alpha</span>
+    
     <span class="docs-header-label">Documentation</span>
     <div class="docs-header-spacer"></div>
     <label class="md-header__button md-icon" for="__search" aria-label="Search documentation">
@@ -456,17 +458,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#what-is-currently-established" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is currently established
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -684,17 +675,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#what-is-currently-established" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is currently established
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -808,7 +788,7 @@
 <p>Neither quantity is the GPU batch size. vLLM batches the submitted sequences internally, and each document creates one sequence per query–option combination. Input length, query count, and option count therefore affect how much work a submission represents.</p>
 <p>For an incremental workload, the application controls when inputs are loaded, how many calls remain outstanding, and when completed results are saved or released. There is no requirement to load all batches first or accumulate all results. The small two-call example above is an illustration of concurrency, not a prescribed dataset-processing architecture.</p>
 <p>SocialJev moves its own encoding and decoding off the caller's event-loop thread. Other loading or processing performed by the application needs to be arranged so it can overlap inference too.</p>
-<p>The repository's <a href="https://github.com/social-jev/social-jev/blob/main/scripts/wikipedia.py">Wikipedia</a> and <a href="https://github.com/social-jev/social-jev/blob/main/scripts/fineweb.py">FineWeb</a> runs provide concrete references for larger concurrent workloads. They include benchmark instrumentation and prepare their input collections before timed inference; they are not streaming-inference examples.</p>
+<p>The repository's <a href="https://github.com/social-jev/social-jev/blob/main/examples/wikipedia.py">Wikipedia</a> and <a href="https://github.com/social-jev/social-jev/blob/main/examples/fineweb.py">FineWeb</a> runs provide concrete references for larger concurrent workloads. They include benchmark instrumentation and prepare their input collections before timed inference; they are not streaming-inference examples.</p>
 <h2 id="configure-execution">Configure execution<a class="headerlink" href="#configure-execution" title="Permanent link">&para;</a></h2>
 <p>Native vLLM options pass through <code>from_pretrained()</code>. For example:</p>
 <div class="highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">model</span> <span class="o">=</span> <span class="n">SocialJev</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
@@ -861,9 +841,6 @@
 <div class="highlight"><span class="filename">Bash</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">VLLM_BATCH_INVARIANT</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>inference.py
 </code></pre></div>
 <p>The setting reaches both local vLLM and a managed server. It has hardware and operation restrictions, remains a beta feature, and can affect performance. See <a href="https://docs.vllm.ai/en/v0.31.0/features/batch_invariance/">vLLM's batch-invariance documentation</a>.</p>
-<h3 id="what-is-currently-established">What is currently established<a class="headerlink" href="#what-is-currently-established" title="Permanent link">&para;</a></h3>
-<p>Our backend checks establish agreement within numerical tolerance, not an exact reproducibility guarantee across batch sizes or concurrent schedules. End-to-end batch invariance of the SocialJev backbone and custom linear/MLP head has not yet been validated.</p>
-<p>For a reproducible run, retain the requests and supplied options, select a fixed model revision with <code>revision</code>, and record the package/software versions, hardware, precision, and parallelism settings. vLLM's reproducibility scope is the same hardware and vLLM version; it does not promise identical results across different environments. See <a href="https://docs.vllm.ai/en/v0.31.0/usage/reproducibility/">vLLM's reproducibility guidance</a>.</p>
 
 
 
