@@ -1616,9 +1616,12 @@ button {
 .motivation-title { font: 26px/1.2 "Newsreader", Georgia, serif; margin: 24px 0 12px; }
 #usage { scroll-margin-top: 90px; }
 
-.interface-section { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; }
-.interface-links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+.interface-section { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 48px; }
+.interface-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
 .interface-links .button, .interface-links .text-link { margin: 0; }
+.interface-links a { gap: 6px; white-space: nowrap; }
+.interface-links .button { padding: 14px 10px; }
+.interface-links a[href]::after { margin-left: 0; }
 .github-link, .resource-icon-link { display: inline-flex; gap: 8px; align-items: center; }
 .interface-code { min-width: 0; background: #fff; border: 1px solid #d8dfda; border-radius: 8px; overflow: hidden; }
 .interface-code-label { padding: 16px 20px; border-bottom: 1px solid #ddd; background: #f2f2f2; font-size: 12px; color: #555; }
