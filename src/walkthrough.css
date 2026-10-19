@@ -1869,3 +1869,5 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .measured-evaluation .hover-model-label { font: 22px "DM Sans", sans-serif; fill: var(--ink); pointer-events: none; }
 
 .multi-query-attention .playground-instruction { font-size: 16px; line-height: 1.6; margin: 0 0 20px; }
+
+.model-label-connector { stroke: var(--green); stroke-width: 1.5; }

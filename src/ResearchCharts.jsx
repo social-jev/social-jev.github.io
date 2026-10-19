@@ -49,6 +49,9 @@ export function ParetoChart() {
               }}>
               {!point.ours && <circle cx={x(point.params)} cy={y(point.score)} r="16" fill="transparent" />}
               <circle cx={x(point.params)} cy={y(point.score)} r={point.ours ? 8 : 6} className={point.ours ? 'ours-point' : 'baseline-point'} />
+              {point.ours && <line x1={x(point.params)} y1={y(point.score)}
+                x2={x(point.params)} y2={y(point.score) + point.dy + (point.dy > 0 ? -26 : 9)}
+                className="model-label-connector" />}
               {point.ours && <text x={x(point.params) + point.dx} y={y(point.score) + point.dy} className="ours-label">{point.name}<tspan className="preview-label"> (preview)</tspan></text>}
             </g>
           ))}
