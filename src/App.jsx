@@ -175,9 +175,9 @@ export function App() {
         <Chapter
           id="attention"
           number="05"
-          title="Attention masks and position assignments"
-          description="During training, the state, multiple queries, and their candidate options are packed into one sequence. Queries cannot attend to each other. Each option can attend to the state and its own query, but not to other options."
-          detail="Options reuse the same starting position after the state and query. The shared linear or MLP head reads each option’s final hidden state."
+          title="Option order does not determine the prediction"
+          description="SocialJev treats each candidate option independently: it sees the state and its own query, but cannot attend to other options. All options also begin at the same position ID, so the model cannot distinguish “first option” from “second option” or learn a preference based on that ordering."
+          detail="Reordering the options therefore leaves their predicted probabilities unchanged. The same isolation and position assignments apply across queries, so their order does not affect the results either."
         >
           <AttentionPlayground />
         </Chapter>
