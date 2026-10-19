@@ -1764,7 +1764,7 @@ button {
 @media (max-width: 600px) { .wikipedia-highlight { padding: 32px 20px; } .wikipedia-description { font-size: 14px; } .wikipedia-labels { font-size: 13px; margin-bottom: 20px; } }
 
 /* Shared link symbol: the approved fine external-link outline. */
-a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
+a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after {
   content: "";
   display: inline-block;
   width: .85em;
@@ -1776,7 +1776,6 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
   mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M11%204h6v6M17%204l-8%208M8%205H4v12h12v-4%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 }
 
-.site-header nav a[href^="#"]::after { content: none; }
 
 .interface-section { align-items: start; }
 
