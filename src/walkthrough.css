@@ -1848,7 +1848,7 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .site-footer .wordmark { font-size: 36px !important; }
 .request-box p, .request-options li, .result-probability > div:first-child,
 .example-state p, .example-query p, .example-options li { font-size: 16px; }
-.interface-code pre { font-size: 14px; }
+.interface-code pre { font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .chart-legend { flex-wrap: wrap; row-gap: 12px; }
 .measured-evaluation .axis-text, .measured-evaluation .baseline-label { font-size: 22px; }
 .measured-evaluation .axis-title, .measured-evaluation .ours-label { font-size: 23px; }
