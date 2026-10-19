@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { UsageCode } from "./UsageCode.jsx";
 import { ApplicationAnimation } from "./ApplicationAnimation.jsx";
 import { EvaluationExamples } from "./EvaluationExamples.jsx";
 import { ParetoChart } from "./ResearchCharts.jsx";
@@ -108,7 +109,7 @@ export function App() {
         </section>
         <section id="applications" className="academic-overview" aria-labelledby="overview-title">
           <div className="overview-copy"><h2 id="overview-title">Overview</h2>
-          <p>SocialJev is a Jev-like model that combines general transformer capabilities with decision training for social science, fast inference, and a flexible typed interface.</p>
+          <p>SocialJev is a general classifier for the social sciences, inspired by <a href="https://jevresearch.github.io/Jev-Research/">TypeSafe’s Jev</a>. It combines transformer capabilities with social-science training, fast inference and a flexible interface for specifying tasks and candidate answers at inference time.</p>
           <p>It is designed for large-scale labelling, where frontier language models can be prohibitively expensive and lightweight classifiers often require task-specific training. SocialJev scores candidate answers directly instead of generating responses token by token.</p></div>
           <ApplicationAnimation />
         </section>
@@ -125,24 +126,8 @@ export function App() {
             </div>
           </div>
           <div className="interface-code">
-            <div className="interface-code-label"><span>Python · core interface</span><button className="copy-code-button" onClick={copyCode} aria-label="Copy Python code"><span aria-live="polite">{copyStatus}</span></button></div>
-            <pre><code ref={codeRef}>{`from social_jev import Query, Request, SocialJev
-
-model = SocialJev.from_pretrained(
-    "social-jev/social-jev-0.6B-preview"
-)
-
-request = Request(
-    state="The council expanded the bus network.",
-    queries=[Query(
-        text="Which policy area does this document concern?",
-        options=["Transport", "Education", "Healthcare"],
-    )],
-)
-
-result = model.query(request)[0][0]
-result.choice         # Selected candidate answer
-result.probabilities  # dict[str, float]`}</code></pre>
+            <div className="interface-code-label"><span className="code-language"><i aria-hidden="true" />Python <span aria-hidden="true">/</span> core interface</span><button className="copy-code-button" onClick={copyCode} aria-label="Copy Python code"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1" /><path d="M3 11H2V2h8v1" /></svg><span aria-live="polite">{copyStatus}</span></button></div>
+            <pre><code ref={codeRef}><UsageCode /></code></pre>
           </div>
         </section>
         <Chapter
