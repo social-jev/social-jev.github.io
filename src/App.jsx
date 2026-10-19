@@ -194,9 +194,6 @@ export function App() {
           <a href={packageUrl}>Package</a>
           <a href="https://huggingface.co/social-jev">Models & data</a>
           <a href="/docs/">Documentation</a>
-          <a href="https://github.com/social-jev/SocialJev.github.io">
-            Website source
-          </a>
         </nav>
       </footer>
     </>
