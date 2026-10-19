@@ -5,6 +5,15 @@ on:
   repository_dispatch:
     types: [package-docs]
   workflow_dispatch:
+    inputs:
+      docs_version:
+        description: 'Existing documentation version to update; leave empty to publish the website'
+        type: string
+        default: ''
+      fetch_docs_from_branch:
+        description: 'Package branch containing the corrected documentation'
+        type: string
+        default: main
 permissions:
   contents: write
   pages: write
@@ -19,26 +28,26 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: website
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: published
           path: published
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: DGoettlich/social-jev
-          ref: main
+          repository: social-jev/social-jev
+          ref: ${{ format('refs/heads/{0}', inputs.fetch_docs_from_branch || 'main') }}
           fetch-depth: 0
           persist-credentials: false
           path: package
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
       - name: Build website only for website updates
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.docs_version == '')
         working-directory: website
         run: |
           npm ci
@@ -53,6 +62,15 @@ jobs:
         run: |
           bash website/scripts/build-release-docs.sh "$GITHUB_WORKSPACE/package" "$GITHUB_WORKSPACE/published"
           node website/scripts/update-doc-versions.mjs "$GITHUB_WORKSPACE/published/docs"
+      - name: Rebuild selected documentation version
+        if: github.event_name == 'workflow_dispatch' && inputs.docs_version != ''
+        env:
+          DOCS_VERSION: ${{ inputs.docs_version }}
+        run: |
+          bash website/scripts/rebuild-docs.sh \
+            "$GITHUB_WORKSPACE/package" \
+            "$GITHUB_WORKSPACE/published" \
+            "$DOCS_VERSION"
       - name: Check for publishing changes
         id: changes
         working-directory: published
@@ -63,16 +81,16 @@ jobs:
           else
             echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         if: steps.changes.outputs.changed == 'true'
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         if: steps.changes.outputs.changed == 'true'
         with:
           path: published
       - name: Deploy combined website and docs
         id: deployment
         if: steps.changes.outputs.changed == 'true'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
       - name: Save successfully published content
         if: steps.changes.outputs.changed == 'true'
         working-directory: published
