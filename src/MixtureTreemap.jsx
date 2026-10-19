@@ -37,9 +37,6 @@ export function MixtureTreemap() {
   const total = sample.reduce((sum, item) => sum + item.value, 0);
   return (
     <figure className="mixture-figure visual-surface">
-      <div className="visual-topline">
-        <span className="small-label">Share of training questions</span>
-      </div>
       <div
         className="treemap"
         role="group"

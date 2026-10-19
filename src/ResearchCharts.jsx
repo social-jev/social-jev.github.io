@@ -10,9 +10,6 @@ export function ParetoChart() {
   const active = evaluationModels.find(point => point.model === activeModel);
   return (
     <figure className="chart-figure visual-surface measured-evaluation">
-      <div className="visual-topline">
-        <span className="small-label">Accuracy × model size</span>
-      </div>
       <div className="pareto-scroll">
         <svg className="pareto-chart" viewBox="0 0 920 530" role="img" aria-labelledby="pareto-title pareto-desc">
           <title id="pareto-title">Classification accuracy and total model size</title>

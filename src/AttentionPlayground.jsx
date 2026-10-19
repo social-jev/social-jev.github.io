@@ -11,7 +11,6 @@ export function AttentionPlayground() {
   const reader=attentionTokens[selected];
   const visible=attentionTokens.filter(token=>canAttend(reader,token));
   return <figure className="attention-figure visual-surface training-mask-figure multi-query-attention">
-    <div className="visual-topline"><span className="small-label">Packed training sequence · linear / MLP head</span></div>
     <p className="playground-instruction">Select a token to inspect its context. Numbers below tiles are position IDs.</p>
     <div className="training-token-scroll"><div className="training-token-groups">{rows.map((row,i)=><div className="training-token-line" key={i}>{row.map(group=><div key={group.name} className="training-token-group"><span>{group.name}</span><div>{group.tokens.map(token=><button key={token.index} className={`training-token ${token.role} ${canAttend(reader,token)?'visible':'masked'}`} aria-pressed={selected===token.index} aria-label={`${token.label}: ${token.word}, stored slot ${token.index}, position ${token.position}`} onClick={()=>playback.choose((token.index+attentionTokens.length-10)%attentionTokens.length)}><strong>{token.word}</strong><small>{token.position}</small></button>)}</div></div>)}</div>)}</div></div>
     <div className="attention-inspector">

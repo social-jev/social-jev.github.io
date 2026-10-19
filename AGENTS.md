@@ -80,3 +80,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Application examples put task definitions in the query and use short answer options. The stance example uses Support, Oppose and Unclear.
 
 - Pareto chart: keep full SocialJev names and preview suffixes visible without label connectors. Reference model names appear on hover, keyboard focus or tap as borderless text with a cream halo; omit accuracy and parameter counts from hover labels.
+
+- Omit the figure headings “Accuracy × model size”, “Share of training questions” and “Packed training sequence · linear / MLP head”. Keep the attention interaction instruction at 16px.

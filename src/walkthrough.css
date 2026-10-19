@@ -1867,3 +1867,5 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .reference-model:hover .baseline-point, .reference-model:focus .baseline-point { fill: var(--green); stroke: var(--green); stroke-width: 3px; }
 .measured-evaluation .hover-model-label, .measured-evaluation .ours-label { paint-order: stroke; stroke: var(--paper, #fcfcf9); stroke-width: 7px; stroke-linejoin: round; }
 .measured-evaluation .hover-model-label { font: 22px "DM Sans", sans-serif; fill: var(--ink); pointer-events: none; }
+
+.multi-query-attention .playground-instruction { font-size: 16px; line-height: 1.6; margin: 0 0 20px; }
