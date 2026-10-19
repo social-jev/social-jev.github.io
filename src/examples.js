@@ -5,9 +5,8 @@ export const examples = [
     source: "A statement about housing policy",
     document:
       "The city council proposed limiting annual rent increases to two percent. I support this measure because it would help tenants remain in their homes.",
-    question: "What is the author’s stance toward the proposed limit on annual rent increases?",
+    question: "What stance does the author express toward limiting annual rent increases to two percent? Choose Support if they favour the limit, Oppose if they reject it, or Unclear if no clear position is expressed.",
     options: ["Support", "Oppose", "Unclear"],
-    optionText: ["The author supports the limit.", "The author opposes the limit.", "The author’s stance is unclear."],
     selected: "Support",
   },
   {

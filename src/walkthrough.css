@@ -1859,3 +1859,7 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 @media(max-width:600px) { .task-example > summary { grid-template-columns: minmax(0,1fr) 154px; } }
 
 .treemap > button > small { font-size: 14px; }
+
+.request-options ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.request-options li { text-align: center; overflow-wrap: anywhere; }
+@media (min-width:601px) and (max-width:1100px) { .request-options ul { grid-template-columns: 1fr; } }

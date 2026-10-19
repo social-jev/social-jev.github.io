@@ -13,7 +13,7 @@ export function ApplicationAnimation() {
         <h3>Request</h3>
         <div className="request-state"><h4>State</h4><p>{example.document}</p></div>
         <div className="request-query"><h4>Query</h4><p>{example.question}</p></div>
-        <div className="request-options"><h4>Options</h4><ul>{(example.optionText || example.options).map(option=><li key={option}>{option}</li>)}</ul></div>
+        <div className="request-options"><h4>Options</h4><ul>{example.options.map(option=><li key={option}>{option}</li>)}</ul></div>
       </div>
       <div className={`request-model ${phase===1?'scoring':''}`}><span aria-hidden="true">→</span><div>SocialJev</div><span aria-hidden="true">→</span></div>
       <div className="result-box"><h3>Result</h3>

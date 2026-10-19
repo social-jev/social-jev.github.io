@@ -9,7 +9,7 @@ test("every example changes document, question and candidate labels together", (
   );
   for (const example of examples) {
     assert.ok(example.options.includes(example.selected));
-    assert.ok(example.question.endsWith("?"));
+    assert.ok(example.question.includes("?"));
     assert.equal(new Set(example.options).size, example.options.length);
   }
 });

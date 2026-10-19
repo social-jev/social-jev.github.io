@@ -76,3 +76,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Extend SocialJev to modalities beyond text. This is a future direction, not a claim about currently supported inputs. Do not add a public roadmap section yet.
 
 - Keep landing-page body copy at 18px and supporting captions, legends, plot notes and controls at 16px. Maintain readable text on mobile rather than shrinking it to fit.
+
+- Application examples put task definitions in the query and use short answer options. The stance example uses Support, Oppose and Unclear.
