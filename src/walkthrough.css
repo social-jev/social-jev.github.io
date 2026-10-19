@@ -1616,14 +1616,17 @@ button {
 .motivation-title { font: 26px/1.2 "Newsreader", Georgia, serif; margin: 24px 0 12px; }
 #usage { scroll-margin-top: 90px; }
 
-.interface-section { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
-.interface-links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+.interface-section { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 48px; }
+.interface-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 28px; }
 .interface-links .button, .interface-links .text-link { margin: 0; }
+.interface-links a { gap: 6px; white-space: nowrap; }
+.interface-links .button { padding: 12px 8px; }
+.interface-links a[href]::after { margin-left: 0; }
 .github-link, .resource-icon-link { display: inline-flex; gap: 8px; align-items: center; }
 .interface-code { min-width: 0; background: #fff; border: 1px solid #d8dfda; border-radius: 8px; overflow: hidden; }
 .interface-code-label { padding: 16px 20px; border-bottom: 1px solid #ddd; background: #f2f2f2; font-size: 12px; color: #555; }
 .interface-code pre { margin: 0; padding: 20px; overflow-x: auto; font: 12px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; color: #283a32; }
-@media (max-width: 800px) { .interface-section { grid-template-columns: 1fr; gap: 28px; } .interface-code pre { font-size: 11px; } }
+@media (max-width: 1100px) { .interface-section { grid-template-columns: 1fr; gap: 28px; } }
 
 .academic-hero { max-width: 1120px; margin: auto; padding: 64px 32px 56px; text-align: center; border-bottom: 1px solid var(--line, #dce2dc); }
 .academic-hero h1 { font: 400 clamp(58px, 7vw, 86px)/1.1 "Newsreader", Georgia, serif; letter-spacing: -2px; margin: 0 0 18px; }
@@ -1848,7 +1851,7 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .site-footer .wordmark { font-size: 36px !important; }
 .request-box p, .request-options li, .result-probability > div:first-child,
 .example-state p, .example-query p, .example-options li { font-size: 16px; }
-.interface-code pre { font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.interface-code pre { font-size: 14px; white-space: pre; overflow-wrap: normal; }
 .chart-legend { flex-wrap: wrap; row-gap: 12px; }
 .measured-evaluation .axis-text, .measured-evaluation .baseline-label { font-size: 22px; }
 .measured-evaluation .axis-title, .measured-evaluation .ours-label { font-size: 23px; }
