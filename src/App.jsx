@@ -41,6 +41,16 @@ export function App() {
   const [active, setActive] = useState("applications");
   const codeRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("Copy");
+  const [emailCopyStatus, setEmailCopyStatus] = useState("");
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText("dgoettlich@ethz.ch");
+      setEmailCopyStatus("Copied");
+    } catch {
+      setEmailCopyStatus("Select the address to copy");
+    }
+    window.setTimeout(() => setEmailCopyStatus(""), 2000);
+  }
   async function copyCode() {
     try {
       await navigator.clipboard.writeText(codeRef.current.textContent);
@@ -92,6 +102,7 @@ export function App() {
             <li>Elliott Ash</li><li>Felix Drinkall</li><li>Pranav Garg</li><li>Daniel Göttlich</li>
           </ul>
           <p className="academic-affiliation">ETH Zurich</p>
+          <button className="hero-email" type="button" onClick={copyEmail} title="Copy email address" aria-label="Copy dgoettlich@ethz.ch"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></svg><span>dgoettlich@ethz.ch</span><svg className="email-copy-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3" /></svg><span className="email-copy-status" role="status">{emailCopyStatus}</span></button>
           <div className="academic-links">
             <a href={packageUrl}><img src="/github.svg" width="20" height="20" alt="" />GitHub</a>
             <a href={modelUrl}><span aria-hidden="true">🤗</span>Models</a>

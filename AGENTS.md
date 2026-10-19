@@ -84,3 +84,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Omit the figure headings “Accuracy × model size”, “Share of training questions” and “Packed training sequence · linear / MLP head”. Keep the attention interaction instruction at 16px.
 
 - Hero authors use 22px medium text and the institution uses 20px darker text, with 44px above the author line. On mobile use 20px authors and 18px affiliation.
+
+- Show a copyable envelope + dgoettlich@ethz.ch line between ETH Zurich and the header resource buttons, with brief copy confirmation.

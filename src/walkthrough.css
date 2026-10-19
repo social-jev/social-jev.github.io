@@ -1876,3 +1876,13 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo)::after {
 .author-list { font-size: 22px; font-weight: 500; line-height: 1.5; gap: 12px 30px; margin: 44px 0 12px; }
 .academic-affiliation { font-size: 20px; line-height: 1.5; color: var(--ink); margin-bottom: 30px; }
 @media(max-width:600px) { .author-list { font-size: 20px; gap: 10px 22px; } .academic-affiliation { font-size: 18px; } }
+
+/* Copyable contact address below the institution. */
+.academic-affiliation { margin-bottom: 14px; }
+.hero-email { display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 30px; padding: 4px 0; border: 0; background: transparent; color: var(--green); font: 18px/1.5 "DM Sans", sans-serif; cursor: pointer; }
+.hero-email .email-copy-icon { opacity: .6; margin-left: 3px; }
+.hero-email:hover { color: var(--ink); }
+
+.hero-email { position: relative; }
+.hero-email > span:not(.email-copy-status) { user-select: all; }
+.email-copy-status { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); font-size: 14px; white-space: nowrap; }
