@@ -86,3 +86,6 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 - Hero authors use 22px medium text and the institution uses 20px darker text, with 44px above the author line. On mobile use 20px authors and 18px affiliation.
 
 - Show a copyable envelope + dgoettlich@ethz.ch line between ETH Zurich and the header resource buttons, with brief copy confirmation.
+
+- The header Cite button matches the resource buttons and copies the working-paper BibTeX citation immediately, with brief copy confirmation. Use the title “SocialJev: A Family of Classification Foundation Models for the Social Sciences” and journal “Working Paper”.
+- End the landing page with Limitations and roadmap as an itemized prose list: current limitation, practical implication, and planned response. Include domain specificity, extraction, multimodality, compute provider integrations, adaptation, evaluation, and query optimization. Multimodality wording: “SocialJev can currently only read text. We are working on a multimodal version.”

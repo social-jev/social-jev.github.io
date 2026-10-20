@@ -1634,8 +1634,8 @@ button {
 .author-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; list-style: none; padding: 0; margin: 28px 0 12px; font-size: 15px; }
 .academic-affiliation { font-size: 15px; color: var(--muted); margin: 0 0 28px; }
 .academic-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
-.academic-links a { display: inline-flex; align-items: center; gap: 9px; border: 1px solid #9baa9e; border-radius: 5px; padding: 12px 18px; text-decoration: none; font-size: 14px; }
-.academic-links a:hover { background: #edf2e6; }
+.academic-links a, .academic-links .cite-button { display: inline-flex; align-items: center; gap: 9px; border: 1px solid #9baa9e; border-radius: 5px; padding: 12px 18px; text-decoration: none; font-size: 14px; }
+.academic-links a:hover, .academic-links .cite-button:hover { background: #edf2e6; }
 .academic-overview { max-width: 1120px; margin: auto; padding: 36px 32px 40px; scroll-margin-top: 24px; }
 .academic-overview h2 { font: 400 38px/1.15 "Newsreader", Georgia, serif; margin: 0 0 14px; }
 .academic-overview > p { font-size: 15px; line-height: 1.7; margin: 0 0 12px; max-width: 1050px; }
@@ -1889,3 +1889,15 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .hero-email { position: relative; }
 .hero-email > span:not(.email-copy-status) { user-select: all; }
 .email-copy-status { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); font-size: 14px; white-space: nowrap; }
+
+.academic-links .cite-button { background: transparent; color: var(--ink); font-family: inherit; font-weight: 400; line-height: inherit; cursor: pointer; min-width: 112px; justify-content: center; }
+.limitations-section { max-width: 1120px; margin: auto; padding: 48px 32px 56px; border-top: 1px solid var(--line); }
+.limitations-section h2 { font: 400 40px/1.15 "Newsreader", Georgia, serif; margin: 0 0 14px; }
+.limitations-section > p, .roadmap-prose li { font-size: 18px; line-height: 1.65; color: var(--muted); }
+.limitations-section > p { margin: 0 0 28px; }
+.roadmap-prose { padding-left: 26px; margin: 0; max-width: 1000px; }
+.roadmap-prose li { padding-left: 10px; margin-bottom: 24px; }
+.roadmap-prose li:last-child { margin-bottom: 0; }
+.roadmap-prose strong { color: var(--ink); font-weight: 600; }
+.roadmap-prose li::marker { color: var(--green); font-size: 16px; }
+@media(max-width:600px) { .academic-links .cite-button { padding: 10px 12px; font-size: 12px; min-width: 96px; } .limitations-section { padding: 32px 20px; } .limitations-section h2 { font-size: 30px; } }

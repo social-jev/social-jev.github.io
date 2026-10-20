@@ -8,6 +8,14 @@ import { ArchitectureAnimation } from "./ArchitectureAnimation.jsx";
 import { AttentionPlayground } from "./AttentionPlayground.jsx";
 const modelUrl = "https://huggingface.co/collections/social-jev/socialjev-preview";
 const packageUrl = "https://github.com/social-jev/social-jev";
+const citation = `@article{socialjev2026,
+  author  = {Ash, Elliott and Drinkall, Felix and
+             Garg, Pranav and Göttlich, Daniel},
+  title   = {{SocialJev}: A Family of Classification Foundation Models
+             for the Social Sciences},
+  journal = {Working Paper},
+  year    = {2026}
+}`;
 const sections = [
   ["applications", "Applications"],
   ["evaluation", "Evaluation"],
@@ -42,6 +50,16 @@ export function App() {
   const codeRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("Copy");
   const [emailCopyStatus, setEmailCopyStatus] = useState("");
+  const [citationCopyStatus, setCitationCopyStatus] = useState("Cite");
+  async function copyCitation() {
+    try {
+      await navigator.clipboard.writeText(citation);
+      setCitationCopyStatus("Copied");
+    } catch {
+      setCitationCopyStatus("Copy failed");
+    }
+    window.setTimeout(() => setCitationCopyStatus("Cite"), 2000);
+  }
   async function copyEmail() {
     try {
       await navigator.clipboard.writeText("dgoettlich@ethz.ch");
@@ -107,6 +125,7 @@ export function App() {
             <a href={packageUrl}><img src="/github.svg" width="20" height="20" alt="" />GitHub</a>
             <a href={modelUrl}><span aria-hidden="true">🤗</span>Models</a>
             <a href="/docs/"><span aria-hidden="true">▤</span>Documentation</a>
+            <button className="cite-button" type="button" onClick={copyCitation} aria-label="Copy working-paper citation" title="Copy BibTeX citation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 6h5v6H6c0 3 1 4 3 5M14 6h5v6h-4c0 3 1 4 3 5" /></svg><span aria-live="polite">{citationCopyStatus}</span></button>
           </div>
         </section>
         <section className="wikipedia-highlight" aria-labelledby="wikipedia-title">
@@ -182,7 +201,19 @@ export function App() {
           <AttentionPlayground />
         </Chapter>
 
-
+        <section id="roadmap" className="limitations-section" aria-labelledby="roadmap-title">
+          <h2 id="roadmap-title">Limitations and roadmap</h2>
+          <p>SocialJev is an early release. These are its current limits and the work planned to address them.</p>
+          <ol className="roadmap-prose">
+<li><strong>Domain specificity.</strong> SocialJev is currently trained on a limited amount of data covering four types of social science-related NLP tasks. Therefore, at present, we would not be surprised if it performed noticeably worse on very different tasks or data. We are actively working on including a broader task set applied to a wider range of datasets of interest to social science researchers.</li>
+<li><strong>Classification and extraction.</strong> SocialJev currently answers questions by choosing between options supplied with the request. This means that researchers need to specify the possible answers in advance; it cannot yet extract features directly from the text. We are working on adding extraction alongside classification, so that SocialJev can also identify information that has not been enumerated as a set of options.</li>
+<li><strong>Multimodality.</strong> SocialJev can currently only read text. We are working on a multimodal version.</li>
+<li><strong>Compute provider integrations.</strong> Running SocialJev on large datasets currently requires access to a suitable GPU and some familiarity with setting up inference. This can make it harder to use for researchers without their own computing infrastructure. We plan to add integrations with GPU providers so that inference jobs can be launched without handling GPU rental and setup separately.</li>
+<li><strong>Adapting the model.</strong> Some research projects may require more specialised decisions than the released models can reliably make. At present, adapting a model to such a task requires a separate fine-tuning workflow. We plan to provide a simple training interface so that researchers can fine-tune SocialJev using labelled examples from their own projects.</li>
+<li><strong>Assessing performance.</strong> The benchmark results shown here do not establish how well SocialJev will perform on a particular research dataset. Researchers currently need to assemble their own evaluation workflow to assess this. We plan to add an evaluation interface that makes it easier to measure performance on labelled examples and compare alternative queries.</li>
+<li><strong>Query optimization.</strong> Predictions can depend on how a question and its candidate answers are formulated. Finding a suitable formulation currently requires manual experimentation, even when the underlying research task is unchanged. We plan to add tools that help researchers optimise their queries using labelled examples from the task they want to study.</li>
+</ol>
+        </section>
       </main>
       <footer className="site-footer">
         <div>
