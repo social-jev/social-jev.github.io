@@ -86,7 +86,7 @@ export function MixtureTreemap() {
           <small>of training questions</small>
         </span>
         <a href="/data/">
-          Data availability
+          Data
         </a>
       </div>
     </figure>

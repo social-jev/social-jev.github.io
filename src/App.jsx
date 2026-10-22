@@ -177,7 +177,7 @@ export function App() {
           detail="The treemap shows each dataset’s share of training questions."
           link={{
             href: "/data/",
-            label: "Dataset availability",
+            label: "Data",
           }}
         >
           <MixtureTreemap />
