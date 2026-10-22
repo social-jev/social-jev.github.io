@@ -89,3 +89,5 @@ Build app UI in `src/`. GitHub Pages hosts the static Vite output in `dist/clien
 
 - The header Cite button matches the resource buttons and copies the working-paper BibTeX citation immediately, with brief copy confirmation. Use the title “SocialJev: A Family of Classification Foundation Models for the Social Sciences” and journal “Working Paper”.
 - End the landing page with Limitations and roadmap as an itemized prose list: current limitation, practical implication, and planned response. Include domain specificity, extraction, multimodality, compute provider integrations, adaptation, evaluation, and query optimization. Multimodality wording: “SocialJev can currently only read text. We are working on a multimodal version.”
+
+- Training datasets are temporarily unavailable while legal and licensing requirements are clarified. Both the training-section link and treemap dataset links point to `/data/`, a centered “Coming soon!” page with the approved release explanation. The footer links only Models to the preview model collection. Do not restore direct dataset links until release is approved.

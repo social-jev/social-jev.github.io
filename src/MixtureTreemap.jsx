@@ -85,8 +85,8 @@ export function MixtureTreemap() {
           {((selected.value / total) * 100).toFixed(1)}%{" "}
           <small>of training questions</small>
         </span>
-        <a href={`https://huggingface.co/datasets/social-jev/${selected.slug}`}>
-          Dataset
+        <a href="/data/">
+          Data availability
         </a>
       </div>
     </figure>

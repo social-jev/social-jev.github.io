@@ -176,8 +176,8 @@ export function App() {
           description="SocialJev is trained across datasets covering political, social, and economic classification tasks. We assemble shorter sequences into passages and use an LLM to generate synthetic queries, with human labels and codebooks as reference."
           detail="The treemap shows each dataset’s share of training questions."
           link={{
-            href: "https://huggingface.co/social-jev",
-            label: "Explore the datasets",
+            href: "/data/",
+            label: "Dataset availability",
           }}
         >
           <MixtureTreemap />
@@ -223,7 +223,7 @@ export function App() {
         </div>
         <nav aria-label="Resources">
           <a href={packageUrl}>Package</a>
-          <a href="https://huggingface.co/social-jev">Models & data</a>
+          <a href={modelUrl}>Models</a>
           <a href="/docs/">Documentation</a>
         </nav>
       </footer>
