@@ -1633,8 +1633,8 @@ button {
 .academic-subtitle { font: 400 clamp(26px, 3.2vw, 38px)/1.2 "Newsreader", Georgia, serif; margin: 0; }
 .author-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; list-style: none; padding: 0; margin: 28px 0 12px; font-size: 15px; }
 .academic-affiliation { font-size: 15px; color: var(--muted); margin: 0 0 28px; }
-.academic-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
-.academic-links a, .academic-links .cite-button { display: inline-flex; align-items: center; gap: 9px; border: 1px solid #9baa9e; border-radius: 5px; padding: 12px 18px; text-decoration: none; font-size: 14px; }
+.academic-links { display: flex; justify-content: flex-start; flex-wrap: nowrap; gap: 12px; overflow-x: auto; width: max-content; max-width: 100%; margin-inline: auto; }
+.academic-links a, .academic-links .cite-button { flex-shrink: 0; white-space: nowrap; display: inline-flex; align-items: center; gap: 9px; border: 1px solid #9baa9e; border-radius: 5px; padding: 12px 18px; text-decoration: none; font-size: 14px; }
 .academic-links a:hover, .academic-links .cite-button:hover { background: #edf2e6; }
 .academic-overview { max-width: 1120px; margin: auto; padding: 36px 32px 40px; scroll-margin-top: 24px; }
 .academic-overview h2 { font: 400 38px/1.15 "Newsreader", Georgia, serif; margin: 0 0 14px; }
