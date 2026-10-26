@@ -9,8 +9,8 @@ import { AttentionPlayground } from "./AttentionPlayground.jsx";
 const modelUrl = "https://huggingface.co/collections/social-jev/socialjev-preview";
 const packageUrl = "https://github.com/social-jev/social-jev";
 const citation = `@article{socialjev2026,
-  author  = {Ash, Elliott and Drinkall, Felix and
-             Garg, Pranav and Göttlich, Daniel},
+  author  = {Göttlich, Daniel and Garg, Pranav and
+             Drinkall, Felix and Ash, Elliott},
   title   = {{SocialJev}: A Family of Classification Foundation Models
              for the Social Sciences},
   journal = {Working Paper},
@@ -117,7 +117,7 @@ export function App() {
           <h1 id="hero-title">SocialJev</h1>
           <p className="academic-subtitle">A Classification Foundation Model<br />for the Social Sciences</p>
           <ul className="author-list" aria-label="Authors">
-            <li>Elliott Ash</li><li>Felix Drinkall</li><li>Pranav Garg</li><li>Daniel Göttlich</li>
+            <li>Daniel Göttlich</li><li>Pranav Garg</li><li>Felix Drinkall</li><li>Elliott Ash</li>
           </ul>
           <p className="academic-affiliation">ETH Zurich</p>
           <button className="hero-email" type="button" onClick={copyEmail} title="Copy email address" aria-label="Copy dgoettlich@ethz.ch"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></svg><span>dgoettlich@ethz.ch</span><svg className="email-copy-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3" /></svg><span className="email-copy-status" role="status">{emailCopyStatus}</span></button>
