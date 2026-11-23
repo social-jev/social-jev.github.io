@@ -41,3 +41,20 @@ export function UsageCode() {
     <span className="syntax-comment">{"# dict[str, float]"}</span>
   </>;
 }
+
+const pythonTokens = /(#.*)|("[^"\n]*")|\b(from|import|with|as|lambda|None)\b|\b(\d+)\b|\b([A-Za-z_]\w*)(?=\()/g;
+
+export function HighlightedPython({ code }) {
+  const parts = [];
+  let end = 0;
+  for (const match of code.matchAll(pythonTokens)) {
+    const [, comment, string, keyword, number, call] = match;
+    const kind = comment ? "comment" : string ? "string" : keyword ? "keyword"
+      : number ? "number" : /^[A-Z]/.test(call) ? "class" : "function";
+    parts.push(code.slice(end, match.index));
+    parts.push(<span key={match.index} className={`syntax-${kind}`}>{match[0]}</span>);
+    end = match.index + match[0].length;
+  }
+  parts.push(code.slice(end));
+  return parts;
+}

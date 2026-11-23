@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { UsageCode } from "./UsageCode.jsx";
+import { HighlightedPython, UsageCode } from "./UsageCode.jsx";
+import { usageExamples } from "./usageExamples.js";
 import { ApplicationAnimation } from "./ApplicationAnimation.jsx";
 import { EvaluationExamples } from "./EvaluationExamples.jsx";
 import { ParetoChart } from "./ResearchCharts.jsx";
@@ -48,6 +49,8 @@ function Chapter({ id, number, title, children, description, link, detail }) {
 export function App() {
   const [active, setActive] = useState("applications");
   const codeRef = useRef(null);
+  const [usageIndex, setUsageIndex] = useState(0);
+  const usage = usageExamples[usageIndex];
   const [copyStatus, setCopyStatus] = useState("Copy");
   const [emailCopyStatus, setEmailCopyStatus] = useState("");
   const [citationCopyStatus, setCitationCopyStatus] = useState("Cite");
@@ -68,6 +71,24 @@ export function App() {
       setEmailCopyStatus("Select the address to copy");
     }
     window.setTimeout(() => setEmailCopyStatus(""), 2000);
+  }
+  function selectUsage(index) {
+    setUsageIndex(index);
+    setCopyStatus("Copy");
+  }
+  function navigateUsage(event) {
+    const last = usageExamples.length - 1;
+    const destinations = {
+      ArrowLeft: usageIndex === 0 ? last : usageIndex - 1,
+      ArrowRight: usageIndex === last ? 0 : usageIndex + 1,
+      Home: 0,
+      End: last,
+    };
+    const next = destinations[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    selectUsage(next);
+    event.currentTarget.querySelectorAll("button")[next].focus();
   }
   async function copyCode() {
     try {
@@ -147,7 +168,8 @@ export function App() {
         <section id="usage" className="package-callout interface-section">
           <div className="interface-heading">
             <p className="eyebrow">Usage</p><h2>Using SocialJev</h2>
-            <p>A typed request specifies the state, query, and candidate answers. Each query returns a Result with the selected answer and its candidate probabilities.</p>
+            <p>{usage.description}</p>
+            {usage.note && <p className="usage-note">{usage.note}</p>}
             <div className="interface-links">
               <a className="button primary resource-icon-link" href="/docs/"><span aria-hidden="true">▤</span>Documentation</a>
               <a className="text-link resource-icon-link" href={modelUrl}><span aria-hidden="true">🤗</span>Models</a>
@@ -157,8 +179,21 @@ export function App() {
             </div>
           </div>
           <div className="interface-code">
-            <div className="interface-code-label"><span className="code-language"><i aria-hidden="true" />Python <span aria-hidden="true">/</span> core interface</span><button className="copy-code-button" onClick={copyCode} aria-label="Copy Python code"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1" /><path d="M3 11H2V2h8v1" /></svg><span aria-live="polite">{copyStatus}</span></button></div>
-            <pre><code ref={codeRef}><UsageCode /></code></pre>
+            <div className="usage-toolbar">
+            <div className="usage-tabs" role="tablist" aria-label="Python examples" onKeyDown={navigateUsage}>
+              {usageExamples.map(({ label }, index) => (
+                <button key={label} type="button" role="tab" id={`usage-tab-${index}`}
+                  aria-selected={index === usageIndex} aria-controls="usage-example"
+                  tabIndex={index === usageIndex ? 0 : -1} onClick={() => selectUsage(index)}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="interface-code-actions"><button className="copy-code-button" onClick={copyCode} aria-label="Copy Python code"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1" /><path d="M3 11H2V2h8v1" /></svg><span aria-live="polite">{copyStatus}</span></button></div>
+            </div>
+            <div id="usage-example" role="tabpanel" aria-labelledby={`usage-tab-${usageIndex}`}>
+            <pre tabIndex={0} aria-label={`${usage.label} Python example`}><code ref={codeRef}>{usage.code ? <HighlightedPython code={usage.code} /> : <UsageCode />}</code></pre>
+            </div>
           </div>
         </section>
         <Chapter
