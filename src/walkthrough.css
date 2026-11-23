@@ -1624,7 +1624,6 @@ button {
 .interface-links a[href]::after { margin-left: 0; }
 .github-link, .resource-icon-link { display: inline-flex; gap: 8px; align-items: center; }
 .interface-code { min-width: 0; background: #fff; border: 1px solid #d8dfda; border-radius: 8px; overflow: hidden; }
-.interface-code-label { padding: 16px 20px; border-bottom: 1px solid #ddd; background: #f2f2f2; font-size: 12px; color: #555; }
 .interface-code pre { margin: 0; padding: 20px; overflow-x: auto; font: 12px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; color: #283a32; }
 @media (max-width: 1100px) { .interface-section { grid-template-columns: 1fr; gap: 28px; } }
 
@@ -1731,7 +1730,6 @@ button {
 .cutaway-svg .cutaway-active rect { fill: #d7e8ce; stroke: #305e4d; stroke-width: 2; }
 .cutaway-svg { min-width: 640px; }
 .cutaway-svg .token-label { font-size: 14px; }
-.interface-code-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .copy-code-button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #444; font: inherit; cursor: pointer; }
 .copy-code-button:hover { background: #e9e9e9; }
 
@@ -1828,9 +1826,6 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .option-status svg { width: 14px; height: 14px; }
 .task-example-body .example-answer-note { font-size: 11px; line-height: 1.6; color: var(--muted); margin: 12px 0 0; }
 
-.code-language { display: inline-flex; align-items: center; gap: 12px; }
-.code-language i { width: 7px; height: 7px; background: #999; border-radius: 50%; }
-.code-language > span { color: #888; }
 .copy-code-button svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.3; }
 .interface-code .syntax-keyword, .interface-code .syntax-number { color: #80579b; }
 .interface-code .syntax-class { color: #305e4d; }
@@ -1846,7 +1841,7 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .chart-legend, .dataset-detail small, .dataset-detail div > span, .dataset-detail > a,
 .examples-subtitle, .examples-toggle, .example-toggle, .task-definition, .option-status,
 .task-example-body .example-answer-note, .reader-description, .mask-explanation,
-.interface-code-label, .text-link, .interface-links a, .visual-topline .small-label,
+.interface-code-actions, .text-link, .interface-links a, .visual-topline .small-label,
 .site-footer p, .site-footer a, .small-label { font-size: 16px !important; line-height: 1.6; }
 .site-footer .wordmark { font-size: 36px !important; }
 .request-box p, .request-options li, .result-probability > div:first-child,
@@ -1901,3 +1896,59 @@ a[href]:not(.wordmark):not(.skip-link):not(.logo):not(.site-header nav a)::after
 .roadmap-prose strong { color: var(--ink); font-weight: 600; }
 .roadmap-prose li::marker { color: var(--green); font-size: 16px; }
 @media(max-width:600px) { .academic-links .cite-button { padding: 10px 12px; font-size: 12px; min-width: 96px; } .limitations-section { padding: 32px 20px; } .limitations-section h2 { font-size: 30px; } }
+
+.usage-tabs {
+  display: flex;
+  overflow-x: auto;
+  min-width: 0;
+  flex: 1;
+}
+.usage-tabs button {
+  flex: 1 0 auto;
+  padding: 14px clamp(9px, 1vw, 17px);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.usage-tabs button[aria-selected="true"] {
+  border-bottom-color: #305e4d;
+  color: #305e4d;
+  background: #f4f7f3;
+}
+.usage-tabs button:hover { background: #f4f7f3; }
+.usage-tabs button:focus-visible,
+.interface-code pre:focus-visible { outline-offset: -4px; }
+.interface-section p.usage-note:not(.eyebrow) { font-size: 14px !important; }
+.interface-code pre { block-size: 32rem; padding-top: 16px; overflow: auto; }
+
+.interface-code-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex: none;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+@media (min-width: 601px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--paper, #f8f9f6);
+  }
+  #usage { scroll-margin-top: 0; }
+}
+
+.usage-toolbar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d8dfda;
+}
+
+@media (max-width: 600px) {
+  .interface-code pre { block-size: 26rem; }
+}
